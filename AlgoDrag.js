@@ -47,10 +47,10 @@ function handleImageLoad(event) {
 		container.addChild(bitmap);
 		bitmap.x = canvas.width * Math.random() | 0;
 		bitmap.y = canvas.height * Math.random() | 0;
-		bitmap.rotation = 360 * Math.random() | 0;
+		//bitmap.rotation = 360 * Math.random() | 0;
 		bitmap.regX = bitmap.image.width / 2 | 0;
 		bitmap.regY = bitmap.image.height / 2 | 0;
-        bitmap.scale = bitmap.originalScale = Math.random() * 0.4 + 0.6;
+        bitmap.scale = bitmap.originalScale = 1;
         bitmap.name = "bmp_" + i;
 		bitmap.cursor = "pointer";
 		/*bitmap.x = 0;
