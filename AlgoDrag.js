@@ -30,7 +30,8 @@ function init() {//Draw a square on screen.
     image.crossOrigin = "Anonymous"; // Should work fine
     image.src = "./img/HelloWorld.bmp";
     temp = new createjs.Bitmap(image);
-    temp.onload = handleImageLoad;
+	temp.onload = handleImageLoad;
+	boxStage.update();
 }
 
 function handleImageLoad(event) {
