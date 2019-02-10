@@ -22,15 +22,15 @@ function init() {//Draw a square on screen.
     boxStage.mouseMoveOutside = true;
     
     //var image = new Image();
-	//image.src = "./img/HelloWorld.bmp";
-    //image.onload = handleImageLoad;
+	image.src = "./img/HelloWorld.bmp";
+    image.onload = handleImageLoad;
     
     //Trying different Image creation technique to avoid CORS security warnings
-    var image = document.createElement("img");
+    /*var image = document.createElement("img");
     image.crossOrigin = "Anonymous"; // Should work fine
     image.src = "./img/HelloWorld.bmp";
     temp = new createjs.Bitmap(image);
-	temp.onload = handleImageLoad;
+	temp.onload = handleImageLoad;*/
 	boxStage.update();
 }
 
