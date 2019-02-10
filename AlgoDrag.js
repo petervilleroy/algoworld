@@ -61,13 +61,13 @@ function handleImageLoad(event) {
 		// in this case that means it executes in the scope of the button.
 		bitmap.on("mousedown", function (evt) {
 			this.parent.addChild(this);
-			this.offset = {x: this.x - evt.boxStageX, y: this.y - evt.boxStageY};
+			this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
 		});
 
 		// the pressmove event is dispatched when the mouse moves after a mousedown on the target until the mouse is released.
 		bitmap.on("pressmove", function (evt) {
-			this.x = evt.boxStageX + this.offset.x;
-			this.y = evt.boxStageY + this.offset.y;
+			this.x = evt.stageX + this.offset.x;
+			this.y = evt.stageY + this.offset.y;
 			// indicate that the boxStage should be updated on the next tick:
 			update = true;
 		});
