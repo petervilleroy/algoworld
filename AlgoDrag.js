@@ -45,17 +45,17 @@ function handleImageLoad(event) {
         var i = 2;
 		bitmap = new createjs.Bitmap(image);
 		container.addChild(bitmap);
-		/*bitmap.x = canvas.width * Math.random() | 0;
+		bitmap.x = canvas.width * Math.random() | 0;
 		bitmap.y = canvas.height * Math.random() | 0;
 		bitmap.rotation = 360 * Math.random() | 0;
 		bitmap.regX = bitmap.image.width / 2 | 0;
 		bitmap.regY = bitmap.image.height / 2 | 0;
         bitmap.scale = bitmap.originalScale = Math.random() * 0.4 + 0.6;
         bitmap.name = "bmp_" + i;
-		bitmap.cursor = "pointer";*/
-		bitmap.x = 0;
+		bitmap.cursor = "pointer";
+		/*bitmap.x = 0;
 		bitmap.y = 0;
-		bitmap.name = "bmp_2";
+		bitmap.name = "bmp_2";*/
 
 		// using "on" binds the listener to the scope of the currentTarget by default
 		// in this case that means it executes in the scope of the button.
