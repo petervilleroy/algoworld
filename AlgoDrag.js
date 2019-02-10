@@ -91,7 +91,7 @@ function handleImageLoad(event) {
         // this set makes it so the stage only re-renders when an event handler indicates a change has happened.
         if (update) {
             update = false; // only update once
-            stage.update(event);
+            boxStage.update(event);
         }
     } 
 }
