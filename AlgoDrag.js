@@ -29,7 +29,7 @@ function init() {//Draw a square on screen.
     var image = document.createElement("img");
     image.crossOrigin = "Anonymous"; // Should work fine
     image.src = "./img/HelloWorld.bmp";
-    temp = new Bitmap(image);
+    temp = new createjs.Bitmap(image);
     temp.onload = handleImageLoad;
 }
 
