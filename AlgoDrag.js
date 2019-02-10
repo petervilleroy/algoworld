@@ -21,16 +21,16 @@ function init() {//Draw a square on screen.
     boxStage.enableMouseOver(10);
     boxStage.mouseMoveOutside = true;
     
-    var image = new Image();
+    /*var image = new Image();
 	image.src = "./img/HelloWorld.bmp";
-    image.onload = handleImageLoad;
+    image.onload = handleImageLoad;*/
     
     //Trying different Image creation technique to avoid CORS security warnings
-    /*var image = document.createElement("img");
+    var image = document.createElement("img");
     image.crossOrigin = "Anonymous"; // Should work fine
     image.src = "./img/HelloWorld.bmp";
     temp = new createjs.Bitmap(image);
-	temp.onload = handleImageLoad;*/
+	temp.onload = handleImageLoad;
 	boxStage.update();
 }
 
@@ -42,17 +42,20 @@ function handleImageLoad(event) {
 
 	// create and populate the screen with random daisies:
 	//for (var i = 0; i < 100; i++) {
-        var i = 0;
+        var i = 2;
 		bitmap = new createjs.Bitmap(image);
 		container.addChild(bitmap);
-		bitmap.x = canvas.width * Math.random() | 0;
+		/*bitmap.x = canvas.width * Math.random() | 0;
 		bitmap.y = canvas.height * Math.random() | 0;
 		bitmap.rotation = 360 * Math.random() | 0;
 		bitmap.regX = bitmap.image.width / 2 | 0;
 		bitmap.regY = bitmap.image.height / 2 | 0;
         bitmap.scale = bitmap.originalScale = Math.random() * 0.4 + 0.6;
         bitmap.name = "bmp_" + i;
-		bitmap.cursor = "pointer";
+		bitmap.cursor = "pointer";*/
+		bitmap.x = 0;
+		bitmap.y = 0;
+		bitmap.name = bmp_2;
 
 		// using "on" binds the listener to the scope of the currentTarget by default
 		// in this case that means it executes in the scope of the button.
@@ -82,7 +85,7 @@ function handleImageLoad(event) {
 	//}
 
 	//examples.hideDistractor();
-    /*createjs.Ticker.addEventListener("tick", tick);
+    createjs.Ticker.addEventListener("tick", tick);
     
     function tick(event) {
         // this set makes it so the stage only re-renders when an event handler indicates a change has happened.
@@ -90,5 +93,5 @@ function handleImageLoad(event) {
             update = false; // only update once
             stage.update(event);
         }
-    } */
+    } 
 }
