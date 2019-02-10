@@ -9,14 +9,14 @@ var update = true;
 function init() {//Draw a square on screen.
     canvas = document.getElementById("myBoxCanvas");
 	boxStage = new createjs.Stage('myBoxCanvas');
-    var shape = new createjs.Shape();
+    /*var shape = new createjs.Shape();
     shape.graphics.beginFill('beige').drawRoundRect(0, 0, 230, 60,10);
     boxStage.addChild(shape);
     var txt = new createjs.Text("Hello World", "40px Arial", "#ff7700");
     txt.x = shape.x + 10;
     txt.y = shape.y + 10;
     boxStage.addChild(txt);
-    boxStage.update();
+    boxStage.update();*/
 
     boxStage.enableMouseOver(10);
     boxStage.mouseMoveOutside = true;
