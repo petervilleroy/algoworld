@@ -55,7 +55,7 @@ function handleImageLoad(event) {
 		bitmap.cursor = "pointer";*/
 		bitmap.x = 0;
 		bitmap.y = 0;
-		bitmap.name = bmp_2;
+		bitmap.name = "bmp_2";
 
 		// using "on" binds the listener to the scope of the currentTarget by default
 		// in this case that means it executes in the scope of the button.
