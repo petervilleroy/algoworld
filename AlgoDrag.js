@@ -9,28 +9,28 @@ var update = true;
 function init() {//Draw a square on screen.
     canvas = document.getElementById("myBoxCanvas");
 	boxStage = new createjs.Stage('myBoxCanvas');
-    /*var shape = new createjs.Shape();
+    var shape = new createjs.Shape();
     shape.graphics.beginFill('beige').drawRoundRect(0, 0, 230, 60,10);
     boxStage.addChild(shape);
     var txt = new createjs.Text("Hello World", "40px Arial", "#ff7700");
     txt.x = shape.x + 10;
     txt.y = shape.y + 10;
     boxStage.addChild(txt);
-    boxStage.update();*/
+    boxStage.update();
 
     boxStage.enableMouseOver(10);
     boxStage.mouseMoveOutside = true;
     
-    /*var image = new Image();
+    var image = new Image();
 	image.src = "./img/HelloWorld.bmp";
-    image.onload = handleImageLoad;*/
+    image.onload = handleImageLoad;
     
     //Trying different Image creation technique to avoid CORS security warnings
-    var image = document.createElement("img");
+    /*var image = document.createElement("img");
     image.crossOrigin = "Anonymous"; // Should work fine
-    image.src = "/img/HelloWorld.bmp";
+    image.src = "http://i.stack.imgur.com/OGtMI.jpg?s=32&g=1";
     temp = new createjs.Bitmap(image);
-	temp.onload = handleImageLoad;
+	temp.onload = handleImageLoad;*/
 	boxStage.update();
 }
 
