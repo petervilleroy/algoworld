@@ -21,7 +21,7 @@ function init() {//Draw a square on screen.
     boxStage.enableMouseOver(10);
     boxStage.mouseMoveOutside = true;
     
-    //var image = new Image();
+    var image = new Image();
 	image.src = "./img/HelloWorld.bmp";
     image.onload = handleImageLoad;
     
