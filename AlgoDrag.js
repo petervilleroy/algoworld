@@ -1,4 +1,4 @@
-var canvas, boxStage;
+var worldCanvas, boxCanvas, boxStage;
 
 var mouseTarget;	// the display object currently under the mouse, or being dragged
 var dragStarted;	// indicates whether we are currently in a drag operation
@@ -7,16 +7,14 @@ var update = true;
 
 
 function init() {//Draw a square on screen.
-    canvas = document.getElementById("myBoxCanvas");
+    worldCanvas = document.getElementById("myWorldCanvas");
+	worldStage = new createjs.Stage(worldCanvas);
+	boxCanvas = document.getElementById("myBoxCanvas");
 	boxStage = new createjs.Stage('myBoxCanvas');
     var shape = new createjs.Shape();
-    shape.graphics.beginFill('beige').drawRoundRect(0, 0, 230, 60,10);
-    boxStage.addChild(shape);
-    var txt = new createjs.Text("Hello World", "40px Arial", "#ff7700");
-    txt.x = shape.x + 10;
-    txt.y = shape.y + 10;
-    boxStage.addChild(txt);
-    boxStage.update();
+    shape.graphics.beginFill('blue').drawCircle(30, 60, 10);
+    worldStage.addChild(shape);
+    worldStage.update();
 
     boxStage.enableMouseOver(10);
     boxStage.mouseMoveOutside = true;
@@ -45,8 +43,8 @@ function handleImageLoad(event) {
         var i = 2;
 		bitmap = new createjs.Bitmap(image);
 		container.addChild(bitmap);
-		bitmap.x = canvas.width * Math.random() | 0;
-		bitmap.y = canvas.height * Math.random() | 0;
+		bitmap.x = boxCanvas.width * Math.random() | 0;
+		bitmap.y = boxCanvas.height * Math.random() | 0;
 		//bitmap.rotation = 360 * Math.random() | 0;
 		bitmap.regX = bitmap.image.width / 2 | 0;
 		bitmap.regY = bitmap.image.height / 2 | 0;
