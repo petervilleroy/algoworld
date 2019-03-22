@@ -58,6 +58,7 @@ function populateLevel_0() {
 	});
 	//teach the shape to move.
 	shape.moveTo = setMove;
+	shape.moveShape = moveShape;
 	worldStage.addChild(shape);
 	shapearray.push(shape);
 	
