@@ -45,12 +45,12 @@ function populateLevel_0() {
 	update = true; 
 }
 
-function handleGo(shape) {
+function handleGo(event) {
     createjs.Tween.get(shape).to({x: 100, y: 100}, 1500)//, createjs.Ease.getPowInOut(2))
     .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
 }
 
 function fireEvent() {
     var event = new createjs.Event("GO");
-    this.dispatchEvent(event);
+    EventDispatcher.dispatchEvent(event);
 }
