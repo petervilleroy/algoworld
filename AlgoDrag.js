@@ -154,7 +154,7 @@ function handleImageLoad(event) {
         if (update) {
 			update = false; // only update once
 			//update positions of all elements
-			shapearray.foreach(moveShape);
+			shapearray.forEach(moveShape);
 			boxStage.update(event);
 			worldStage.update(event);
         }
