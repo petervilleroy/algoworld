@@ -13,7 +13,7 @@ function init() {//Draw a square on screen.
 		default: 
 			populateLevel_0();
 	}
-}
+};
 
 function populateLevel_0() {
 	var shape, shapex, shapey, shaper;
@@ -43,15 +43,15 @@ function populateLevel_0() {
 	worldStage.update();
 	
 	update = true; 
-}
+};
 
 function handleGo(shape) {
     createjs.Tween.get(shape).to({x: 100, y: 100}, 1500)//, createjs.Ease.getPowInOut(2))
     .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
-}
+};
 
 function fireEvent() {
     var event = new createjs.Event("GO");
 
     new createjs.EventDispatcher().dispatchEvent(event);
-}
+};
