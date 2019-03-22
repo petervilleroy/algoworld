@@ -69,6 +69,7 @@ function populateLevel_0() {
 	shape.moveTo = function(xarg, yarg, t) {
 		createjs.Tween.get(shape, {loop:false}).to({x: xarg, y: yarg}, t, createjs.Ease.getPowInOut(4));
 	}
+	createjs.Ticker.addEventListener("tick", worldStage);
 
 	worldStage.addChild(shape);
 	worldStage.update();
@@ -161,7 +162,7 @@ function handleImageLoad(event) {
 			//update positions of all elements
 			//shapearray.forEach(moveShape);
 			boxStage.update(event);
-			worldStage.update(event);
+			//worldStage.update(event);
         }
     } 
 }
