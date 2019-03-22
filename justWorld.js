@@ -22,7 +22,10 @@ function populateLevel_0() {
 	shape = new createjs.Shape();
 	shapex = worldCanvas.width * Math.random() | 0;
 	shapey = worldCanvas.height * Math.random() | 0;
-	shaper = 10;
+    shaper = 10;
+    movex = 300;
+    movey = 150;
+
 	console.log("Drawing circle at ("+shapex+", "+shapey+").")
 	shape.graphics.beginFill('blue').drawCircle(shapex, shapey, shaper);
 	shape.on("rollover", function (evt) {
@@ -30,7 +33,7 @@ function populateLevel_0() {
     });
     worldStage.addChild(shape);
 	
-	createjs.Tween.get(shape, {loop:false}).to({x: 40, y: 15}, 1500, createjs.Ease.getPowInOut(2));
+	createjs.Tween.get(shape).to({x: movex-shape.x, y: movey-shape.y}, 1500, createjs.Ease.getPowInOut(2));
 	
 	createjs.Ticker.addEventListener("tick", worldStage);
 
