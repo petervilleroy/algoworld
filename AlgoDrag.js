@@ -12,7 +12,7 @@ function init() {//Draw a square on screen.
 	boxCanvas = document.getElementById("myBoxCanvas");
 	boxStage = new createjs.Stage('myBoxCanvas');
 	switch(currentLevel) {
-		case 0: populateLevel_0();
+		case 0: populateLevel_0();break;
 		default: populateLevel_0();
 	}
 	worldStage.update();
