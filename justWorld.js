@@ -13,7 +13,6 @@ function init() {//Draw a square on screen.
 		default: 
 			populateLevel_0();
 	}
-
 }
 
 function populateLevel_0() {
@@ -27,7 +26,9 @@ function populateLevel_0() {
     movey = 15;
 
 	console.log("Drawing circle at ("+shapex+", "+shapey+").")
-	shape.graphics.beginFill('blue').drawCircle(shapex, shapey, shaper);
+    shape.graphics.beginFill('blue').drawCircle(0, 0, shaper);
+    shape.x = shapex;
+    shape.y = shapey;
 	shape.on("rollover", function (evt) {
 		this.scale = this.originalScale * 1.2;
     });
@@ -41,6 +42,4 @@ function populateLevel_0() {
 	worldStage.update();
 	
 	update = true; 
-
-   
 }
