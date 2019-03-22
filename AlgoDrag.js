@@ -57,7 +57,14 @@ function populateLevel_0() {
 		update = true;
 	});
 	//teach the shape to move.
-	shape.moveTo = setMove;
+	shape.moveTo = function(xarg, yarg, t) {
+		console.log ("DEBUG: got request to move shape to ("+xarg+","+yarg+") in T="+t)
+		this.moveX = xarg;
+		this.moveY = yarg;
+		this.moveT = t;
+		this.moving = true;
+		update = true;
+	};
 	shape.moveShape = moveShape;
 	worldStage.addChild(shape);
 	shapearray.push(shape);
@@ -68,33 +75,26 @@ function populateLevel_0() {
 	update = true;
 }
 
-function setMove (xarg, yarg, t) {
-	console.log ("DEBUG: got request to move shape to ("+xarg+","+yarg+") in T="+t)
-	this.moveX = xarg;
-	this.moveY = yarg;
-	this.moveT = t;
-	this.moving = true;
-	update = true;
-}
-function moveShape () {
-	if(this.moving) {
-		console.log ("DEBUG: moving shape to ("+this.moveX+","+this.moveY+") in T="+this.moveT)
-		if (this.moveX - this.x > 5 || this.moveX - this.x < -5) {
-			this.x += ((this.moveX - this.x) / 5);
+ 
+function moveShape (item, index) {
+	if(item.moving) {
+		console.log ("DEBUG: moving shape to ("+item.moveX+","+item.moveY+") in T="+item.moveT)
+		if (item.moveX - item.x > 5 || item.moveX - item.x < -5) {
+			item.x += ((item.moveX - item.x) / 5);
 		}
 		else {
-			this.x = this.moveX;
+			item.x = item.moveX;
 		}
-		if (this.moveY - this.y > 5 || this.moveY - this.y < -5) {
-			this.y += ((this.moveY - this.y) / 5);
+		if (item.moveY - item.y > 5 || item.moveY - item.y < -5) {
+			item.y += ((item.moveY - item.y) / 5);
 		}
 		else {
-			this.y = this.moveY;
+			item.y = item.moveY;
 		}
 		
 		update = true;
-		if(this.moveX == this.x && this.moveY == this.y) {
-			this.moving = false;
+		if(item.moveX == item.x && item.moveY == item.y) {
+			item.moving = false;
 			console.log("DEBUG: done moving object")
 		}
 	}
