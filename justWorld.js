@@ -37,8 +37,9 @@ function populateLevel_0() {
     createjs.Tween.get(shape).to({x: movex, y: movey}, 1500)//, createjs.Ease.getPowInOut(2))
     .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
     
-	createjs.Ticker.addEventListener("tick", worldStage);
-    $("#eventButton").click(function handleGo(shape) {
+    createjs.Ticker.addEventListener("tick", worldStage);
+    
+    $("#eventButton").click(function handleGo() {
         createjs.Tween.get(shape).to({x: 100, y: 100}, 1500)//, createjs.Ease.getPowInOut(2))
         .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
     });
