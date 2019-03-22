@@ -5,6 +5,7 @@ var dragStarted;	// indicates whether we are currently in a drag operation
 var offset;
 var update = true;
 var currentLevel = 0;
+var shapearray = [];
 
 function init() {//Draw a square on screen.
     worldCanvas = document.getElementById("myWorldCanvas");
@@ -56,8 +57,9 @@ function populateLevel_0() {
 		update = true;
 	});
 	//teach the shape to move.
-	shape.moveTo = moveShape;
+	shape.moveTo = setMove;
 	worldStage.addChild(shape);
+	shapearray.push(shape);
 	
 	shape.moveTo(400,150,10);
 	// assign color, size, icon according to rules TBD
@@ -65,23 +67,36 @@ function populateLevel_0() {
 	update = true;
 }
 
-function moveShape (xarg, yarg, t) {
-	console.log ("DEBUG: moving shape to ("+xarg+","+yarg+") in T="+t)
-	if (xarg - this.x > 5 || xarg - this.x < -5) {
-		this.x += ((xarg - this.x) / 5);
-	}
-	else {
-		this.x = xarg;
-	}
-	if (yarg - this.y > 5 || yarg - this.y < -5) {
-		this.y += ((yarg - this.y) / 5);
-	}
-	else {
-		this.y = yarg;
-	}
-	
-	
+function setMove (xarg, yarg, t) {
+	console.log ("DEBUG: got request to move shape to ("+xarg+","+yarg+") in T="+t)
+	this.moveX = xarg;
+	this.moveY = yarg;
+	this.moveT = t;
+	this.moving = true;
 	update = true;
+}
+function moveShape () {
+	if(this.moving) {
+		console.log ("DEBUG: moving shape to ("+this.moveX+","+this.moveY+") in T="+this.moveT)
+		if (this.moveX - this.x > 5 || this.moveX - this.x < -5) {
+			this.x += ((this.moveX - this.x) / 5);
+		}
+		else {
+			this.x = this.moveX;
+		}
+		if (this.moveY - this.y > 5 || this.moveY - this.y < -5) {
+			this.y += ((this.moveY - this.y) / 5);
+		}
+		else {
+			this.y = this.moveY;
+		}
+		
+		update = true;
+		if(this.moveX == this.x && this.moveY == this.y) {
+			this.moving = false;
+			console.log("DEBUG: done moving object")
+		}
+	}
 }
 function handleImageLoad(event) {
 	var image = event.target;
@@ -137,7 +152,9 @@ function handleImageLoad(event) {
     function tick(event) {
         // this set makes it so the stage only re-renders when an event handler indicates a change has happened.
         if (update) {
-            update = false; // only update once
+			update = false; // only update once
+			//update positions of all elements
+			shapearray.foreach(moveShape);
 			boxStage.update(event);
 			worldStage.update(event);
         }
