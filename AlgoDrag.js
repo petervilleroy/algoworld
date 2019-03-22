@@ -161,7 +161,7 @@ function handleImageLoad(event) {
 			//update positions of all elements
 			//shapearray.forEach(moveShape);
 			boxStage.update(event);
-			//worldStage.update(event);
+			worldStage.update(event);
         }
     } 
 }
