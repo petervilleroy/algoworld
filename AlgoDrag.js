@@ -45,6 +45,7 @@ function populateLevel_0() {
 	shapex = worldCanvas.width * Math.random() | 0;
 	shapey = worldCanvas.height * Math.random() | 0;
 	shaper = 10;
+	console.log("Drawing circle at ("+shapex+", "+shapey+").")
     shape.graphics.beginFill('blue').drawCircle(shapex, shapey, shaper);
 	worldStage.addChild(shape);
 	
