@@ -12,8 +12,8 @@ function init() {//Draw a square on screen.
 	boxCanvas = document.getElementById("myBoxCanvas");
 	boxStage = new createjs.Stage('myBoxCanvas');
 	switch(currentLevel) {
-		case 0: populateLevel_0;
-		default: populateLevel_0
+		case 0: populateLevel_0();
+		default: populateLevel_0();
 	}
 	WorldStage.update();
 	
@@ -49,7 +49,7 @@ function populateLevel_0() {
 	worldStage.addChild(shape);
 	
 	// assign color, size, icon according to rules TBD
-
+	worldStage.update();
 }
 
 function handleImageLoad(event) {
