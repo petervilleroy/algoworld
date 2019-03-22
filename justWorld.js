@@ -38,7 +38,7 @@ function populateLevel_0() {
     .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
     
 	createjs.Ticker.addEventListener("tick", worldStage);
-    this.addEventListener("GO", handleGo(shape));
+    $("#eventButton").addEventListener("click", handleGo(shape));
     
 	worldStage.update();
 	
@@ -50,8 +50,8 @@ function handleGo(shape) {
     .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
 };
 
-function fireEvent() {
+/*function fireEvent() {
     var event = new createjs.Event("GO");
 
     new createjs.EventDispatcher().dispatchEvent(event);
-};
+};*/
