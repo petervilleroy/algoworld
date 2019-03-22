@@ -66,6 +66,7 @@ function populateLevel_0() {
 }
 
 function moveShape (xarg, yarg, t) {
+	console.log ("DEBUG: moving shape to ("+xarg+","+yarg+") in T="+t)
 	if (xarg - this.x > 5 || xarg - this.x < -5) {
 		this.x += ((xarg - this.x) / 5);
 	}
