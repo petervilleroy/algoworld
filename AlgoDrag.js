@@ -57,7 +57,7 @@ function populateLevel_0() {
 		update = true;
 	});
 	//teach the shape to move.
-	shape.moveTo = function(xarg, yarg, t) {
+	/*shape.moveTo = function(xarg, yarg, t) {
 		console.log ("DEBUG: got request to move shape to ("+xarg+","+yarg+") in T="+t)
 		this.moveX = xarg;
 		this.moveY = yarg;
@@ -65,7 +65,11 @@ function populateLevel_0() {
 		this.moving = true;
 		update = true;
 	};
-	shape.moveShape = moveShape;
+	shape.moveShape = moveShape;*/
+	shape.moveTo = function(xarg, yarg, t) {
+		createjs.Tween.get(this, {loop:false}).to({x: xarg, y: yarg}, t, createjs.Ease.getPowInOut(4));
+	}
+
 	worldStage.addChild(shape);
 	shapearray.push(shape);
 	
@@ -75,7 +79,7 @@ function populateLevel_0() {
 	update = true;
 }
  
-function moveShape (item, index) {
+/*function moveShape (item, index) {
 	if(item.moving) {
 		console.log ("DEBUG: moving shape from ("+item.x+","+item.y+") to ("+item.moveX+","+item.moveY+") in T="+item.moveT)
 		if (item.moveX - item.x > 5 || item.moveX - item.x < -5) {
@@ -97,7 +101,7 @@ function moveShape (item, index) {
 			console.log("DEBUG: done moving object")
 		}
 	}
-}
+}*/
 function handleImageLoad(event) {
 	var image = event.target;
 	var bitmap;
@@ -154,9 +158,9 @@ function handleImageLoad(event) {
         if (update) {
 			update = false; // only update once
 			//update positions of all elements
-			shapearray.forEach(moveShape);
+			//shapearray.forEach(moveShape);
 			boxStage.update(event);
-			worldStage.update(event);
+			//worldStage.update(event);
         }
     } 
 }
