@@ -38,7 +38,7 @@ function populateLevel_0() {
     .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
     
 	createjs.Ticker.addEventListener("tick", worldStage);
-    createjs.Ticker.addEventListener("GO", handleGo(shape));
+    this.addEventListener("GO", handleGo(shape));
     
 	worldStage.update();
 	
