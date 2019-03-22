@@ -27,16 +27,15 @@ function populateLevel_0() {
 	shape.graphics.beginFill('blue').drawCircle(shapex, shapey, shaper);
 	shape.on("rollover", function (evt) {
 		this.scale = this.originalScale * 1.2;
-	});
-	shape.moveTo = function(xarg, yarg, t) {
-		createjs.Tween.get(shape, {loop:false}).to({x: xarg, y: yarg}, t, createjs.Ease.getPowInOut(4));
-	}
+    });
+    worldStage.addChild(shape);
+	
+	createjs.Tween.get(shape, {loop:false}).to({x: 400, y: 150}, 1500, createjs.Ease.getPowInOut(2));
+	
 	createjs.Ticker.addEventListener("tick", worldStage);
 
-	worldStage.addChild(shape);
 	worldStage.update();
 	
-	shape.moveTo(400,150,10);
 	update = true; 
 
    
