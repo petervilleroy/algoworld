@@ -12,10 +12,13 @@ function init() {//Draw a square on screen.
 	boxCanvas = document.getElementById("myBoxCanvas");
 	boxStage = new createjs.Stage('myBoxCanvas');
 	switch(currentLevel) {
-		case 0: populateLevel_0();break;
-		default: populateLevel_0();
+		case 0: 
+			populateLevel_0();
+			break;
+		default: 
+			populateLevel_0();
 	}
-	worldStage.update();
+	update = true;
 	
 	
     boxStage.enableMouseOver(10);
@@ -31,7 +34,8 @@ function init() {//Draw a square on screen.
     image.src = "http://i.stack.imgur.com/OGtMI.jpg?s=32&g=1";
     temp = new createjs.Bitmap(image);
 	temp.onload = handleImageLoad;*/
-	boxStage.update();
+	//boxStage.update();
+	update=true;
 }
 
 function populateLevel_0() {
@@ -46,13 +50,38 @@ function populateLevel_0() {
 	shapey = worldCanvas.height * Math.random() | 0;
 	shaper = 10;
 	console.log("Drawing circle at ("+shapex+", "+shapey+").")
-    shape.graphics.beginFill('blue').drawCircle(shapex, shapey, shaper);
+	shape.graphics.beginFill('blue').drawCircle(shapex, shapey, shaper);
+	shape.on("rollover", function (evt) {
+		this.scale = this.originalScale * 1.2;
+		update = true;
+	});
+	//teach the shape to move.
+	shape.moveTo = moveShape;
 	worldStage.addChild(shape);
 	
+	shape.moveTo(400,150,10);
 	// assign color, size, icon according to rules TBD
-	worldStage.update();
+	//worldStage.update();
+	update = true;
 }
 
+function moveShape (xarg, yarg, t) {
+	if (xarg - this.x > 5 || xarg - this.x < -5) {
+		this.x += ((xarg - this.x) / 5);
+	}
+	else {
+		this.x = xarg;
+	}
+	if (yarg - this.y > 5 || yarg - this.y < -5) {
+		this.y += ((yarg - this.y) / 5);
+	}
+	else {
+		this.y = yarg;
+	}
+	
+	
+	update = true;
+}
 function handleImageLoad(event) {
 	var image = event.target;
 	var bitmap;
