@@ -4,21 +4,23 @@ var mouseTarget;	// the display object currently under the mouse, or being dragg
 var dragStarted;	// indicates whether we are currently in a drag operation
 var offset;
 var update = true;
-
+var currentLevel = 0;
 
 function init() {//Draw a square on screen.
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
 	boxCanvas = document.getElementById("myBoxCanvas");
 	boxStage = new createjs.Stage('myBoxCanvas');
-    var shape = new createjs.Shape();
-    shape.graphics.beginFill('blue').drawCircle(30, 60, 10);
-    worldStage.addChild(shape);
-    worldStage.update();
-
+	switch(currentLevel) {
+		case 0: populateLevel_0;
+		default: populateLevel_0
+	}
+	WorldStage.update();
+	
+	
     boxStage.enableMouseOver(10);
     boxStage.mouseMoveOutside = true;
-    
+		
     var image = new Image();
 	image.src = "./img/HelloWorld.bmp";
     image.onload = handleImageLoad;
@@ -30,6 +32,24 @@ function init() {//Draw a square on screen.
     temp = new createjs.Bitmap(image);
 	temp.onload = handleImageLoad;*/
 	boxStage.update();
+}
+
+function populateLevel_0() {
+	var shape, shapex, shapey, shaper;
+	
+	//All these shapes become children of WorldStage
+	//TODO: consider bundling shapes into a container for easier access
+	//      separate from other worldStage children.
+	
+	shape = new createjs.Shape();
+	shapex = worldCanvas.width * Math.random() | 0;
+	shapey = worldCanvas.height * Math.random() | 0;
+	shaper = 10;
+    shape.graphics.beginFill('blue').drawCircle(shapex, shapey, shaper);
+	worldStage.addChild(shape);
+	
+	// assign color, size, icon according to rules TBD
+
 }
 
 function handleImageLoad(event) {
@@ -48,12 +68,10 @@ function handleImageLoad(event) {
 		//bitmap.rotation = 360 * Math.random() | 0;
 		bitmap.regX = bitmap.image.width / 2 | 0;
 		bitmap.regY = bitmap.image.height / 2 | 0;
-        bitmap.scale = bitmap.originalScale = 1;
+        bitmap.scale = bitmap.originalScale = 0.5;
         bitmap.name = "bmp_" + i;
 		bitmap.cursor = "pointer";
-		/*bitmap.x = 0;
-		bitmap.y = 0;
-		bitmap.name = "bmp_2";*/
+		
 
 		// using "on" binds the listener to the scope of the currentTarget by default
 		// in this case that means it executes in the scope of the button.
@@ -89,7 +107,8 @@ function handleImageLoad(event) {
         // this set makes it so the stage only re-renders when an event handler indicates a change has happened.
         if (update) {
             update = false; // only update once
-            boxStage.update(event);
+			boxStage.update(event);
+			worldStage.update(event);
         }
     } 
 }
