@@ -33,7 +33,7 @@ function populateLevel_0() {
     });
     worldStage.addChild(shape);
 	
-    createjs.Tween.get(shape).to({x: movex-shape.x, y: movey-shape.y}, 1500, createjs.Ease.getPowInOut(2))
+    createjs.Tween.get(shape).to({x: movex, y: movey}, 1500, createjs.Ease.getPowInOut(2))
     .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
     
 	createjs.Ticker.addEventListener("tick", worldStage);
