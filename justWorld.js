@@ -38,8 +38,18 @@ function populateLevel_0() {
     .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
     
 	createjs.Ticker.addEventListener("tick", worldStage);
-
+    createjs.Ticker.addEventListener("GO!", handleGo(shape));
+    
 	worldStage.update();
 	
 	update = true; 
+}
+
+function handleGo(shape) {
+    createjs.Tween.get(shape).to({x: 100, y: 100}, 1500)//, createjs.Ease.getPowInOut(2))
+    .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
+}
+
+function fireEvent() {
+    this.dispatchEvent("GO!");
 }
