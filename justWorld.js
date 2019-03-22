@@ -30,7 +30,7 @@ function populateLevel_0() {
     });
     worldStage.addChild(shape);
 	
-	createjs.Tween.get(shape, {loop:false}).to({x: 400, y: 150}, 1500, createjs.Ease.getPowInOut(2));
+	createjs.Tween.get(shape, {loop:false}).to({x: 40, y: 15}, 1500, createjs.Ease.getPowInOut(2));
 	
 	createjs.Ticker.addEventListener("tick", worldStage);
 
