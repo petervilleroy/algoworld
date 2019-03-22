@@ -74,11 +74,10 @@ function populateLevel_0() {
 	//worldStage.update();
 	update = true;
 }
-
  
 function moveShape (item, index) {
 	if(item.moving) {
-		console.log ("DEBUG: moving shape to ("+item.moveX+","+item.moveY+") in T="+item.moveT)
+		console.log ("DEBUG: moving shape from ("+item.x+","+item.y+") to ("+item.moveX+","+item.moveY+") in T="+item.moveT)
 		if (item.moveX - item.x > 5 || item.moveX - item.x < -5) {
 			item.x += ((item.moveX - item.x) / 5);
 		}
