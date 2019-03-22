@@ -67,11 +67,12 @@ function populateLevel_0() {
 	};
 	shape.moveShape = moveShape;*/
 	shape.moveTo = function(xarg, yarg, t) {
-		createjs.Tween.get(this, {loop:false}).to({x: xarg, y: yarg}, t, createjs.Ease.getPowInOut(4));
+		createjs.Tween.get(shape, {loop:false}).to({x: xarg, y: yarg}, t, createjs.Ease.getPowInOut(4));
 	}
 
 	worldStage.addChild(shape);
-	shapearray.push(shape);
+	worldStage.update();
+	//shapearray.push(shape);
 	
 	shape.moveTo(400,150,10);
 	// assign color, size, icon according to rules TBD
