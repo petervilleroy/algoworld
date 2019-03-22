@@ -15,7 +15,7 @@ function init() {//Draw a square on screen.
 		case 0: populateLevel_0();
 		default: populateLevel_0();
 	}
-	WorldStage.update();
+	worldStage.update();
 	
 	
     boxStage.enableMouseOver(10);
