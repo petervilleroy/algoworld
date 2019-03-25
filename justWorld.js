@@ -1,11 +1,12 @@
 var worldCanvas, worldStage;
-
+var spriteContainer;
 var currentLevel = 0;
 
 function init() {//Draw a square on screen.
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
-	
+    spriteContainer = new createjs.Container();
+    
 	switch(currentLevel) {
 		case 0: 
 			populateLevel_0();
@@ -32,13 +33,15 @@ function populateLevel_0() {
 	shape.on("rollover", function (evt) {
 		this.scale = this.originalScale * 1.2;
     });
-    worldStage.addChild(shape);
+    spriteContainer.addChild(shape);
+    worldStage.addChild(spriteContainer);
 	
     createjs.Tween.get(shape).to({x: movex, y: movey}, 1500)//, createjs.Ease.getPowInOut(2))
     .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
     
     createjs.Ticker.addEventListener("tick", worldStage);
     
+    //Assign a function to the Event! Button
     $("#eventButton").click(function handleGo() {
         createjs.Tween.get(shape).to({x: 100, y: 100}, 1500)//, createjs.Ease.getPowInOut(2))
         .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
