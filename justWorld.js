@@ -26,27 +26,31 @@ function populateLevel_0() {
     movex = 30;
     movey = 15;
 
-	console.log("Drawing circle at ("+shapex+", "+shapey+").")
-    shape.graphics.beginFill('blue').drawCircle(0, 0, shaper);
-    shape.x = shapex;
-    shape.y = shapey;
-	shape.on("rollover", function (evt) {
-		this.scale = this.originalScale * 1.2;
-    });
-    spriteContainer.addChild(shape);
-    worldStage.addChild(spriteContainer);
-	
-    createjs.Tween.get(shape).to({x: movex, y: movey}, 1500)//, createjs.Ease.getPowInOut(2))
-    .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
+    for (var i = 0; i < 10; i++) {
+        console.log("Drawing circle at ("+shapex+", "+shapey+").")
+        shape.graphics.beginFill('blue').drawCircle(0, 0, shaper);
+        shape.x = shapex;
+        shape.y = shapey;
+        shape.on("rollover", function (evt) {
+            this.scale = this.originalScale * 1.2;
+        });
+        shape.name = "sprite_"+i;
+        spriteContainer.addChild(shape);
+        worldStage.addChild(spriteContainer);
+    }
+    createjs.Tween.get(spriteContainer(0)).to({x: movex, y: movey}, 1500)//, createjs.Ease.getPowInOut(2))
+    .call(function(sprite){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
     
     createjs.Ticker.addEventListener("tick", worldStage);
     
     //Assign a function to the Event! Button
     $("#eventButton").click(function handleGo() {
-        foreach (shape in spriteContainer) {
-            createjs.Tween.get(shape).to({x: 100, y: 100}, 1500)//, createjs.Ease.getPowInOut(2))
-        .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
-        }
+        spriteContainer.foreach (function(sprite, i){
+            spritex = 100 + (30 * Math.random() | 0)
+            spritey = 100 + (30 * Math.random() | 0)
+            createjs.Tween.get(sprite).to({x: spritex, y: spritey}, 1500)//, createjs.Ease.getPowInOut(2))
+        .call(function(sprite){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
+        });
         
     });
     
