@@ -26,7 +26,7 @@ function populateLevel_0() {
     movex = 30;
     movey = 15;
 
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < 3; i++) {
         console.log("Drawing circle at ("+shapex+", "+shapey+").")
         shape.graphics.beginFill('blue').drawCircle(0, 0, shaper);
         shape.x = shapex;
@@ -48,8 +48,8 @@ function populateLevel_0() {
     //Assign a function to the Event! Button
     $("#eventButton").click(function handleGo() {
         spriteContainer.forEach (function(sprite, i){
-            spritex = 100 + (30 * Math.random() | 0)
-            spritey = 100 + (30 * Math.random() | 0)
+            spritex = 100 + (50 * Math.random() | 0)
+            spritey = 100 + (50 * Math.random() | 0)
             createjs.Tween.get(sprite).to({x: spritex, y: spritey}, 1500)//, createjs.Ease.getPowInOut(2))
         .call(function(sprite){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
         });
