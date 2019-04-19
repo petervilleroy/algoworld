@@ -5,7 +5,7 @@ var currentLevel = 0;
 function init() {//Draw a square on screen.
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
-    spriteContainer = new createjs.Container();
+    spriteContainer = new Array();
     
 	switch(currentLevel) {
 		case 0: 
@@ -35,10 +35,10 @@ function populateLevel_0() {
             this.scale = this.originalScale * 1.2;
         });
         shape.name = "sprite_"+i;
-        spriteContainer.addChild(shape);
+        spriteContainer.push(shape);
         worldStage.addChild(spriteContainer);
     }
-    createjs.Tween.get(spriteContainer.getChildAt(0)).to({x: movex, y: movey}, 1500)//, createjs.Ease.getPowInOut(2))
+    createjs.Tween.get(spriteContainer[0].to({x: movex, y: movey}, 1500)//, createjs.Ease.getPowInOut(2))
     .call(function(sprite){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
     
     createjs.Ticker.addEventListener("tick", worldStage);
