@@ -36,7 +36,7 @@ function populateLevel_0() {
         });
         shape.name = "sprite_"+i;
         spriteContainer.push(shape);
-        worldStage.addChild(spriteContainer);
+        spriteContainer.forEach(function(sprite, i){worldStage.addChild(sprite);});
     }
     createjs.Tween.get(spriteContainer[0]).to({x: movex, y: movey}, 1500)//, createjs.Ease.getPowInOut(2))
     .call(function(sprite){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
