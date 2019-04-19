@@ -21,7 +21,7 @@ function populateLevel_0() {
 	
 	
 
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 8; i++) {
         shape = new createjs.Shape();
         shapex = worldCanvas.width * Math.random() | 0;
         shapey = worldCanvas.height * Math.random() | 0;
@@ -41,8 +41,8 @@ function populateLevel_0() {
         //spriteContainer.forEach(function(sprite, i){worldStage.addChild(sprite);
         //    console.log("DEBUG: Added "+sprite.name+" to World Stage.")});
     }
-    createjs.Tween.get(spriteContainer[0]).to({x: movex, y: movey}, 1500)//, createjs.Ease.getPowInOut(2))
-    .call(function(sprite){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
+    spriteContainer.forEach(function(sprite, i){createjs.Tween.get(sprite).to({x: movex, y: movey}, 1500)
+    .call(function(sprite){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");})});
     
     createjs.Ticker.addEventListener("tick", worldStage);
     
