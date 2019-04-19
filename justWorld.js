@@ -26,7 +26,7 @@ function populateLevel_0() {
     movex = 30;
     movey = 15;
 
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < 1; i++) {
         console.log("Drawing circle at ("+shapex+", "+shapey+").")
         shape.graphics.beginFill('blue').drawCircle(0, 0, shaper);
         shape.x = shapex;
