@@ -43,8 +43,11 @@ function populateLevel_0() {
     
     //Assign a function to the Event! Button
     $("#eventButton").click(function handleGo() {
-        createjs.Tween.get(shape).to({x: 100, y: 100}, 1500)//, createjs.Ease.getPowInOut(2))
+        foreach (shape in spriteContainer) {
+            createjs.Tween.get(shape).to({x: 100, y: 100}, 1500)//, createjs.Ease.getPowInOut(2))
         .call(function(shape){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
+        }
+        
     });
     
 	worldStage.update();

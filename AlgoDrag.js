@@ -27,7 +27,8 @@ function init() {//Draw a square on screen.
 		
     var image = new Image();
 	image.src = "./img/HelloWorld.bmp";
-    image.onload = handleImageLoad;
+	image.onload = handleImageLoad;
+	//for Shapes, use shape.added = handleShapeAdd;
     
     //Trying different Image creation technique to avoid CORS security warnings
     /*var image = document.createElement("img");
