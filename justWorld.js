@@ -19,14 +19,15 @@ function init() {//Draw a square on screen.
 function populateLevel_0() {
 	var shape, shapex, shapey, shaper;
 	
-	shape = new createjs.Shape();
-	shapex = worldCanvas.width * Math.random() | 0;
-	shapey = worldCanvas.height * Math.random() | 0;
-    shaper = 10;
-    movex = 30;
-    movey = 15;
+	
 
     for (var i = 0; i < 3; i++) {
+        shape = new createjs.Shape();
+        shapex = worldCanvas.width * Math.random() | 0;
+        shapey = worldCanvas.height * Math.random() | 0;
+        shaper = 10;
+        movex = 30;
+        movey = 15;
         console.log("Drawing circle at ("+shapex+", "+shapey+").")
         shape.graphics.beginFill('blue').drawCircle(0, 0, shaper);
         shape.x = shapex;
