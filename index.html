@@ -10,16 +10,29 @@
     <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
     <script src="https://use.typekit.net/cek3iwo.js"></script>
     <script src="justWorld.js"></script>
-    
+    <link rel="stylesheet" type="text/css" href="algoworld.css">
+
 </head>
 
 <body onload="init();">
-    <p>Animation Canvas:</p><br/>
-    <canvas id="myWorldCanvas" width="500" height="300"></canvas></body>
+    <table>
+        <tr>
+            <td>
+                <p>Animation Canvas:</p><br/>
+                <canvas id="myWorldCanvas" width="500" height="500"></canvas>
 
-    <button id="eventButton" >Event!</button>
+                <button id="eventButton" >Event!</button>
+            </td>
+            <td>
+                <p>Box Building Canvas:</p><br/>
+                <canvas id="myBoxCanvas" width="200" height="500"></canvas>
+            </td>
+        </tr>
+    </table>
+   
+    
 
-    <p>Box Building Canvas:</p><br/>
-    <canvas id="myBoxCanvas" width="500" height="300"></canvas></body>
+   
+</body>
 
 </html>
