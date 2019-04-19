@@ -49,8 +49,8 @@ function populateLevel_0() {
     //Assign a function to the Event! Button
     $("#eventButton").click(function handleGo() {
         spriteContainer.forEach (function(sprite, i){
-            spritex = 100 + (50 * Math.random() | 0)
-            spritey = 100 + (50 * Math.random() | 0)
+            spritex = 200 + (150 * Math.random() | 0)
+            spritey = 100 + (80 * Math.random() | 0)
             createjs.Tween.get(sprite).to({x: spritex, y: spritey}, 1500)//, createjs.Ease.getPowInOut(2))
         .call(function(sprite){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
         });
