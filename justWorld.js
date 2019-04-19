@@ -45,7 +45,7 @@ function populateLevel_0() {
     
     //Assign a function to the Event! Button
     $("#eventButton").click(function handleGo() {
-        spriteContainer.foreach (function(sprite, i){
+        spriteContainer.forEach (function(sprite, i){
             spritex = 100 + (30 * Math.random() | 0)
             spritey = 100 + (30 * Math.random() | 0)
             createjs.Tween.get(sprite).to({x: spritex, y: spritey}, 1500)//, createjs.Ease.getPowInOut(2))
