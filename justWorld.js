@@ -28,8 +28,8 @@ function populateLevel_0() {
         shapex = worldCanvas.width * Math.random() | 0;
         shapey = worldCanvas.height * Math.random() | 0;
         shaper = 10;
-        //movex = 30;
-        //movey = 15;
+        movex = 30;
+        movey = 15;
         console.log("Drawing circle at ("+shapex+", "+shapey+").")
         shape.graphics.beginFill('blue').drawCircle(0, 0, shaper);
         shape.x = shapex;
@@ -45,7 +45,7 @@ function populateLevel_0() {
         shape.graphics.beginFill('orange').arc(shapex, shapey, shaper*5, 0, 180);
         shape.name = "body_"+i;
         citizen.addChild(shape);
-        
+
         // Add the new Citizen to the population
         spriteArray.push(citizen);
         worldStage.addChild(citizen);
