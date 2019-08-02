@@ -1,11 +1,11 @@
 var worldCanvas, worldStage;
-var spriteContainer;
+var spriteArray;
 var currentLevel = 0;
 
 function init() {//Draw a square on screen.
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
-    spriteContainer = new Array();
+    spriteArray = new Array();
     
 	switch(currentLevel) {
 		case 0: 
@@ -17,17 +17,19 @@ function init() {//Draw a square on screen.
 };
 
 function populateLevel_0() {
-	var shape, shapex, shapey, shaper;
+	var shape, shapex, shapey, shaper, citizen, citizenx, citizeny;
 	
 	
 
     for (var i = 0; i < 8; i++) {
+        // Create and attach Head
         shape = new createjs.Shape();
+        citizen = new createjs.Container();
         shapex = worldCanvas.width * Math.random() | 0;
         shapey = worldCanvas.height * Math.random() | 0;
         shaper = 10;
-        movex = 30;
-        movey = 15;
+        //movex = 30;
+        //movey = 15;
         console.log("Drawing circle at ("+shapex+", "+shapey+").")
         shape.graphics.beginFill('blue').drawCircle(0, 0, shaper);
         shape.x = shapex;
@@ -35,24 +37,33 @@ function populateLevel_0() {
         shape.on("rollover", function (evt) {
             this.scale = this.originalScale * 1.2;
         });
-        shape.name = "sprite_"+i;
-        spriteContainer.push(shape);
-        worldStage.addChild(shape);
-        //spriteContainer.forEach(function(sprite, i){worldStage.addChild(sprite);
+        shape.name = "head_"+i;
+        citizen.name = "citizen_"+i;
+        citizen.addChild(shape);
+        // Now create the Body
+        shape = new createjs.Shape();
+        shape.graphics.beginFill('orange').arc(shapex, shapey, shaper*5, 0, 180);
+        shape.name = "body_"+i;
+        citizen.addChild(shape);
+        
+        // Add the new Citizen to the population
+        spriteArray.push(citizen);
+        worldStage.addChild(citizen);
+        //spriteArray.forEach(function(sprite, i){worldStage.addChild(sprite);
         //    console.log("DEBUG: Added "+sprite.name+" to World Stage.")});
     }
-    spriteContainer.forEach(function(sprite, i){createjs.Tween.get(sprite).to({x: movex, y: movey}, 1500)
-    .call(function(sprite){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");})});
+    spriteArray.forEach(function(citizen, i){createjs.Tween.get(citizen).to({x: movex, y: movey}, 1500)
+    .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");})});
     
     createjs.Ticker.addEventListener("tick", worldStage);
     
     //Assign a function to the Event! Button
     $("#eventButton").click(function handleGo() {
-        spriteContainer.forEach (function(sprite, i){
-            spritex = 200 + (150 * Math.random() | 0)
-            spritey = 200 + (80 * Math.random() | 0)
-            createjs.Tween.get(sprite).to({x: spritex, y: spritey}, 1500)//, createjs.Ease.getPowInOut(2))
-        .call(function(sprite){console.log("DEBUG: shape is now at ("+this.x+","+this.y+")");});
+        spriteArray.forEach (function(citizen, i){
+            citizenx = 200 + (150 * Math.random() | 0)
+            citizeny = 200 + (80 * Math.random() | 0)
+            createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500)//, createjs.Ease.getPowInOut(2))
+        .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");});
         });
         
     });
