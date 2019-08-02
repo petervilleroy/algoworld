@@ -42,6 +42,7 @@ function populateLevel_0() {
         citizen.addChild(shape);
         // Now create the Body
         shape = new createjs.Shape();
+        console.log("Drawing circle at ("+shapex+", "+shapey+").")
         shape.graphics.beginFill('orange').arc(0, 0, shaper*5, 0, Math.PI);
         shape.name = "body_"+i;
         citizen.addChild(shape);
@@ -60,8 +61,8 @@ function populateLevel_0() {
     //Assign a function to the Event! Button
     $("#eventButton").click(function handleGo() {
         spriteArray.forEach (function(citizen, i){
-            citizenx = 200 + (150 * Math.random() | 0)
-            citizeny = 200 + (80 * Math.random() | 0)
+            citizenx = 100 + (150 * Math.random() | 0)
+            citizeny = 100 + (80 * Math.random() | 0)
             createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500)//, createjs.Ease.getPowInOut(2))
         .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");});
         });
