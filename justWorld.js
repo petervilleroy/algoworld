@@ -42,7 +42,7 @@ function populateLevel_0() {
         citizen.addChild(shape);
         // Now create the Body
         shape = new createjs.Shape();
-        shape.graphics.beginFill('orange').arc(shapex, shapey, shaper*5, 0, 180);
+        shape.graphics.beginFill('orange').arc(shapex, shapey, shaper*5, 0, Math.PI);
         shape.name = "body_"+i;
         citizen.addChild(shape);
 
