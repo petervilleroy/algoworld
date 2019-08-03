@@ -1,6 +1,11 @@
 var worldCanvas, worldStage;
 var spriteArray;
 var currentLevel = 0;
+var lightOutline = "#D39972";
+var lightHead = "#F7C19B";
+var darkOutline = "#6F4F1D";
+var darkHead = "#876127";
+var bodyColor = 'orange';
 
 function init() {//Draw a square on screen.
     worldCanvas = document.getElementById("myWorldCanvas");
@@ -31,7 +36,7 @@ function populateLevel_0() {
         shaper = 10;
         // Body
         console.log("Drawing body at ("+shapex+", "+shapey+").")
-        shape.graphics.beginFill('orange').arc(0, 0, shaper*2, 0, Math.PI, true);
+        shape.graphics.beginFill(bodyColor).arc(0, 0, shaper*2, 0, Math.PI, true);
         shape.x = shapex;
         shape.y = shapey+(shaper*2.5);
         shape.name = "body_"+i;
@@ -40,7 +45,7 @@ function populateLevel_0() {
         // Now create the Head
         shape = new createjs.Shape();
         console.log("Drawing head at ("+shapex+", "+shapey+").")
-        shape.graphics.beginFill('blue').drawCircle(0, 0, shaper);
+        shape.graphics.beginStroke(lightOutline).beginFill(lightHead).drawCircle(0, 0, shaper);
         shape.x = shapex;
         shape.y = shapey;
         //shape.on("rollover", function (evt) {            this.scale = this.originalScale * 1.2;        });
