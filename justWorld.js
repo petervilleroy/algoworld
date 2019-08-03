@@ -43,12 +43,14 @@ function populateLevel_3() {
         shaper = 10;
         shapeRace = 100*Math.random() | 0;
         shapeGender = 100*Math.random() | 0;
+        shapeInitWealth = Math.random();
         lightProportion = 65;
         maleProportion = 55;
         
         // Body
         console.log("Drawing body at ("+shapex+", "+shapey+").")
-        shape.graphics.beginFill(bodyColor).arc(0, 0, shaper*2, 0, Math.PI, true);
+        // begin at PI/2 - initWealth*PI
+        shape.graphics.beginFill(bodyColor).arc(0, 0, shaper*2, (Math.PI/2)-(Math.PI*shapeInitWealth), (Math.PI/2)+(Math.PI*shapeInitWealth), true);
         shape.x = shapex;
         shape.y = shapey+(shaper*2.5);
         shape.name = "body_"+i;
