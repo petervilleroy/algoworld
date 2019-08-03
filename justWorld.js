@@ -25,7 +25,7 @@ function init() {//Draw a square on screen.
 
 function populateLevel_3() {
 	var shape, shapex, shapey, shaper, citizen, citizenx, citizeny;
-	var worldPopulation = 8
+	var worldPopulation = 20;
     var movex = 30;
     var movey = 15;
     var lightOutline = "#D39972";
