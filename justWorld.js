@@ -23,31 +23,31 @@ function populateLevel_0() {
     var movey = 15;
 
     for (var i = 0; i < 8; i++) {
-        // Create and attach Head
+        // Create and attach Body
         shape = new createjs.Shape();
         citizen = new createjs.Container();
         shapex = worldCanvas.width * Math.random() | 0;
         shapey = worldCanvas.height * Math.random() | 0;
         shaper = 10;
-
-        console.log("Drawing circle at ("+shapex+", "+shapey+").")
+        // Body
+        console.log("Drawing body at ("+shapex+", "+shapey+").")
+        shape.graphics.beginFill('orange').arc(0, 0, shaper*2, 0, Math.PI, true);
+        shape.x = shapex;
+        shape.y = shapey+(shaper*2.5);
+        shape.name = "body_"+i;
+        citizen.addChild(shape);
+        
+        // Now create the Head
+        shape = new createjs.Shape();
+        console.log("Drawing head at ("+shapex+", "+shapey+").")
         shape.graphics.beginFill('blue').drawCircle(0, 0, shaper);
         shape.x = shapex;
         shape.y = shapey;
-        shape.on("rollover", function (evt) {
-            this.scale = this.originalScale * 1.2;
-        });
+        //shape.on("rollover", function (evt) {            this.scale = this.originalScale * 1.2;        });
         shape.name = "head_"+i;
         citizen.addChild(shape);
-        // Now create the Body
-        shape = new createjs.Shape();
-        console.log("Drawing circle at ("+shapex+", "+shapey+").")
-        shape.graphics.beginFill('orange').arc(0, 0, shaper*2, 0, Math.PI, true);
-        shape.x = shapex;
-        shape.y = shapey+(shaper*2);
-        shape.name = "body_"+i;
-        citizen.addChild(shape);
-
+        
+        
         // Add the new Citizen to the population
         citizen.name = "citizen_"+i;
         spriteArray.push(citizen);
@@ -83,3 +83,5 @@ function populateLevel_0() {
 
     new createjs.EventDispatcher().dispatchEvent(event);
 };*/
+
+
