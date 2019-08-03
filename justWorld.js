@@ -41,7 +41,9 @@ function populateLevel_3() {
         shapex = 0; //worldCanvas.width * Math.random() | 0;
         shapey = 0; //worldCanvas.height * Math.random() | 0;
         shaper = 10;
-        shapeRace = i*Math.random() | 0;
+        shapeRace = 100*Math.random() | 0;
+        lightProportion = 60;
+        maleProportion = 50;
         
         // Body
         console.log("Drawing body at ("+shapex+", "+shapey+").")
@@ -55,13 +57,19 @@ function populateLevel_3() {
         shape = new createjs.Shape();
         console.log("Drawing head at ("+shapex+", "+shapey+").")
         // apply Gender
-        if(shapeRace < (worldPopulation/3)) {
+        if(shapeRace < lightProportion) {
             shape.graphics.beginStroke(lightOutline).beginFill(lightHead).drawCircle(0, 0, shaper);
             shape.race = 0;
         }
         else {
             shape.graphics.beginStroke(darkOutline).beginFill(darkHead).drawCircle(0, 0, shaper);
             shape.race = 1;
+        }
+        if(shapeRace < maleProportion) {
+            shape.gender = 0;
+        }
+        else {
+            shape.gender = 1;
         }
         shape.x = shapex;
         shape.y = shapey;
