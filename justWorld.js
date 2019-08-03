@@ -1,11 +1,7 @@
 var worldCanvas, worldStage;
 var spriteArray;
-var currentLevel = 0;
-var lightOutline = "#D39972";
-var lightHead = "#F7C19B";
-var darkOutline = "#6F4F1D";
-var darkHead = "#876127";
-var bodyColor = 'orange';
+var currentLevel = 3;
+
 
 function init() {//Draw a square on screen.
     worldCanvas = document.getElementById("myWorldCanvas");
@@ -13,27 +9,40 @@ function init() {//Draw a square on screen.
     spriteArray = new Array();
     
 	switch(currentLevel) {
-		case 0: 
-			populateLevel_0();
+		case 1: 
+			populateLevel_1();
+            break;
+        case 2: 
+			populateLevel_2();
+            break;
+        case 3: 
+			populateLevel_3();
 			break;
 		default: 
-			populateLevel_0();
+			populateLevel_3();
 	}
 };
 
-function populateLevel_0() {
+function populateLevel_3() {
 	var shape, shapex, shapey, shaper, citizen, citizenx, citizeny;
-	
+	var worldPopulation = 8
     var movex = 30;
     var movey = 15;
+    var lightOutline = "#D39972";
+    var lightHead = "#F7C19B";
+    var darkOutline = "#6F4F1D";
+    var darkHead = "#876127";
+    var bodyColor = 'orange';
 
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < worldPopulation; i++) {
         // Create and attach Body
         shape = new createjs.Shape();
         citizen = new createjs.Container();
         shapex = 0; //worldCanvas.width * Math.random() | 0;
         shapey = 0; //worldCanvas.height * Math.random() | 0;
         shaper = 10;
+        shapeRace = i*Math.random() | 0;
+        
         // Body
         console.log("Drawing body at ("+shapex+", "+shapey+").")
         shape.graphics.beginFill(bodyColor).arc(0, 0, shaper*2, 0, Math.PI, true);
@@ -45,7 +54,15 @@ function populateLevel_0() {
         // Now create the Head
         shape = new createjs.Shape();
         console.log("Drawing head at ("+shapex+", "+shapey+").")
-        shape.graphics.beginStroke(lightOutline).beginFill(lightHead).drawCircle(0, 0, shaper);
+        // apply Gender
+        if(shapeRace < (worldPopulation / 2)) {
+            shape.graphics.beginStroke(lightOutline).beginFill(lightHead).drawCircle(0, 0, shaper);
+            shape.race = 0;
+        }
+        else {
+            shape.graphics.beginStroke(darkOutline).beginFill(darkHead).drawCircle(0, 0, shaper);
+            shape.race = 1;
+        }
         shape.x = shapex;
         shape.y = shapey;
         //shape.on("rollover", function (evt) {            this.scale = this.originalScale * 1.2;        });
