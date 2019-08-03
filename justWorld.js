@@ -42,6 +42,7 @@ function populateLevel_3() {
         shapey = 0; //worldCanvas.height * Math.random() | 0;
         shaper = 10;
         shapeRace = 100*Math.random() | 0;
+        shapeGender = 100*Math.random() | 0;
         lightProportion = 65;
         maleProportion = 55;
         
@@ -75,7 +76,7 @@ function populateLevel_3() {
         // apply Gender
         shape = new createjs.Shape();
         console.log("Drawing bow at ("+shapex+", "+shapey+").")
-        if(shapeRace < maleProportion) {
+        if(shapeGender < maleProportion) {
             citizen.gender = 0;
         }
         else {
