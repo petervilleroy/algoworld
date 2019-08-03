@@ -112,8 +112,8 @@ function populateLevel_3() {
     $("#eventButton").click(function handleGo() {
         spriteArray.forEach (function(citizen, i){
             if(citizen.wealth < 15){
-                citizenx = WorldCanvas.width - 25*deathToll;
-                citizeny = WorldCanvas.height - 25;
+                citizenx = worldCanvas.width - 25*deathToll;
+                citizeny = worldCanvas.height - 25;
                 deathToll += 1;
                 deadArray.push(spriteArray.splice(i,1));
             }
