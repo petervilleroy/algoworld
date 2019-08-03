@@ -85,6 +85,8 @@ function populateLevel_3() {
             shape.graphics.beginFill('red').drawCircle(-.7*shaper,.7*shaper,.1*shaper);
             citizen.gender = 1;
         }
+        shape.x = shapex;
+        shape.y = shapey;
         shape.name = "bow_"+i;
         citizen.addChild(shape);
 
