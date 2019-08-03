@@ -26,8 +26,8 @@ function populateLevel_0() {
         // Create and attach Body
         shape = new createjs.Shape();
         citizen = new createjs.Container();
-        shapex = worldCanvas.width * Math.random() | 0;
-        shapey = worldCanvas.height * Math.random() | 0;
+        shapex = 0; //worldCanvas.width * Math.random() | 0;
+        shapey = 0; //worldCanvas.height * Math.random() | 0;
         shaper = 10;
         // Body
         console.log("Drawing body at ("+shapex+", "+shapey+").")
