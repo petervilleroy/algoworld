@@ -108,7 +108,7 @@ function populateLevel_3() {
         spriteArray.forEach (function(citizen, i){
             citizenx = 50 + (400 * Math.random() | 0)
             citizeny = 50 + (350 * Math.random() | 0)
-            createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500, createjs.Ease.circIn) //, createjs.Ease.getPowInOut(2))
+            createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500) //, createjs.Ease.getPowInOut(2))
         .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");});
         });
         
