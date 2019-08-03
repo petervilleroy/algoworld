@@ -55,7 +55,7 @@ function populateLevel_3() {
         shape = new createjs.Shape();
         console.log("Drawing head at ("+shapex+", "+shapey+").")
         // apply Gender
-        if(shapeRace < (worldPopulation / 2)) {
+        if(shapeRace < (worldPopulation)) {
             shape.graphics.beginStroke(lightOutline).beginFill(lightHead).drawCircle(0, 0, shaper);
             shape.race = 0;
         }
