@@ -56,32 +56,38 @@ function populateLevel_3() {
         // Now create the Head
         shape = new createjs.Shape();
         console.log("Drawing head at ("+shapex+", "+shapey+").")
-        // apply Gender
+        // apply Race
         if(shapeRace < lightProportion) {
             shape.graphics.beginStroke(lightOutline).beginFill(lightHead).drawCircle(0, 0, shaper);
-            shape.race = 0;
+            citizen.race = 0;
         }
         else {
             shape.graphics.beginStroke(darkOutline).beginFill(darkHead).drawCircle(0, 0, shaper);
-            shape.race = 1;
+            citizen.race = 1;
         }
-        if(shapeRace < maleProportion) {
-            shape.gender = 0;
-        }
-        else {
-            //Draw the female icon
-            shape.graphics.moveTo(-.9*shaper,0);
-            shape.graphics.lineTo(-.5*shaper, 1.4*shaper).lineTo(0,0.9*shaper).lineTo(-1.4*shaper,0.5*shaper).lineTo(-.9*shaper,0);
-            shape.graphics.beginFill('red').drawCircle(-.7*shaper,.7*shaper,.1*shaper);
-            shape.gender = 1;
-        }
+        
         shape.x = shapex;
         shape.y = shapey;
         //shape.on("rollover", function (evt) {            this.scale = this.originalScale * 1.2;        });
         shape.name = "head_"+i;
         citizen.addChild(shape);
         
-        
+        // apply Gender
+        shape = new createjs.Shape();
+        console.log("Drawing bow at ("+shapex+", "+shapey+").")
+        if(shapeRace < maleProportion) {
+            citizen.gender = 0;
+        }
+        else {
+            //Draw the female icon
+            shape.graphics.moveTo(-.9*shaper,0);
+            shape.graphics.beginStroke('red').lineTo(-.5*shaper, 1.4*shaper).lineTo(0,0.9*shaper).lineTo(-1.4*shaper,0.5*shaper).lineTo(-.9*shaper,0);
+            shape.graphics.beginFill('red').drawCircle(-.7*shaper,.7*shaper,.1*shaper);
+            citizen.gender = 1;
+        }
+        shape.name = "bow_"+i;
+        citizen.addChild(shape);
+
         // Add the new Citizen to the population
         citizen.name = "citizen_"+i;
         spriteArray.push(citizen);
