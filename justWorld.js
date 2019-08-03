@@ -81,8 +81,8 @@ function populateLevel_3() {
         else {
             //Draw the female icon
             shape.graphics.moveTo(-.9*shaper,0);
-            shape.graphics.beginStroke('red').lineTo(-.5*shaper, -1.4*shaper).lineTo(0,-0.9*shaper).lineTo(-1.4*shaper,-0.5*shaper).lineTo(-.9*shaper,0);
-            shape.graphics.beginFill('red').drawCircle(-.7*shaper,.7*shaper,.2*shaper);
+            shape.graphics.beginStroke('red').lineTo(-.9*shaper,0).lineTo(-.5*shaper, -1.4*shaper).lineTo(0,-0.9*shaper).lineTo(-1.4*shaper,-0.5*shaper).lineTo(-.9*shaper,0);
+            shape.graphics.beginFill('red').drawCircle(-.7*shaper,-.7*shaper,.2*shaper);
             citizen.gender = 1;
         }
         shape.x = shapex;
