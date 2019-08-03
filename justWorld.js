@@ -7,6 +7,7 @@ function init() {//Draw a square on screen.
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
     spriteArray = new Array();
+    deadArray = new Array();
     
 	switch(currentLevel) {
 		case 1: 
@@ -25,7 +26,8 @@ function init() {//Draw a square on screen.
 
 function populateLevel_3() {
 	var shape, shapex, shapey, shaper, citizen, citizenx, citizeny;
-	var worldPopulation = 20;
+    var worldPopulation = 20;
+    var deathToll = 0;
     var movex = 30;
     var movey = 15;
     var lightOutline = "#D39972";
@@ -109,10 +111,21 @@ function populateLevel_3() {
     //Assign a function to the Event! Button
     $("#eventButton").click(function handleGo() {
         spriteArray.forEach (function(citizen, i){
-            citizenx = 50 + (400 * Math.random() | 0)
-            citizeny = 50 + (350 * Math.random() | 0)
+            if(citizen.wealth < 15){
+                citizenx = WorldCanvas.width - 25*deathToll;
+                citizeny = WorldCanvas.height - 25;
+                deathToll += 1;
+                deadArray.push(spriteArray.splice(i,1));
+            }
+            else {
+                citizenx = 50 + (400 * Math.random() | 0)
+                citizeny = 50 + (350 * Math.random() | 0)
+            }
+            
             createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500) //, createjs.Ease.getPowInOut(2))
-        .call(function(citizen){console.log("DEBUG: "+citizen.name+","+citizen.wealth+"% is now at ("+this.x+","+this.y+")");});
+        .call(function(citizen){console.log("DEBUG: "+citizen.name+","+citizen.wealth+"% is now at ("
+        +this.x+","+this.y+"). Living Population: "+worldPopulation-deathToll+".");});
+        
         });
         
     });
