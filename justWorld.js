@@ -42,8 +42,8 @@ function populateLevel_3() {
         shapey = 0; //worldCanvas.height * Math.random() | 0;
         shaper = 10;
         shapeRace = 100*Math.random() | 0;
-        lightProportion = 60;
-        maleProportion = 50;
+        lightProportion = 65;
+        maleProportion = 55;
         
         // Body
         console.log("Drawing body at ("+shapex+", "+shapey+").")
