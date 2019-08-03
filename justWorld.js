@@ -63,8 +63,8 @@ function populateLevel_0() {
     //Assign a function to the Event! Button
     $("#eventButton").click(function handleGo() {
         spriteArray.forEach (function(citizen, i){
-            citizenx = 100 + (150 * Math.random() | 0)
-            citizeny = 100 + (80 * Math.random() | 0)
+            citizenx = 50 + (150 * Math.random() | 0)
+            citizeny = 50 + (80 * Math.random() | 0)
             createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500)//, createjs.Ease.getPowInOut(2))
         .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");});
         });
