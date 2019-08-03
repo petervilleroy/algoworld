@@ -57,7 +57,7 @@ function populateLevel_3() {
         shape.y = shapey+(shaper*2.5);
         shape.name = "body_"+i;
         citizen.addChild(shape);
-        citizen.wealth = Math.rount(shapeInitWealth*100);
+        citizen.wealth = Math.round(shapeInitWealth*100);
         
         // Now create the Head
         shape = new createjs.Shape();
