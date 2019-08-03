@@ -38,16 +38,18 @@ function populateLevel_0() {
             this.scale = this.originalScale * 1.2;
         });
         shape.name = "head_"+i;
-        citizen.name = "citizen_"+i;
         citizen.addChild(shape);
         // Now create the Body
-        //shape = new createjs.Shape();
-        //console.log("Drawing circle at ("+shapex+", "+shapey+").")
-        //shape.graphics.beginFill('orange').arc(0, 0, shaper*5, 0, Math.PI);
-        //shape.name = "body_"+i;
-        //citizen.addChild(shape);
+        shape = new createjs.Shape();
+        console.log("Drawing circle at ("+shapex+", "+shapey+").")
+        shape.graphics.beginFill('orange').arc(0, 0, shaper*3, 0, Math.PI, true);
+        shape.x = shapex;
+        shape.y = shapey;
+        shape.name = "body_"+i;
+        citizen.addChild(shape);
 
         // Add the new Citizen to the population
+        citizen.name = "citizen_"+i;
         spriteArray.push(citizen);
         worldStage.addChild(citizen);
         //spriteArray.forEach(function(sprite, i){worldStage.addChild(sprite);
