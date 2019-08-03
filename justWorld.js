@@ -41,11 +41,11 @@ function populateLevel_0() {
         citizen.name = "citizen_"+i;
         citizen.addChild(shape);
         // Now create the Body
-        shape = new createjs.Shape();
-        console.log("Drawing circle at ("+shapex+", "+shapey+").")
-        shape.graphics.beginFill('orange').arc(0, 0, shaper*5, 0, Math.PI);
-        shape.name = "body_"+i;
-        citizen.addChild(shape);
+        //shape = new createjs.Shape();
+        //console.log("Drawing circle at ("+shapex+", "+shapey+").")
+        //shape.graphics.beginFill('orange').arc(0, 0, shaper*5, 0, Math.PI);
+        //shape.name = "body_"+i;
+        //citizen.addChild(shape);
 
         // Add the new Citizen to the population
         spriteArray.push(citizen);
