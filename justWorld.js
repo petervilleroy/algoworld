@@ -111,7 +111,7 @@ function populateLevel_3() {
     //Assign a function to the Event! Button
     $("#eventButton").click(function handleGo() {
         spriteArray.forEach (function(citizen, i){
-            if(citizen.wealth > 90){
+            if(citizen.wealth > 85){
                 citizenx = worldCanvas.width - 25*deathToll;
                 citizeny = worldCanvas.height - 25;
                 deathToll += 1;
@@ -124,7 +124,7 @@ function populateLevel_3() {
             
             createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500) //, createjs.Ease.getPowInOut(2))
         .call(function(citizen){console.log("DEBUG: "+citizen.name+","+citizen.wealth+"% is now at ("
-        +this.x+","+this.y+"). Living Population: "+worldPopulation-deathToll+".");});
+        +this.x+","+this.y+"). Living Population: "+spriteArray.length+".");});
         
         });
         
