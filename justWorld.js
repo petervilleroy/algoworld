@@ -55,6 +55,7 @@ function populateLevel_3() {
         shape.y = shapey+(shaper*2.5);
         shape.name = "body_"+i;
         citizen.addChild(shape);
+        citizen.wealth = Math.rount(shapeInitWealth*100);
         
         // Now create the Head
         shape = new createjs.Shape();
@@ -111,7 +112,7 @@ function populateLevel_3() {
             citizenx = 50 + (400 * Math.random() | 0)
             citizeny = 50 + (350 * Math.random() | 0)
             createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500) //, createjs.Ease.getPowInOut(2))
-        .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");});
+        .call(function(citizen){console.log("DEBUG: "+citizen.name+","+citizen.wealth+"% is now at ("+this.x+","+this.y+")");});
         });
         
     });
