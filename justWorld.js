@@ -69,6 +69,10 @@ function populateLevel_3() {
             shape.gender = 0;
         }
         else {
+            //Draw the female icon
+            shape.graphics.moveTo(-.9*shaper,0);
+            shape.graphics.lineTo(-.5*shaper, 1.4*shaper).lineTo(0,0.9*shaper).lineTo(-1.4*shaper,0.5*shaper).lineTo(-.9*shaper,0);
+            shape.graphics.beginFill('red').drawCircle(-.7*shaper,.7*shaper,.1*shaper);
             shape.gender = 1;
         }
         shape.x = shapex;
