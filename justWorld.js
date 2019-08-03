@@ -19,7 +19,8 @@ function init() {//Draw a square on screen.
 function populateLevel_0() {
 	var shape, shapex, shapey, shaper, citizen, citizenx, citizeny;
 	
-	
+    var movex = 30;
+    var movey = 15;
 
     for (var i = 0; i < 8; i++) {
         // Create and attach Head
@@ -28,8 +29,7 @@ function populateLevel_0() {
         shapex = worldCanvas.width * Math.random() | 0;
         shapey = worldCanvas.height * Math.random() | 0;
         shaper = 10;
-        movex = 30;
-        movey = 15;
+
         console.log("Drawing circle at ("+shapex+", "+shapey+").")
         shape.graphics.beginFill('blue').drawCircle(0, 0, shaper);
         shape.x = shapex;
@@ -42,9 +42,9 @@ function populateLevel_0() {
         // Now create the Body
         shape = new createjs.Shape();
         console.log("Drawing circle at ("+shapex+", "+shapey+").")
-        shape.graphics.beginFill('orange').arc(0, 0, shaper*3, 0, Math.PI, true);
+        shape.graphics.beginFill('orange').arc(0, 0, shaper*2, 0, Math.PI, true);
         shape.x = shapex;
-        shape.y = shapey;
+        shape.y = shapey+(shaper*2);
         shape.name = "body_"+i;
         citizen.addChild(shape);
 
