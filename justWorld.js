@@ -9,6 +9,8 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.name = name;
     this.race = race;
     this.gender = gender;
+    this.imprisoned = false;
+    this.prisonTimer = 2;
     this.wealth = wealth;
     this.shapex = shapex;
     this.shapey = shapey;
@@ -112,7 +114,8 @@ function populateLevel_3() {
     var movex = 30;
     var movey = 15;
     var graveyard = {height: 50, width: worldCanvas.width};
-    var bank = {y: worldCanvas.height/4, x: worldCanvas.width/4};
+    var bank = {y: worldCanvas.height/4, x: worldCanvas.width *3/4};
+    var prison = {y: worldCanvas.height*3/4, x: worldCanvas.width/4};
     
     for (var i = 0; i < worldPopulation; i++) {
         // Create and attach Body
@@ -148,7 +151,7 @@ function populateLevel_3() {
     $("#eventButton").click(function handleGo() {
         spriteArray.forEach (function(citizen, i){
             // Check if citizen is at the bank
-            if(citizen.x > worldCanvas.width - bank.x && citizen.y < bank.y) {
+            if(citizen.x > bank.x && citizen.y < bank.y) {
                 if(citizen.wealth > 25) {
                     citizen.wealth -= 25;
                 }
@@ -156,6 +159,25 @@ function populateLevel_3() {
                     citizen.wealth = 5;
                 }
                 console.log("DEBUG: "+citizen.name + " received a loan!");
+            }
+
+            // Check if citizen is in prison
+            if(citizen.x < prison.x && citizen.y > prison.y) {
+                console.log("DEBUG: "+citizen.name + " has been put in prison. Timer: "+citizen.prisonTimer);
+                citizen.imprisoned = true;
+                citizen.prisonTimer -= 1;
+                if(citizen.prisonTimer == 0) {
+                    console.log("DEBUG: "+citizen.name + " has been released from prison!");
+                    citizen.imprisoned = false;
+                    // move citizen to random non-prison spot
+                    citizenx = prison.x + ((worldCanvas.width-prison.x) * Math.random() | 0)
+                    citizeny = ((worldCanvas.height-prison.y) * Math.random() | 0)
+                }
+                else {
+                    console.log("DEBUG: "+citizen.name + " is still in prison. Timer: "+citizen.prisonTimer);
+                    citizenx = citizen.x;
+                    citizeny = citizen.y;
+                }
             }
 
             // Decrement Wealth
@@ -171,10 +193,13 @@ function populateLevel_3() {
                 deadArray.push(spriteArray.splice(i,1));
                 console.log("DEBUG: "+citizen.name + " has died.");
             }
-            // Random Move
+            // If not imprisoned and not dead, perform Random Move
             else {
-                citizenx = 50 + (400 * Math.random() | 0)
-                citizeny = 50 + (350 * Math.random() | 0)
+                if(citizen.imprisoned == false) {
+                    citizenx = 15 + (400 * Math.random() | 0)
+                    citizeny = 15 + (350 * Math.random() | 0)
+                }
+                
             }
             
             createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500) //, createjs.Ease.getPowInOut(2))
