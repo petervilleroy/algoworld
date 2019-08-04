@@ -74,6 +74,15 @@ Citizen.prototype.render = function() {
     }
     
 };
+Citizen.prototype.reRender = function() {
+    this.removeChild(this.bodyShape);
+    this.bodyShape = new createjs.Shape();
+    this.bodyShape.graphics.beginFill(this.bodyColor).arc(0, 0, this.shaper*2, 
+        (Math.PI/2)-(Math.PI*this.wealth/100), (Math.PI/2)+(Math.PI*this.wealth/100), true);
+    this.bodyShape.x = this.shapex;
+    this.bodyShape.y = this.shapey+(this.shaper*2.5);
+    this.addChild(this.bodyShape);
+};
 
 function init() {//Draw a square on screen.
     worldCanvas = document.getElementById("myWorldCanvas");
@@ -137,7 +146,7 @@ function populateLevel_3() {
         spriteArray.forEach (function(citizen, i){
             // Decrement Wealth
             citizen.wealth += 5;
-            citizen.render();
+            citizen.reRender();
             //citizen.bodyShape.draw();
 
             // Determine mortality and move accordingly
