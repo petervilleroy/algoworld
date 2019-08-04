@@ -81,7 +81,7 @@ Citizen.prototype.reRender = function() {
         (Math.PI/2)-(Math.PI*this.wealth/100), (Math.PI/2)+(Math.PI*this.wealth/100), true);
     this.bodyShape.x = this.shapex;
     this.bodyShape.y = this.shapey+(this.shaper*2.5);
-    this.addChild(this.bodyShape);
+    this.addChildAt(this.bodyShape, 0);
 };
 
 function init() {//Draw a square on screen.
