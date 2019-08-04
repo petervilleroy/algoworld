@@ -121,7 +121,7 @@ function populateLevel_3() {
         if(shapeGender < maleProportion) {shapeGender = 0} else {shapeGender = 1}
 
         citizen = new Citizen("citizen_"+i, shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
-/*
+/*      
         // Body
         console.log("Drawing body at ("+shapex+", "+shapey+").")
         // begin at PI/2 - initWealth*PI
@@ -171,6 +171,7 @@ function populateLevel_3() {
 */
         // Add the new Citizen to the population
         //citizen.name = "citizen_"+i;
+        citizen.render();
         spriteArray.push(citizen);
         worldStage.addChild(citizen);
         //spriteArray.forEach(function(sprite, i){worldStage.addChild(sprite);
