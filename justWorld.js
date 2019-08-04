@@ -205,8 +205,8 @@ function populateLevel_3() {
             }
             
             createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500) //, createjs.Ease.getPowInOut(2))
-        .call(function(citizen){console.log("DEBUG: "+this.name +","+this.wealth+"% is now at ("
-        +this.x+","+this.y+"). Living Population: "+spriteArray.length+".");});
+        .call(function(citizen){console.log("DEBUG: "+citizen.name +","+citizen.wealth+"% is now at ("
+        +citizen.x+","+citizen.y+"). Living Population: "+spriteArray.length+".");});
         
         });
         
