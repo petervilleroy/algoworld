@@ -2,6 +2,14 @@ var worldCanvas, worldStage;
 var spriteArray;
 var currentLevel = 3;
 
+function Citizen(name, race, gender, wealth) {
+    this.name = name;
+    this.race = race;
+    this.gender = gender;
+    this.wealth = wealth;
+}
+Citizen.prototype = Object.create(createjs.Container.prototype);
+
 
 function init() {//Draw a square on screen.
     worldCanvas = document.getElementById("myWorldCanvas");
@@ -39,7 +47,6 @@ function populateLevel_3() {
     for (var i = 0; i < worldPopulation; i++) {
         // Create and attach Body
         shape = new createjs.Shape();
-        citizen = new createjs.Container();
         shapex = 0; //worldCanvas.width * Math.random() | 0;
         shapey = 0; //worldCanvas.height * Math.random() | 0;
         shaper = 10;
@@ -48,6 +55,8 @@ function populateLevel_3() {
         shapeInitWealth = Math.random();
         lightProportion = 65;
         maleProportion = 55;
+        //citizen = new createjs.Container();
+        citizen = new Citizen("", 0, 0, 50);
         
         // Body
         console.log("Drawing body at ("+shapex+", "+shapey+").")
