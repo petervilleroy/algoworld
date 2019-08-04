@@ -3,6 +3,7 @@ var spriteArray;
 var currentLevel = 3;
 
 function Citizen(name, race, gender, wealth) {
+    createjs.Container.call(this);
     this.name = name;
     this.race = race;
     this.gender = gender;
@@ -57,7 +58,7 @@ function populateLevel_3() {
         maleProportion = 55;
         //citizen = new createjs.Container();
         citizen = new Citizen("", 0, 0, 50);
-        
+
         // Body
         console.log("Drawing body at ("+shapex+", "+shapey+").")
         // begin at PI/2 - initWealth*PI
