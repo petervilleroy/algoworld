@@ -27,7 +27,8 @@ Citizen.prototype.render = function() {
     // Body
     console.log("Citizen: Drawing body at ("+this.shapex+", "+this.shapey+").")
     // begin at PI/2 - initWealth*PI
-    this.bodyShape.graphics.beginFill(bodyColor).arc(0, 0, this.shaper*2, (Math.PI/2)-(Math.PI*this.wealth/100), (Math.PI/2)+(Math.PI*this.wealth/100), true);
+    this.bodyShape.graphics.beginFill(this.bodyColor).arc(0, 0, this.shaper*2, 
+        (Math.PI/2)-(Math.PI*this.wealth/100), (Math.PI/2)+(Math.PI*this.wealth/100), true);
     this.bodyShape.x = this.shapex;
     this.bodyShape.y = this.shapey+(this.shaper*2.5);
     this.addChild(this.bodyShape);
@@ -38,11 +39,13 @@ Citizen.prototype.render = function() {
     console.log("Citizen: Drawing head at ("+this.shapex+", "+this.shapey+").")
     // apply Race
     if(this.race < 1) {
-        this.headShape.graphics.beginStroke(lightOutline).beginFill(lightHead).drawCircle(0, 0, this.shaper);
+        this.headShape.graphics.beginStroke(this.lightOutline).beginFill(this.lightHead)
+        .drawCircle(0, 0, this.shaper);
         //this.race = 0;
     }
     else {
-        this.headShape.graphics.beginStroke(darkOutline).beginFill(darkHead).drawCircle(0, 0, this.shaper);
+        this.headShape.graphics.beginStroke(this.darkOutline).beginFill(this.darkHead)
+        .drawCircle(0, 0, this.shaper);
         //this.race = 1;
     }
 
