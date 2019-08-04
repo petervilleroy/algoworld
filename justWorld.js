@@ -118,18 +118,23 @@ function populateLevel_3() {
     var prison = {height: worldCanvas.height/4, width: worldCanvas.width/4};
     
     prisonShape = new createjs.Shape();
-    //prisonShape.graphics.moveTo(0,prison.y);
     prisonShape.graphics.beginFill('red').drawRect(0,0,prison.width, prison.height);
     prisonShape.x = 0;
-    prisonShape.y = worldCanvas.height - prison.height;
+    prisonShape.y = worldCanvas.height - prison.height - graveyard.height;
 
     bankShape = new createjs.Shape();
-    //bankShape.graphics.moveTo(bank.x,0);
     bankShape.graphics.beginFill('green').drawRect(0, 0, bank.width, bank.height);
     bankShape.x = worldCanvas.width - bank.width;
     bankShape.y = 0;
+
+    graveyardShape = new createjs.Shape();
+    graveyardShape.graphics.beginFill('grey').drawRect(0, 0, graveyeard.width, graveyard.height);
+    graveyardShape.x = 0;
+    graveyardShape.y = worldCanvas.height - graveyard.height;
+
     worldStage.addChild(prisonShape)
     worldStage.addChild(bankShape)
+    worldStage.addChild(graveyardShape)
     worldStage.update();
     
     for (var i = 0; i < worldPopulation; i++) {
@@ -177,7 +182,7 @@ function populateLevel_3() {
             }
 
             // Check if citizen is in prison
-            if(citizen.x < prison.width && citizen.y > prisonShape.y) {
+            if(citizen.x < prison.width && citizen.y > prisonShape.y && citizen.y < prisonShape.y+prison.height) {
                 if(citizen.imprisoned == false) {
                     console.log("DEBUG: "+citizen.name + " has been put in prison. Timer: "+citizen.prisonTimer);
                     citizen.imprisoned = true;
