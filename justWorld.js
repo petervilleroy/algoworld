@@ -120,12 +120,12 @@ function populateLevel_3() {
     prisonShape = new createjs.Shape();
     prisonShape.graphics.moveTo(0,prison.y);
     prisonShape.graphics.beginStroke('red').lineTo(0,prison.y).lineTo(prison.x,prison.y)
-        .lineTo(prison.x, worldStage.height);
+        .lineTo(prison.x, worldStage.height).lineTo(0, worldStage.height);
 
     bankShape = new createjs.Shape();
     bankShape.graphics.moveTo(bank.x,0);
     bankShape.graphics.beginStroke('green').lineTo(bank.x, 0).lineTo(bank.x,bank.y)
-        .lineTo(worldStage.width, bank.y);
+        .lineTo(worldStage.width, bank.y).lineTo(worldStage.width, 0);
     worldStage.addChild(prisonShape)
     worldStage.addChild(bankShape)
     
