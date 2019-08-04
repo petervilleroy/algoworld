@@ -166,7 +166,7 @@ function populateLevel_3() {
             // Determine mortality and move accordingly
             if(citizen.wealth > 85){
                 citizenx = graveyard.width - 25*deathToll;
-                citizeny = graveyard.height / 2;
+                citizeny = worldCanvas.height - graveyard.height / 2;
                 deathToll += 1;
                 deadArray.push(spriteArray.splice(i,1));
                 console.log("DEBUG: "+citizen.name + " has died.");
