@@ -111,6 +111,8 @@ function populateLevel_3() {
     var deathToll = 0;
     var movex = 30;
     var movey = 15;
+    var graveyard = {height: 50, width: worldCanvas.width};
+    var bank = {y: worldCanvas.height/4, x: worldCanvas.width/4};
     
     for (var i = 0; i < worldPopulation; i++) {
         // Create and attach Body
@@ -121,6 +123,7 @@ function populateLevel_3() {
         shapeGender = 100*Math.random() | 0;
         shapeInitWealth = Math.random();
         shapeInitWealth = Math.round(shapeInitWealth*100); // a number 0-99
+        console.log("DEBUG: shapeInitWealth is "+shapeInitWealth);
         lightProportion = 65;
         maleProportion = 55;
         
@@ -144,6 +147,17 @@ function populateLevel_3() {
     // The Event! Button represents (for now) a single move in the game. Will infinite loop eventually.
     $("#eventButton").click(function handleGo() {
         spriteArray.forEach (function(citizen, i){
+            // Check if citizen is at the bank
+            if(citizen.x > bank.x && citizen.y < bank.y) {
+                if(citizen.wealth > 25) {
+                    citizen.wealth -= 25;
+                }
+                else {
+                    citizen.wealth = 5;
+                }
+                console.log("DEBUG: "+citizen.name + " received a loan!");
+            }
+
             // Decrement Wealth
             citizen.wealth += 5;
             citizen.reRender();
@@ -151,8 +165,8 @@ function populateLevel_3() {
 
             // Determine mortality and move accordingly
             if(citizen.wealth > 85){
-                citizenx = worldCanvas.width - 25*deathToll;
-                citizeny = worldCanvas.height - 25;
+                citizenx = graveyard.width - 25*deathToll;
+                citizeny = graveyard.height / 2;
                 deathToll += 1;
                 deadArray.push(spriteArray.splice(i,1));
                 console.log("DEBUG: "+citizen.name + " has died.");
