@@ -128,7 +128,7 @@ function populateLevel_3() {
     bankShape.y = 0;
 
     graveyardShape = new createjs.Shape();
-    graveyardShape.graphics.beginFill('grey').drawRect(0, 0, graveyeard.width, graveyard.height);
+    graveyardShape.graphics.beginFill('grey').drawRect(0, 0, graveyard.width, graveyard.height);
     graveyardShape.x = 0;
     graveyardShape.y = worldCanvas.height - graveyard.height;
 
