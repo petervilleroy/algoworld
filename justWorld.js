@@ -148,7 +148,7 @@ function populateLevel_3() {
     $("#eventButton").click(function handleGo() {
         spriteArray.forEach (function(citizen, i){
             // Check if citizen is at the bank
-            if(citizen.x > bank.x && citizen.y < bank.y) {
+            if(citizen.x > worldCanvas.width - bank.x && citizen.y < bank.y) {
                 if(citizen.wealth > 25) {
                     citizen.wealth -= 25;
                 }
