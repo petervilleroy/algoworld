@@ -10,7 +10,7 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.race = race;
     this.gender = gender;
     this.imprisoned = false;
-    this.prisonTimer = 2;
+    this.prisonTimer = 3;
     this.wealth = wealth;
     this.shapex = shapex;
     this.shapey = shapey;
@@ -163,12 +163,16 @@ function populateLevel_3() {
 
             // Check if citizen is in prison
             if(citizen.x < prison.x && citizen.y > prison.y) {
-                console.log("DEBUG: "+citizen.name + " has been put in prison. Timer: "+citizen.prisonTimer);
-                citizen.imprisoned = true;
+                if(citizen.imprisoned == false) {
+                    console.log("DEBUG: "+citizen.name + " has been put in prison. Timer: "+citizen.prisonTimer);
+                    citizen.imprisoned = true;
+                }
+                
                 citizen.prisonTimer -= 1;
-                if(citizen.prisonTimer == 0) {
+                if(citizen.prisonTimer <= 0) {
                     console.log("DEBUG: "+citizen.name + " has been released from prison!");
                     citizen.imprisoned = false;
+                    citizen.prisonTimer = 5;
                     // move citizen to random non-prison spot
                     citizenx = prison.x + ((worldCanvas.width-prison.x) * Math.random() | 0)
                     citizeny = ((worldCanvas.height-prison.y) * Math.random() | 0)
