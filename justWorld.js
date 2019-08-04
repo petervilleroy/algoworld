@@ -119,7 +119,7 @@ function populateLevel_3() {
     
     prisonShape = new createjs.Shape();
     //prisonShape.graphics.moveTo(0,prison.y);
-    prisonShape.graphics.beginFill('red').drawRect(0,prison.y,prisonx, worldStage.height-prison.y);
+    prisonShape.graphics.beginFill('red').drawRect(0,prison.y,prison.x, worldStage.height-prison.y);
 
     bankShape = new createjs.Shape();
     //bankShape.graphics.moveTo(bank.x,0);
