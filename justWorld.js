@@ -69,7 +69,7 @@ Citizen.prototype.render = function() {
         //citizen.gender = 1;
         this.genderShape.x = this.shapex;
         this.genderShape.y = this.shapey;
-        this.addChild(shape);
+        this.addChild(this.genderShape);
     }
     
 };
