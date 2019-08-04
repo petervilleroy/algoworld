@@ -108,15 +108,19 @@ function populateLevel_3() {
     
     createjs.Ticker.addEventListener("tick", worldStage);
     
-    //Assign a function to the Event! Button
+    // The Event! Button represents (for now) a single move in the game. Will infinite loop eventually.
     $("#eventButton").click(function handleGo() {
         spriteArray.forEach (function(citizen, i){
+            // Decrement Wealth
+            citizen.wealth -= 5;
+            // Determine mortality and move accordingly
             if(citizen.wealth > 85){
                 citizenx = worldCanvas.width - 25*deathToll;
                 citizeny = worldCanvas.height - 25;
                 deathToll += 1;
                 deadArray.push(spriteArray.splice(i,1));
             }
+            // Random Move
             else {
                 citizenx = 50 + (400 * Math.random() | 0)
                 citizeny = 50 + (350 * Math.random() | 0)
