@@ -138,6 +138,8 @@ function populateLevel_3() {
             // Decrement Wealth
             citizen.wealth += 5;
             citizen.render();
+            citizen.bodyShape.draw();
+            
             // Determine mortality and move accordingly
             if(citizen.wealth > 85){
                 citizenx = worldCanvas.width - 25*deathToll;
