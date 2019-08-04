@@ -114,18 +114,23 @@ function populateLevel_3() {
     var movex = 30;
     var movey = 15;
     var graveyard = {height: 50, width: worldCanvas.width};
-    var bank = {y: worldCanvas.height/4, x: worldCanvas.width *3/4};
-    var prison = {y: worldCanvas.height*3/4, x: worldCanvas.width/4};
+    var bank = {height: worldCanvas.height/4, width: worldCanvas.width/4};
+    var prison = {height: worldCanvas.height/4, width: worldCanvas.width/4};
     
     prisonShape = new createjs.Shape();
     //prisonShape.graphics.moveTo(0,prison.y);
-    prisonShape.graphics.beginFill('red').drawRect(0,prison.y,prison.x, worldStage.height-prison.y);
+    prisonShape.graphics.beginFill('red').drawRect(0,0,prison.width, prison.height);
+    prisonShape.x = 0;
+    prisonShape.y = worldCanvas.height - prison.height;
 
     bankShape = new createjs.Shape();
     //bankShape.graphics.moveTo(bank.x,0);
-    bankShape.graphics.beginFill('green').drawRect(bank.x, 0, worldStage.width - bank.x,bank.y);
+    bankShape.graphics.beginFill('green').drawRect(0, 0, bank.width, bank.height);
+    bankShape.x = worldCanvas.width - bank.width;
+    bankShape.y = 0;
     worldStage.addChild(prisonShape)
     worldStage.addChild(bankShape)
+    worldStage.update();
     
     for (var i = 0; i < worldPopulation; i++) {
         // Create and attach Body
