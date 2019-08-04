@@ -31,7 +31,7 @@ Citizen.prototype = Object.create(createjs.Container.prototype);
 //Render function, for drawing the Citizen
 Citizen.prototype.render = function() {
     // Body
-    console.log("Citizen: Drawing body at ("+this.shapex+", "+this.shapey+").")
+    //console.log("Citizen: Drawing body at ("+this.shapex+", "+this.shapey+").")
     // begin at PI/2 - initWealth*PI
     this.bodyShape.graphics.beginFill(this.bodyColor).arc(0, 0, this.shaper*2, 
         (Math.PI/2)-(Math.PI*this.wealth/100), (Math.PI/2)+(Math.PI*this.wealth/100), true);
@@ -41,7 +41,7 @@ Citizen.prototype.render = function() {
     
     // Now create the Head
     this.headShape = new createjs.Shape();
-    console.log("Citizen: Drawing head at ("+this.shapex+", "+this.shapey+").")
+    //console.log("Citizen: Drawing head at ("+this.shapex+", "+this.shapey+").")
     // apply Race
     if(this.race < 1) {
         this.headShape.graphics.beginStroke(this.lightOutline).beginFill(this.lightHead)
@@ -64,7 +64,7 @@ Citizen.prototype.render = function() {
     else {
         //Draw the female icon
         this.genderShape = new createjs.Shape();
-        console.log("Citizen: Drawing bow at ("+this.shapex+", "+this.shapey+").")
+        //console.log("Citizen: Drawing bow at ("+this.shapex+", "+this.shapey+").")
         this.genderShape.graphics.moveTo(-.9*this.shaper,0);
         this.genderShape.graphics.beginStroke('red').lineTo(-.9*this.shaper,0).lineTo(-.5*this.shaper, -1.4*this.shaper)
             .lineTo(0,-0.9*this.shaper).lineTo(-1.4*this.shaper,-0.5*this.shaper).lineTo(-.9*this.shaper,0);
@@ -118,14 +118,12 @@ function populateLevel_3() {
     var prison = {y: worldCanvas.height*3/4, x: worldCanvas.width/4};
     
     prisonShape = new createjs.Shape();
-    prisonShape.graphics.moveTo(0,prison.y);
-    prisonShape.graphics.beginStroke('red').lineTo(0,prison.y).lineTo(prison.x,prison.y)
-        .lineTo(prison.x, worldStage.height).lineTo(0, worldStage.height).lineTo(0,prison.y);
+    //prisonShape.graphics.moveTo(0,prison.y);
+    prisonShape.graphics.beginFill('red').drawRect(0,prison.y,prisonx, worldStage.height-prison.y);
 
     bankShape = new createjs.Shape();
-    bankShape.graphics.moveTo(bank.x,0);
-    bankShape.graphics.beginStroke('green').lineTo(bank.x, 0).lineTo(bank.x,bank.y)
-        .lineTo(worldStage.width, bank.y).lineTo(worldStage.width, 0).lineTo(bank.x,0);
+    //bankShape.graphics.moveTo(bank.x,0);
+    bankShape.graphics.beginFill('green').drawRect(bank.x, 0, worldStage.width - bank.x,bank.y);
     worldStage.addChild(prisonShape)
     worldStage.addChild(bankShape)
     
