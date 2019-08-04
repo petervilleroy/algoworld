@@ -166,7 +166,7 @@ function populateLevel_3() {
     $("#eventButton").click(function handleGo() {
         spriteArray.forEach (function(citizen, i){
             // Check if citizen is at the bank
-            if(citizen.x > bank.x && citizen.y < bank.y) {
+            if(citizen.x > bankShape.x && citizen.y < bank.height) {
                 if(citizen.wealth > 25) {
                     citizen.wealth -= 25;
                 }
@@ -177,7 +177,7 @@ function populateLevel_3() {
             }
 
             // Check if citizen is in prison
-            if(citizen.x < prison.x && citizen.y > prison.y) {
+            if(citizen.x < prison.width && citizen.y > prisonShape.y) {
                 if(citizen.imprisoned == false) {
                     console.log("DEBUG: "+citizen.name + " has been put in prison. Timer: "+citizen.prisonTimer);
                     citizen.imprisoned = true;
@@ -189,8 +189,8 @@ function populateLevel_3() {
                     citizen.imprisoned = false;
                     citizen.prisonTimer = 5;
                     // move citizen to random non-prison spot
-                    citizenx = prison.x + ((worldCanvas.width-prison.x) * Math.random() | 0)
-                    citizeny = ((worldCanvas.height-prison.y) * Math.random() | 0)
+                    citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
+                    citizeny = ((worldCanvas.height-prison.height) * Math.random() | 0)
                 }
                 else {
                     console.log("DEBUG: "+citizen.name + " is still in prison. Timer: "+citizen.prisonTimer);
