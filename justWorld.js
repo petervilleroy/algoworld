@@ -108,7 +108,7 @@ function init() {//Draw a square on screen.
 };
 
 function populateLevel_3() {
-	var prisonShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
+	var bankShape, prisonShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
     var worldPopulation = 20;
     var deathToll = 0;
     var movex = 30;
@@ -118,11 +118,16 @@ function populateLevel_3() {
     var prison = {y: worldCanvas.height*3/4, x: worldCanvas.width/4};
     
     prisonShape = new createjs.Shape();
-    
     prisonShape.graphics.moveTo(0,prison.y);
     prisonShape.graphics.beginStroke('red').lineTo(0,prison.y).lineTo(prison.x,prison.y)
         .lineTo(prison.x, worldStage.height);
+
+    bankShape = new createjs.Shape();
+    bankShape.graphics.moveTo(bank.x,0);
+    bankShape.graphics.beginStroke('green').lineTo(bank.x, 0).lineTo(bank.x,bank.y)
+        .lineTo(worldStage.width, bank.y);
     worldStage.addChild(prisonShape)
+    worldStage.addChild(bankShape)
     
     for (var i = 0; i < worldPopulation; i++) {
         // Create and attach Body
