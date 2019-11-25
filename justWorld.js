@@ -141,9 +141,10 @@ function populateLevel_3() {
     graveyardShape.x = 0;
     graveyardShape.y = worldCanvas.height - graveyard.height;
 
-    worldStage.addChild(prisonShape)
-    worldStage.addChild(bankShape)
-    worldStage.addChild(graveyardShape)
+    worldStage.addChild(prisonShape);
+    worldStage.addChild(bankShape);
+    worldStage.addChild(companyShape);
+    worldStage.addChild(graveyardShape);
     worldStage.update();
     
     for (var i = 0; i < worldPopulation; i++) {
