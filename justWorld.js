@@ -13,6 +13,7 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.prisonTimer = 3;
     this.prisonHistory = false;
     this.employed = false;
+    this.jobHistory = false;
     this.jobTimer = 5;
     this.wealth = wealth;
     this.shapex = shapex;
@@ -224,10 +225,23 @@ function populateLevel_3() {
                     citizen.employed = true;
                     citizen.jobHistory = true;
                 }
+                
+            }
+            
+            // Pay Salary to employed Citizens
+            if(citizen.employed) {
+                if(citizen.wealth > 15) {
+                    citizen.wealth -= 15;
+                }
+                else {
+                    citizen.wealth = 5;
+                }
+                console.log("DEBUG: "+citizen.name + " earned a salary!");
                 citizen.jobTimer -= 1;
                 if(citizen.jobTimer <= 0) {
                     console.log("DEBUG: "+citizen.name + " has retired from a job.");
                     citizen.employed = false;
+                    citizen.jobHistory = true;
                     citizen.jobTimer =10; // greater than the init value, because repeat jobs last longer
                     // Move citizen to a non-company spot
                     citizenx = company.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
