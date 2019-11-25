@@ -343,6 +343,7 @@ function atBank(c, ba, bshape) {
 }
 function calculateSentence(c, r, m) {
     var score = r*c.race + m*c.gender;
+    console.log("---DEBUG: citizen imprisonment score: "+score);
     if(score > 0) {
         return true;
     }
@@ -352,6 +353,7 @@ function calculateSentence(c, r, m) {
 }
 function calculateJobOffer(c, r, m) {
     var score = r*c.race + m*c.gender;
+    console.log("---DEBUG: citizen employment score: "+score);
     if(score > 0) {
         return false;
     }
