@@ -46,7 +46,7 @@ Citizen.prototype.render = function() {
     // Now create the Head
     this.headShape = new createjs.Shape();
     //console.log("Citizen: Drawing head at ("+this.shapex+", "+this.shapey+").")
-    // apply Race
+    // apply Race ; 0=white, 1=black
     if(this.race < 1) {
         this.headShape.graphics.beginStroke(this.lightOutline).beginFill(this.lightHead)
         .drawCircle(0, 0, this.shaper);   
@@ -60,7 +60,7 @@ Citizen.prototype.render = function() {
     this.headShape.y = this.shapey;
     this.addChild(this.headShape);
 
-    // apply Gender
+    // apply Gender ; 0=male, 1=female
     if(shapeGender < 1) {
         //Draw the male icon
         //citizen.gender = 0;
@@ -90,7 +90,7 @@ Citizen.prototype.reRender = function() {
     this.addChildAt(this.bodyShape, 0);
 };
 
-function init() {//Draw a square on screen.
+function init() {
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
     spriteArray = new Array();
@@ -121,6 +121,8 @@ function populateLevel_3() {
     var bank = {height: worldCanvas.height/4, width: worldCanvas.width/4};
     var prison = {height: worldCanvas.height/4, width: worldCanvas.width/4};
     var company = {height: worldCanvas.height/4, width: worldCanvas.width/4};
+    var misogyny = .8;
+    var racism = .8;
     
     prisonShape = new createjs.Shape();
     prisonShape.graphics.beginFill('red').drawRect(0,0,prison.width, prison.height);
@@ -182,7 +184,7 @@ function populateLevel_3() {
     $("#eventButton").click(function handleGo() {
         spriteArray.forEach (function(citizen, i){
             // Check if citizen is at the bank
-            if(citizen.x > bankShape.x && citizen.y < bank.height) {
+            if(atBank(citizen, bank, bankShape)) {
                 if(citizen.wealth > 25) {
                     citizen.wealth -= 25;
                 }
@@ -193,14 +195,20 @@ function populateLevel_3() {
             }
 
             // Check if citizen is in prison
-            if(citizen.x < prison.width && citizen.y > prisonShape.y && citizen.y < prisonShape.y+prison.height) {
+            if(atPrison(citizen, prison, prisonShape)) {
                 if(citizen.imprisoned == false) {
-                    console.log("DEBUG: "+citizen.name + " has been put in prison. Timer: "+citizen.prisonTimer);
-                    citizen.imprisoned = true;
-                    citizen.employed = false;
-                    citizen.jobHistory = false;
-                    citizen.jobTimer = 5;
-                    citizen.prisonHistory = true;
+                    if(calculateSentence(citizen, racism, misogyny)) {
+                        console.log("DEBUG: "+citizen.name + " has been put in prison. Timer: "+citizen.prisonTimer);
+                        citizen.imprisoned = true;
+                        citizen.employed = false;
+                        citizen.jobHistory = false;
+                        citizen.jobTimer = 5;
+                        citizen.prisonHistory = true;
+                    }
+                    else {
+                        console.log("DEBUG: "+citizen.name + " was released without a prison sentence!");
+                    }
+                    
                 }
                 
                 citizen.prisonTimer -= 1;
@@ -224,9 +232,15 @@ function populateLevel_3() {
                 if(citizen.employed == false) {
                     console.log("DEBUG: "+citizen.name + " is applying for a job.");
                     // TODO: make some calculation to determine jobworthiness
-                    console.log("DEBUG: "+citizen.name + " received a job!");
-                    citizen.employed = true;
-                    citizen.jobHistory = true;
+                    if(calculateJobOffer(citizen, racism, misogyny)) {
+                        console.log("DEBUG: "+citizen.name + " received a job!");
+                        citizen.employed = true;
+                        citizen.jobHistory = true;
+                    }
+                    else {
+                        console.log("DEBUG: "+citizen.name + " didn't get the job.");
+                    }
+                    
                 }
                 
             }
@@ -289,7 +303,8 @@ function populateLevel_3() {
 
 
 function atCompany(c, comp, compShape) {
-    if(c.x < comp.width && 
+    if(c.x < compShape.x + comp.width && 
+        c.x > compShape.x &&
         c.y > compShape.y && 
         c.y < compShape.y+comp.height) 
        {
@@ -299,6 +314,50 @@ function atCompany(c, comp, compShape) {
        {
            return false;
        }
+}
+function atPrison(c, pr, prshape) {
+    if(c.x < prshape.x + pr.width && 
+        c.x > prshape.x &&
+        c.y > prshape.y && 
+        c.y < prshape.y+pr.height) 
+       {
+            return true;
+       }
+       else
+       {
+           return false;
+       }
+}
+function atBank(c, ba, bshape) {
+    if(c.x < bshape.x + ba.width && 
+        c.x > bshape.x &&
+        c.y > bshape.y && 
+        c.y < bshape.y+ba.height) 
+       {
+            return true;
+       }
+       else
+       {
+           return false;
+       }
+}
+function calculateSentence(c, r, m) {
+    var score = r*c.race + m*c.gender;
+    if(score > 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function calculateJobOffer(c, r, m) {
+    var score = r*c.race + m*c.gender;
+    if(score > 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 /*function fireEvent() {
     var event = new createjs.Event("GO");
