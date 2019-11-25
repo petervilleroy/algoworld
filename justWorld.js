@@ -342,7 +342,7 @@ function atBank(c, ba, bshape) {
        }
 }
 function calculateSentence(c, r, m) {
-    var score = r*c.race + m*c.gender;
+    var score = r*c.race// + m*c.gender;
     console.log("---DEBUG: citizen imprisonment score: "+score);
     if(score > 0) {
         return true;
