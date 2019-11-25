@@ -11,6 +11,9 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.gender = gender;
     this.imprisoned = false;
     this.prisonTimer = 3;
+    this.prisonHistory = false;
+    this.employed = false;
+    this.jobTimer = 5;
     this.wealth = wealth;
     this.shapex = shapex;
     this.shapey = shapey;
@@ -108,7 +111,7 @@ function init() {//Draw a square on screen.
 };
 
 function populateLevel_3() {
-	var bankShape, prisonShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
+	var bankShape, prisonShape, companyShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
     var worldPopulation = 20;
     var deathToll = 0;
     var movex = 30;
@@ -116,6 +119,7 @@ function populateLevel_3() {
     var graveyard = {height: 50, width: worldCanvas.width};
     var bank = {height: worldCanvas.height/4, width: worldCanvas.width/4};
     var prison = {height: worldCanvas.height/4, width: worldCanvas.width/4};
+    var company = {height: worldCanvas.height/4, width: worldCanvas.width/4};
     
     prisonShape = new createjs.Shape();
     prisonShape.graphics.beginFill('red').drawRect(0,0,prison.width, prison.height);
@@ -126,6 +130,11 @@ function populateLevel_3() {
     bankShape.graphics.beginFill('green').drawRect(0, 0, bank.width, bank.height);
     bankShape.x = worldCanvas.width - bank.width;
     bankShape.y = 0;
+
+    companyShape = new createjs.Shape();
+    companyShape.graphics.beginFill('blue').drawRect(0,0,company.width, company.height);
+    companyShape.x = 0;
+    companyShape.y = 0;
 
     graveyardShape = new createjs.Shape();
     graveyardShape.graphics.beginFill('grey').drawRect(0, 0, graveyard.width, graveyard.height);
@@ -186,6 +195,7 @@ function populateLevel_3() {
                 if(citizen.imprisoned == false) {
                     console.log("DEBUG: "+citizen.name + " has been put in prison. Timer: "+citizen.prisonTimer);
                     citizen.imprisoned = true;
+                    citizen.prisonHistory = true;
                 }
                 
                 citizen.prisonTimer -= 1;
@@ -201,6 +211,26 @@ function populateLevel_3() {
                     console.log("DEBUG: "+citizen.name + " is still in prison. Timer: "+citizen.prisonTimer);
                     citizenx = citizen.x;
                     citizeny = citizen.y;
+                }
+            }
+
+            // Check if citizen is at the Company
+            if(atCompany(citizen)) {
+                if(citizen.employed == false) {
+                    console.log("DEBUG: "+citizen.name + " is applying for a job.");
+                    // TODO: make some calculation to determine jobworthiness
+                    console.log("DEBUG: "+citizen.name + " received a job!");
+                    citizen.employed = true;
+                    citizen.jobHistory = true;
+                }
+                citizen.jobTimer -= 1;
+                if(citizen.jobTimer <= 0) {
+                    console.log("DEBUG: "+citizen.name + " has retired from a job.");
+                    citizen.employed = false;
+                    citizen.jobTimer =10; // greater than the init value, because repeat jobs last longer
+                    // Move citizen to a non-company spot
+                    citizenx = company.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
+                    citizeny = company.height + ((worldCanvas.height - prison.height) * Math.random() | 0)
                 }
             }
 
@@ -240,7 +270,18 @@ function populateLevel_3() {
 };
 
 
-
+function atCompany(c) {
+    if(c.x < company.width && 
+        c.y > companyShape.y && 
+        c.y < companyShape.y+company.height) 
+       {
+            return true;
+       }
+       else
+       {
+           return false;
+       }
+}
 /*function fireEvent() {
     var event = new createjs.Event("GO");
 
