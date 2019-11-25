@@ -197,6 +197,9 @@ function populateLevel_3() {
                 if(citizen.imprisoned == false) {
                     console.log("DEBUG: "+citizen.name + " has been put in prison. Timer: "+citizen.prisonTimer);
                     citizen.imprisoned = true;
+                    citizen.employed = false;
+                    citizen.jobHistory = false;
+                    citizen.jobTimer = 5;
                     citizen.prisonHistory = true;
                 }
                 
