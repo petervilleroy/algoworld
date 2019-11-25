@@ -282,8 +282,27 @@ function populateLevel_3() {
             // If not imprisoned and not dead, perform Random Move
             else {
                 if(citizen.imprisoned == false) {
-                    citizenx = 15 + (400 * Math.random() | 0)
-                    citizeny = 15 + (350 * Math.random() | 0)
+                    if(inQuadrantOne(citizen)) {
+                        citizenx = 15 + ((worldCanvas.width/2)*Math.random() | 0);
+                        citizeny = worldCanvas.height/2 + (((worldCanvas.height-50)/2)*Math.random() | 0);
+                    }
+                    else if(inQuadrantTwo(citizen)) {
+                        citizenx = worldCanvas.width/2 + ((worldCanvas.width/2)*Math.random() | 0);
+                        citizeny = worldCanvas.height/2 + (((worldCanvas.height-50)/2)*Math.random() | 0);
+                    }
+                    else if(inQuadrantThree(citizen)) {
+                        citizenx = worldCanvas.width/2 + ((worldCanvas.width/2)*Math.random() | 0);
+                        citizeny = 15 + (((worldCanvas.height-50)/2)*Math.random() | 0);
+                    }
+                    else if(inQuadrantFour(citizen)) {
+                        citizenx = 15 + ((worldCanvas.width/2)*Math.random() | 0);
+                        citizeny = 15 + (((worldCanvas.height-50)/2)*Math.random() | 0);
+                    }
+                    else {
+                        citizenx = 15 + (400 * Math.random() | 0)
+                        citizeny = 15 + (350 * Math.random() | 0)
+                    }
+                    
                 }
                 
             }
@@ -360,6 +379,46 @@ function calculateJobOffer(c, r, m) {
     }
     else {
         return true;
+    }
+}
+function inQuadrantOne(c, wc) {
+    var width = wc.width / 2;
+    var height = (wc.height-50) / 2;
+    if(c.x < width && c.y < height) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function inQuadrantTwo(c, wc) {
+    var width = wc.width / 2;
+    var height = (wc.height-50) / 2;
+    if(c.x < width && c.y >= height) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function inQuadrantThree(c, wc) {
+    var width = wc.width / 2;
+    var height = (wc.height-50) / 2;
+    if(c.x >= width && c.y >= height) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function inQuadrantFour(c, wc) {
+    var width = wc.width / 2;
+    var height = (wc.height-50) / 2;
+    if(c.x >= width && c.y < height) {
+        return true;
+    }
+    else {
+        return false;
     }
 }
 /*function fireEvent() {
