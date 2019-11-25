@@ -215,7 +215,7 @@ function populateLevel_3() {
             }
 
             // Check if citizen is at the Company
-            if(atCompany(citizen)) {
+            if(atCompany(citizen, company)) {
                 if(citizen.employed == false) {
                     console.log("DEBUG: "+citizen.name + " is applying for a job.");
                     // TODO: make some calculation to determine jobworthiness
@@ -270,10 +270,10 @@ function populateLevel_3() {
 };
 
 
-function atCompany(c) {
-    if(c.x < company.width && 
-        c.y > companyShape.y && 
-        c.y < companyShape.y+company.height) 
+function atCompany(c, comp) {
+    if(c.x < comp.width && 
+        c.y > compShape.y && 
+        c.y < compShape.y+comp.height) 
        {
             return true;
        }
