@@ -282,19 +282,19 @@ function populateLevel_3() {
             // If not imprisoned and not dead, perform Random Move
             else {
                 if(citizen.imprisoned == false) {
-                    if(inQuadrantOne(citizen)) {
+                    if(inQuadrantOne(citizen, worldCanvas)) {
                         citizenx = 15 + ((worldCanvas.width/2)*Math.random() | 0);
                         citizeny = worldCanvas.height/2 + (((worldCanvas.height-50)/2)*Math.random() | 0);
                     }
-                    else if(inQuadrantTwo(citizen)) {
+                    else if(inQuadrantTwo(citizen, worldCanvas)) {
                         citizenx = worldCanvas.width/2 + ((worldCanvas.width/2)*Math.random() | 0);
                         citizeny = worldCanvas.height/2 + (((worldCanvas.height-50)/2)*Math.random() | 0);
                     }
-                    else if(inQuadrantThree(citizen)) {
+                    else if(inQuadrantThree(citizen, worldCanvas)) {
                         citizenx = worldCanvas.width/2 + ((worldCanvas.width/2)*Math.random() | 0);
                         citizeny = 15 + (((worldCanvas.height-50)/2)*Math.random() | 0);
                     }
-                    else if(inQuadrantFour(citizen)) {
+                    else if(inQuadrantFour(citizen, worldCanvas)) {
                         citizenx = 15 + ((worldCanvas.width/2)*Math.random() | 0);
                         citizeny = 15 + (((worldCanvas.height-50)/2)*Math.random() | 0);
                     }
