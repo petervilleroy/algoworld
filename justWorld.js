@@ -115,8 +115,8 @@ function populateLevel_3() {
 	var bankShape, prisonShape, companyShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
     var worldPopulation = 20;
     var deathToll = 0;
-    var movex = 30;
-    var movey = 15;
+    var movex = worldCanvas.width / 2;
+    var movey = worldCanvas.height / 2;
     var graveyard = {height: 50, width: worldCanvas.width};
     var bank = {height: worldCanvas.height/4, width: worldCanvas.width/4};
     var prison = {height: worldCanvas.height/4, width: worldCanvas.width/4};
