@@ -158,7 +158,7 @@ function populateLevel_3() {
         shapeRace = 100*Math.random() | 0;
         shapeGender = 100*Math.random() | 0;
         shapeInitWealth = Math.random();
-        shapeInitWealth = Math.round(shapeInitWealth*90); // a number 0-90
+        shapeInitWealth = Math.round(shapeInitWealth*60)+30; // a number 30-90
         console.log("DEBUG: shapeInitWealth is "+shapeInitWealth);
         lightProportion = 65;
         maleProportion = 55;
