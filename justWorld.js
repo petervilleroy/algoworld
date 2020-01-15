@@ -29,12 +29,6 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.darkHead = "#876127";
     this.bodyColor = 'orange';
 
-    this.onmouseover = function(name, race, gender, wealth) {
-        var content = new createjs.Text("Hello World!")
-        content.x = 50;
-        content.y = 50;
-        
-    }
 }
 Citizen.prototype = Object.create(createjs.Container.prototype);
 
@@ -174,7 +168,11 @@ function populateLevel_3() {
 
         citizen = new Citizen("citizen_"+i, shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
         citizen.render();
-        
+        citizen.addEventListener("click", function(event) {
+            alert("Hello World!");
+                
+            
+        })
         // Add the new Citizen to the population
                 
         spriteArray.push(citizen);
