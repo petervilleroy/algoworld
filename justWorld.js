@@ -318,11 +318,11 @@ function populateLevel_3() {
         var whitepop = 0;
         var colorpop = 0;
         deadArray.forEach(function(citizen, i){if(citizen.race < 1){whitedead += 1;}else{colordead +=1;}});
-        spriteArray.forEach(function(citizen, b){if(citizen.race < 1){whitepop +=1;}else{colorpop +=1;}});
+        spriteArray.forEach(function(citizen, b){if(citizen.race >= 1){whitepop +=1;}else{colorpop +=1;}});
         whitepop += whitedead;
         colorpop += colordead;
-        var whiteMortality = whitedead / whitepop;
-        var colorMortality = colordead / colorpop;
+        var whiteMortality = 100*(whitedead / whitepop);
+        var colorMortality = 100*(colordead / colorpop);
         $("#mortalityRaceWhite").text(whiteMortality);
         $("#mortalityRaceColor").text(colorMortality);
         worldStage.update();
