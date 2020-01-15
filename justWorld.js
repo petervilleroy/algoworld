@@ -311,6 +311,8 @@ function populateLevel_3() {
         /*.call(function(citizen){
             console.log("DEBUG: "+this.name +","+this.wealth+"% is now at (" +this.x+","+this.y+"). Living Population: "+spriteArray.length+".");
         })*/;
+        //TODO: Report onscreen the result of the round - statistics on mortality, wealth distribution, by gender and race.
+        
         worldStage.update();
         });
         
