@@ -327,6 +327,7 @@ function populateLevel_3() {
             else{
                 colordead += 1;
             }
+            console.log("Citizen "+y+" has race "+citizen.race)
         });
         spriteArray.forEach(function(citizen, b){
             if(citizen.race < 1){
