@@ -168,11 +168,12 @@ function populateLevel_3() {
 
         citizen = new Citizen("citizen_"+i, shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
         citizen.render();
-        citizen.addEventListener("click", function(event) {
-            alert("Hello World!");
-                
-            
-        })
+        citizen.on("mouseover", function(evt) {
+            var txt = new createjs.Text("Hello World!");
+            txt.x = 100;
+            alert("type: "+evt.type+" target: "+evt.target);
+            //worldStage.addChild(txt);
+        });
         // Add the new Citizen to the population
                 
         spriteArray.push(citizen);
