@@ -185,7 +185,8 @@ function populateLevel_3() {
 
     $("#eventButton").click(function handleGo() {
         var TOTALWORLDCYCLES = 10;
-        for (var d = 0; d < TOTALWORLDCYCLES; d++) {
+        //TODO: fix this for loop. When implemented, it ran (invisibly) 10 moves and only rendered the end result. Surprise: everbody died!
+       // for (var d = 0; d < TOTALWORLDCYCLES; d++) {
             spriteArray.forEach (function(citizen, i){
                 // Check if citizen is at the bank
                 if(atBank(citizen, bank, bankShape)) {
@@ -319,67 +320,67 @@ function populateLevel_3() {
             }); //end of foreach Sprite Loop
         
 
-        //TODO: Report onscreen the result of the round - statistics on mortality, wealth distribution, by gender and race.
-        //reminder, 0=white, 1=color
-        worldStage.update();
-        var whitedead = 0, colordead = 0;
-        var whitepop = 0, colorpop = 0;
-        var maledead = 0, femaledead = 0;
-        var malepop = 0, femalepop = 0;
-        var malewealth = 0, femalewealth = 0;
-        var whitewealth = 0, colorwealth = 0;
+            //TODO: Report onscreen the result of the round - statistics on mortality, wealth distribution, by gender and race.
+            //reminder, 0=white, 1=color
+            worldStage.update();
+            var whitedead = 0, colordead = 0;
+            var whitepop = 0, colorpop = 0;
+            var maledead = 0, femaledead = 0;
+            var malepop = 0, femalepop = 0;
+            var malewealth = 0, femalewealth = 0;
+            var whitewealth = 0, colorwealth = 0;
 
-        deadArray.forEach(function(citizen, y){
-            if(citizen[0].race < 1){ //Note: the deadArray is populated with single-member arrays (not just citizens) because of the use of Splice() to fill it, which returns arrays not elements.
-                whitedead += 1;
-            }
-            else{
-                colordead += 1;
-            }
-            if(citizen[0].gender < 1){
-                maledead += 1;
-            }
-            else{
-                femaledead += 1;
-            }
-            //console.log("Citizen "+y+" has race "+citizen[0].race)
-        });
-        spriteArray.forEach(function(citizen, b){
-            if(citizen.race < 1){
-                whitepop += 1;
-                whitewealth += (100 - citizen.wealth)
-            }else{
-                colorpop += 1;
-                colorwealth += (100 - citizen.wealth)
-            }
-            
-            if(citizen.gender < 1){
-                malepop += 1;
-                malewealth += (100 - citizen.wealth)
-            }else{
-                femalepop += 1;
-                femalewealth += (100 - citizen.wealth)
-            }
-        });
+            deadArray.forEach(function(citizen, y){
+                if(citizen[0].race < 1){ //Note: the deadArray is populated with single-member arrays (not just citizens) because of the use of Splice() to fill it, which returns arrays not elements.
+                    whitedead += 1;
+                }
+                else{
+                    colordead += 1;
+                }
+                if(citizen[0].gender < 1){
+                    maledead += 1;
+                }
+                else{
+                    femaledead += 1;
+                }
+                //console.log("Citizen "+y+" has race "+citizen[0].race)
+            });
+            spriteArray.forEach(function(citizen, b){
+                if(citizen.race < 1){
+                    whitepop += 1;
+                    whitewealth += (100 - citizen.wealth)
+                }else{
+                    colorpop += 1;
+                    colorwealth += (100 - citizen.wealth)
+                }
+                
+                if(citizen.gender < 1){
+                    malepop += 1;
+                    malewealth += (100 - citizen.wealth)
+                }else{
+                    femalepop += 1;
+                    femalewealth += (100 - citizen.wealth)
+                }
+            });
 
-        whitepop += whitedead;
-        colorpop += colordead;
-        malepop += maledead;
-        femalepop += femaledead;
-        var whiteMortality = 100*(whitedead / whitepop);
-        var colorMortality = 100*(colordead / colorpop);
-        var maleMortality = 100*(maledead / malepop);
-        var femaleMortality = 100*(femaledead / femalepop);
-        $("#mortalityRaceWhite").text(whiteMortality.toFixed(1));
-        $("#mortalityRaceColor").text(colorMortality.toFixed(1));
-        $("#mortalityGenderMale").text(maleMortality.toFixed(1));
-        $("#mortalityGenderFemale").text(femaleMortality.toFixed(1));
-        $("#wealthRaceWhite").text(whitewealth.toFixed(1));
-        $("#wealthRaceColor").text(colorwealth.toFixed(1));
-        $("#wealthGenderMale").text(malewealth.toFixed(1));
-        $("#wealthGenderFemale").text(femalewealth.toFixed(1));
-    } //end of for loop TOTALWORLDCYCLES
-    
+            whitepop += whitedead;
+            colorpop += colordead;
+            malepop += maledead;
+            femalepop += femaledead;
+            var whiteMortality = 100*(whitedead / whitepop);
+            var colorMortality = 100*(colordead / colorpop);
+            var maleMortality = 100*(maledead / malepop);
+            var femaleMortality = 100*(femaledead / femalepop);
+            $("#mortalityRaceWhite").text(whiteMortality.toFixed(1));
+            $("#mortalityRaceColor").text(colorMortality.toFixed(1));
+            $("#mortalityGenderMale").text(maleMortality.toFixed(1));
+            $("#mortalityGenderFemale").text(femaleMortality.toFixed(1));
+            $("#wealthRaceWhite").text(whitewealth.toFixed(1));
+            $("#wealthRaceColor").text(colorwealth.toFixed(1));
+            $("#wealthGenderMale").text(malewealth.toFixed(1));
+            $("#wealthGenderFemale").text(femalewealth.toFixed(1));
+       // } //end of for loop TOTALWORLDCYCLES
+
     }); // End of Click Event Handler
         
 	worldStage.update();
