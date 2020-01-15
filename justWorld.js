@@ -315,11 +315,19 @@ function populateLevel_3() {
          }); //end of foreach Sprite Loop
         //TODO: Report onscreen the result of the round - statistics on mortality, wealth distribution, by gender and race.
         //reminder, 0=white, 1=color
+        worldStage.update();
         var whitedead = 0;
         var colordead = 0;
         var whitepop = 0;
         var colorpop = 0;
-        deadArray.forEach(function(citizen, i){if(citizen.race < 1){whitedead += 1;}else{colordead += 1;}});
+        deadArray.forEach(function(citizen, i){
+            if(citizen.race < 1){
+                whitedead += 1;
+            }
+            else{
+                colordead += 1;
+            }
+        });
         spriteArray.forEach(function(citizen, b){if(citizen.race < 1){whitepop += 1;}else{colorpop += 1;}});
         whitepop += whitedead;
         colorpop += colordead;
@@ -327,7 +335,7 @@ function populateLevel_3() {
         var colorMortality = 100*(colordead / colorpop);
         $("#mortalityRaceWhite").text(whiteMortality);
         $("#mortalityRaceColor").text(colorMortality);
-        worldStage.update();
+        
     }); // End of Click Event Handler
         
 	worldStage.update();
