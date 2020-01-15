@@ -59,12 +59,7 @@ Citizen.prototype.render = function() {
     this.headShape.x = this.shapex;
     this.headShape.y = this.shapey;
     this.addChild(this.headShape);
-    this.headShape.on("mouseover", function(evt) {
-        var txt = new createjs.Text("Hello World!");
-        txt.x = 100;
-        alert("type: "+evt.type+" target: "+evt.target);
-        //worldStage.addChild(txt);
-    });
+    
 
     // apply Gender ; 0=male, 1=female
     if(shapeGender < 1) {
@@ -156,6 +151,13 @@ function populateLevel_3() {
     worldStage.addChild(graveyardShape);
     worldStage.update();
     
+    WorldStage.on("click", function(evt) {
+        var txt = new createjs.Text("Hello World!");
+        txt.x = 100;
+        alert("type: "+evt.type+" target: "+evt.target);
+        //worldStage.addChild(txt);
+    });
+
     for (var i = 0; i < worldPopulation; i++) {
         // Create and attach Body
         shapex = 0; 
