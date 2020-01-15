@@ -320,6 +320,10 @@ function populateLevel_3() {
         var colordead = 0;
         var whitepop = 0;
         var colorpop = 0;
+        var maledead = 0;
+        var femaledead = 0;
+        var malepop = 0;
+        var femalepop = 0;
         deadArray.forEach(function(citizen, y){
             if(citizen[0].race < 1){ //Note: the deadArray is populated with single-member arrays (not just citizens) because of the use of Splice() to fill it, which returns arrays not elements.
                 whitedead += 1;
@@ -327,20 +331,41 @@ function populateLevel_3() {
             else{
                 colordead += 1;
             }
-            console.log("Citizen "+y+" has race "+citizen[0].race)
+            if(citizen[0].gender < 1){
+                maledead += 1;
+            }
+            else{
+                femaledead += 1;
+            }
+            //console.log("Citizen "+y+" has race "+citizen[0].race)
         });
         spriteArray.forEach(function(citizen, b){
             if(citizen.race < 1){
                 whitepop += 1;
             }else{
-                colorpop += 1;}
-            });
+                colorpop += 1;
+            }
+            
+            if(citizen.gender < 1){
+                malepop += 1;
+            }else{
+                femalepop += 1;
+            }
+        });
+
         whitepop += whitedead;
         colorpop += colordead;
+        malepop += maledead;
+        femalepop += femaledead;
         var whiteMortality = 100*(whitedead / whitepop);
         var colorMortality = 100*(colordead / colorpop);
-        $("#mortalityRaceWhite").text(whiteMortality);
-        $("#mortalityRaceColor").text(colorMortality);
+        var maleMortality = 100*(maledead / malepop);
+        var femaleMortality = 100*(femaledead / femalepop);
+        $("#mortalityRaceWhite").text(whiteMortality.toFixed(1));
+        $("#mortalityRaceColor").text(colorMortality.toFixed(1));
+        $("#mortalityGenderMale").text(maleMortality.toFixed(1));
+        $("#mortalityGenderFemale").text(femaleMortality.toFixed(1))
+        
         
     }); // End of Click Event Handler
         
