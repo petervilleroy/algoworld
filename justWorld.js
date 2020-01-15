@@ -317,8 +317,8 @@ function populateLevel_3() {
         var colordead = 0;
         var whitepop = 0;
         var colorpop = 0;
-        deadArray.forEach(function(citizen, i){if(citizen.race < 1){whitedead += 1;}else{colordead +=1;}});
-        spriteArray.forEach(function(citizen, b){if(citizen.race >= 1){whitepop +=1;}else{colorpop +=1;}});
+        deadArray.forEach(function(citizen, i){if(citizen.race < 1){whitedead += 1;}else{colordead += 1;}});
+        spriteArray.forEach(function(citizen, b){if(citizen.race < 1){whitepop += 1;}else{colorpop += 1;}});
         whitepop += whitedead;
         colorpop += colordead;
         var whiteMortality = 100*(whitedead / whitepop);
