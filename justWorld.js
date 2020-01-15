@@ -151,7 +151,7 @@ function populateLevel_3() {
     worldStage.addChild(graveyardShape);
     worldStage.update();
     
-    WorldStage.on("click", function(evt) {
+    worldStage.on("click", function(evt) {
         var txt = new createjs.Text("Hello World!");
         txt.x = 100;
         alert("type: "+evt.type+" target: "+evt.target);
