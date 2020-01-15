@@ -312,8 +312,8 @@ function populateLevel_3() {
             console.log("DEBUG: "+this.name +","+this.wealth+"% is now at (" +this.x+","+this.y+"). Living Population: "+spriteArray.length+".");
         })*/;
         
-    });
-    //TODO: Report onscreen the result of the round - statistics on mortality, wealth distribution, by gender and race.
+         }); //end of foreach Sprite Loop
+        //TODO: Report onscreen the result of the round - statistics on mortality, wealth distribution, by gender and race.
         //reminder, 0=white, 1=color
         var whitedead = 0;
         var colordead = 0;
@@ -328,12 +328,12 @@ function populateLevel_3() {
         $("#mortalityRaceWhite").text(whiteMortality);
         $("#mortalityRaceColor").text(colorMortality);
         worldStage.update();
-        });
+    }); // End of Click Event Handler
         
 	worldStage.update();
 	
 	update = true; 
-};
+}; // end of Populate Lvl3
 
 
 function atCompany(c, comp, compShape) {
