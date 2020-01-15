@@ -316,14 +316,13 @@ function populateLevel_3() {
         //TODO: Report onscreen the result of the round - statistics on mortality, wealth distribution, by gender and race.
         //reminder, 0=white, 1=color
         worldStage.update();
-        var whitedead = 0;
-        var colordead = 0;
-        var whitepop = 0;
-        var colorpop = 0;
-        var maledead = 0;
-        var femaledead = 0;
-        var malepop = 0;
-        var femalepop = 0;
+        var whitedead = 0, colordead = 0;
+        var whitepop = 0, colorpop = 0;
+        var maledead = 0, femaledead = 0;
+        var malepop = 0, femalepop = 0;
+        var malewealth = 0, femalewealth = 0;
+        var whitewealth = 0, colorwealth = 0;
+
         deadArray.forEach(function(citizen, y){
             if(citizen[0].race < 1){ //Note: the deadArray is populated with single-member arrays (not just citizens) because of the use of Splice() to fill it, which returns arrays not elements.
                 whitedead += 1;
@@ -342,14 +341,18 @@ function populateLevel_3() {
         spriteArray.forEach(function(citizen, b){
             if(citizen.race < 1){
                 whitepop += 1;
+                whitewealth += (100 - citizen.wealth)
             }else{
                 colorpop += 1;
+                colorwealth += (100 - citizen.wealth)
             }
             
             if(citizen.gender < 1){
                 malepop += 1;
+                malewealth += (100 - citizen.wealth)
             }else{
                 femalepop += 1;
+                femalewealth += (100 - citizen.wealth)
             }
         });
 
@@ -364,8 +367,11 @@ function populateLevel_3() {
         $("#mortalityRaceWhite").text(whiteMortality.toFixed(1));
         $("#mortalityRaceColor").text(colorMortality.toFixed(1));
         $("#mortalityGenderMale").text(maleMortality.toFixed(1));
-        $("#mortalityGenderFemale").text(femaleMortality.toFixed(1))
-        
+        $("#mortalityGenderFemale").text(femaleMortality.toFixed(1));
+        $("#wealthRaceWhite").text(whitewealth.toFixed(1));
+        $("#wealthRaceColor").text(colorwealth.toFixed(1));
+        $("#wealthGenderMale").text(malewealth.toFixed(1));
+        $("#wealthGenderFemale").text(femalewealth.toFixed(1));
         
     }); // End of Click Event Handler
         
