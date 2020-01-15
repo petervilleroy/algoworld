@@ -29,6 +29,12 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.darkHead = "#876127";
     this.bodyColor = 'orange';
 
+    this.onmouseover = function(name, race, gender, wealth) {
+        var content = new createjs.Text("Hello World!")
+        content.x = 50;
+        content.y = 50;
+        
+    }
 }
 Citizen.prototype = Object.create(createjs.Container.prototype);
 
@@ -322,7 +328,9 @@ function populateLevel_3() {
 
             //TODO: Report onscreen the result of the round - statistics on mortality, wealth distribution, by gender and race.
             //reminder, 0=white, 1=color
+            
             worldStage.update();
+            
             var whitedead = 0, colordead = 0;
             var whitepop = 0, colorpop = 0;
             var maledead = 0, femaledead = 0;
