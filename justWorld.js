@@ -321,13 +321,13 @@ function populateLevel_3() {
         var whitepop = 0;
         var colorpop = 0;
         deadArray.forEach(function(citizen, y){
-            if(citizen.race < 1){
+            if(citizen[0].race < 1){ //Note: the deadArray is populated with single-member arrays (not just citizens) because of the use of Splice() to fill it, which returns arrays not elements.
                 whitedead += 1;
             }
             else{
                 colordead += 1;
             }
-            console.log("Citizen "+y+" has race "+citizen.race)
+            console.log("Citizen "+y+" has race "+citizen[0].race)
         });
         spriteArray.forEach(function(citizen, b){
             if(citizen.race < 1){
