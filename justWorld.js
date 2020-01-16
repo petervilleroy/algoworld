@@ -156,7 +156,11 @@ function populateLevel_3() {
     worldStage.update();
     
     worldStage.on("click", function(evt) {
-        tooltip.text = "target: "+evt.target.parent.name +" Gender: "+evt.target.parent.gender +" Race: "+evt.target.parent.race + " Wealth: "+(100-evt.target.parent.wealth).toFixed(0);
+        tooltip.text = evt.target.parent.name +", "+evt.target.parent.gender == 0 ? "Male" : "Female" +
+        ", "+evt.target.parent.race == 0 ? "White" : "Color" + 
+        ", "+evt.target.parent.employed == false ? "Unemployed" : "Employed" +
+        ", Wealth: "+(100-evt.target.parent.wealth).toFixed(0) +
+        ", "+ evt.target.parent.imprisoned == true? "Imprisoned" : "";
         worldStage.update();
     });
 
