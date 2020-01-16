@@ -154,7 +154,7 @@ function populateLevel_3() {
     worldStage.on("click", function(evt) {
         var txt = new createjs.Text("Hello World!");
         txt.x = 100;
-        alert("type: "+evt.type+" target: "+evt.target.gender);
+        alert("type: "+evt.type+" target: "+evt.target.parent.name);
         //worldStage.addChild(txt);
     });
 
