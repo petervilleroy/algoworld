@@ -135,8 +135,8 @@ function populateLevel_3() {
 
     bankShape = new createjs.Shape();
     bankShape.graphics.beginFill('green').drawRect(0, 0, bank.width, bank.height);
-    bankShape.x = worldCanvas.width - bank.width;
-    bankShape.y = 0;
+    bankShape.x = worldCanvas.width - (worldCanvas.width/4 + bank.width/2);
+    bankShape.y = 0 + worldCanvas.height/4 - bank.height/2;
 
     companyShape = new createjs.Shape();
     companyShape.graphics.beginFill('blue').drawRect(0,0,company.width, company.height);
