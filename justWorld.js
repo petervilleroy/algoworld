@@ -190,7 +190,7 @@ function populateLevel_3() {
         worldStage.addChild(citizen);
         
     }
-    spriteArray.forEach(function(citizen, i){createjs.Tween.get(citizen).to({x: movex, y: movey}, 1500)
+    spriteArray.forEach(function(citizen, i){createjs.Tween.get(citizen).to({x: movex, y: movey}, 1500, createjs.Ease.quadInOut)
     .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");})});
     
     createjs.Ticker.addEventListener("tick", worldStage);
