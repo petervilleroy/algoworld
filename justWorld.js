@@ -127,7 +127,7 @@ function populateLevel_3() {
     var tooltip = new createjs.Text("");
     
     tooltip.x = tooltip.y = 10;
-    
+
     prisonShape = new createjs.Shape();
     prisonShape.graphics.beginFill('red').drawRect(0,0,prison.width, prison.height);
     prisonShape.x = 0;
@@ -152,6 +152,7 @@ function populateLevel_3() {
     worldStage.addChild(bankShape);
     worldStage.addChild(companyShape);
     worldStage.addChild(graveyardShape);
+    worldStage.addChild(tooltip);
     worldStage.update();
     
     worldStage.on("click", function(evt) {
