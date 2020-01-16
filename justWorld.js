@@ -329,7 +329,7 @@ function populateLevel_3() {
                     
                 }
                 
-                createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500) //, createjs.Ease.getPowInOut(2))
+                createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500, createjs.Ease.quadInOut) //, createjs.Ease.getPowInOut(2))
             /*.call(function(citizen){
                 console.log("DEBUG: "+this.name +","+this.wealth+"% is now at (" +this.x+","+this.y+"). Living Population: "+spriteArray.length+".");
             })*/;
