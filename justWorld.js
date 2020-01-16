@@ -390,6 +390,11 @@ function populateLevel_3() {
             var colorMortality = 100*(colordead / colorpop);
             var maleMortality = 100*(maledead / malepop);
             var femaleMortality = 100*(femaledead / femalepop);
+            
+            whitewealth = whitewealth / whitepop;
+            colorwealth = colorwealth / colorpop;
+            malewealth = malewealth / malepop;
+            femalewealth = femalewealth / femalepop;
             $("#mortalityRaceWhite").text(whiteMortality.toFixed(1));
             $("#mortalityRaceColor").text(colorMortality.toFixed(1));
             $("#mortalityGenderMale").text(maleMortality.toFixed(1));
