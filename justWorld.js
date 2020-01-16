@@ -140,8 +140,8 @@ function populateLevel_3() {
 
     companyShape = new createjs.Shape();
     companyShape.graphics.beginFill('blue').drawRect(0,0,company.width, company.height);
-    companyShape.x = 0;
-    companyShape.y = 0;
+    companyShape.x = 0 + worldCanvas.width/4 - company.width/2;
+    companyShape.y = 0 + worldCanvas.height/4 - company.height/2;
 
     graveyardShape = new createjs.Shape();
     graveyardShape.graphics.beginFill('grey').drawRect(0, 0, graveyard.width, graveyard.height);
