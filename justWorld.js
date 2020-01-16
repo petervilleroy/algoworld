@@ -382,6 +382,12 @@ function populateLevel_3() {
                 }
             });
 
+            // I am here deliberately calculating per-person wealth before dead population is added to the total pop
+            whitewealth = whitewealth / whitepop;
+            colorwealth = colorwealth / colorpop;
+            malewealth = malewealth / malepop;
+            femalewealth = femalewealth / femalepop;
+
             whitepop += whitedead;
             colorpop += colordead;
             malepop += maledead;
@@ -391,10 +397,7 @@ function populateLevel_3() {
             var maleMortality = 100*(maledead / malepop);
             var femaleMortality = 100*(femaledead / femalepop);
             
-            whitewealth = whitewealth / whitepop;
-            colorwealth = colorwealth / colorpop;
-            malewealth = malewealth / malepop;
-            femalewealth = femalewealth / femalepop;
+            
             $("#mortalityRaceWhite").text(whiteMortality.toFixed(1));
             $("#mortalityRaceColor").text(colorMortality.toFixed(1));
             $("#mortalityGenderMale").text(maleMortality.toFixed(1));
