@@ -225,8 +225,8 @@ function populateLevel_3() {
                         }
                         
                     }
-                    
-                    citizen.prisonTimer -= 1;
+                    else{
+                        citizen.prisonTimer -= 1;
                     if(citizen.prisonTimer <= 0) {
                         console.log("DEBUG: "+citizen.name + " has been released from prison!");
                         citizen.imprisoned = false;
@@ -240,6 +240,8 @@ function populateLevel_3() {
                         citizenx = citizen.x;
                         citizeny = citizen.y;
                     }
+                    }
+                    
                 }
 
                 // Check if citizen is at the Company
