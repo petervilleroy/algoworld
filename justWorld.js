@@ -230,21 +230,21 @@ function populateLevel_3() {
                         }
                         
                     }
-                    else{
+                    if(citizen.imprisoned == true) {
                         citizen.prisonTimer -= 1;
-                    if(citizen.prisonTimer <= 0) {
-                        console.log("DEBUG: "+citizen.name + " has been released from prison!");
-                        citizen.imprisoned = false;
-                        citizen.prisonTimer = 5;
-                        // move citizen to random non-prison spot
-                        citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
-                        citizeny = ((worldCanvas.height-prison.height) * Math.random() | 0)
-                    }
-                    else {
-                        console.log("DEBUG: "+citizen.name + " is still in prison. Timer: "+citizen.prisonTimer);
-                        citizenx = citizen.x;
-                        citizeny = citizen.y;
-                    }
+                        if(citizen.prisonTimer <= 0) {
+                            console.log("DEBUG: "+citizen.name + " has been released from prison!");
+                            citizen.imprisoned = false;
+                            citizen.prisonTimer = 5;
+                            // move citizen to random non-prison spot
+                            citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
+                            citizeny = ((worldCanvas.height-prison.height) * Math.random() | 0)
+                        }
+                        else {
+                            console.log("DEBUG: "+citizen.name + " is still in prison. Timer: "+citizen.prisonTimer);
+                            citizenx = citizen.x;
+                            citizeny = citizen.y;
+                        }
                     }
                     
                 }
