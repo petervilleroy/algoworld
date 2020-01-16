@@ -124,6 +124,9 @@ function populateLevel_3() {
     var company = {height: worldCanvas.height/4, width: worldCanvas.width/4};
     var misogyny = .8;
     var racism = .8;
+    var tooltip = new createjs.Text("");
+    
+    tooltip.x = tooltip.y = 10;
     
     prisonShape = new createjs.Shape();
     prisonShape.graphics.beginFill('red').drawRect(0,0,prison.width, prison.height);
@@ -152,10 +155,8 @@ function populateLevel_3() {
     worldStage.update();
     
     worldStage.on("click", function(evt) {
-        var txt = new createjs.Text("Hello World!");
-        txt.x = 100;
-        alert("type: "+evt.type+" target: "+evt.target.parent.name);
-        //worldStage.addChild(txt);
+        tooltip.text = "target: "+evt.target.parent.name +" Gender: "+evt.target.parent.gender +" Race: "+evt.target.parent.race + " Wealth: "+(100-evt.target.parent.wealth).toFixed(0);
+        worldStage.update();
     });
 
     for (var i = 0; i < worldPopulation; i++) {
