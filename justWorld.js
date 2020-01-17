@@ -98,6 +98,21 @@ function init() {
 	worldStage = new createjs.Stage(worldCanvas);
     spriteArray = new Array();
     deadArray = new Array();
+    var bankShape, prisonShape, companyShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
+    var worldPopulation = 2;
+    var deathToll = 0;
+    var movex = worldCanvas.width / 2;
+    var movey = worldCanvas.height / 2;
+    var graveyard = {height: 50, width: worldCanvas.width};
+    var bank = {height: worldCanvas.height/4, width: worldCanvas.width/4};
+    var prison = {height: worldCanvas.height/4, width: worldCanvas.width/4};
+    var company = {height: worldCanvas.height/4, width: worldCanvas.width/4};
+    var misogyny = .8;
+    var racism = .8;
+    var tooltip = new createjs.Text("");
+    
+
+    tooltip.x = tooltip.y = 10;
     
 	switch(currentLevel) {
 		case 1: 
@@ -115,21 +130,7 @@ function init() {
 };
 
 function populateLevel_3() {
-	var bankShape, prisonShape, companyShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
-    var worldPopulation = 2;
-    var deathToll = 0;
-    var movex = worldCanvas.width / 2;
-    var movey = worldCanvas.height / 2;
-    var graveyard = {height: 50, width: worldCanvas.width};
-    var bank = {height: worldCanvas.height/4, width: worldCanvas.width/4};
-    var prison = {height: worldCanvas.height/4, width: worldCanvas.width/4};
-    var company = {height: worldCanvas.height/4, width: worldCanvas.width/4};
-    var misogyny = .8;
-    var racism = .8;
-    var tooltip = new createjs.Text("");
-    
-
-    tooltip.x = tooltip.y = 10;
+	
 
     prisonShape = new createjs.Shape();
     prisonShape.graphics.beginFill('red').drawRect(0,0,prison.width, prison.height);
