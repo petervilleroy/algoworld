@@ -209,7 +209,7 @@ function populateLevel_3() {
 }; // end of Populate Lvl3
 
 
-function handleGo(spriteArray, ) {
+function handleGo() {
         
         
     spriteArray.forEach (function(citizen, i){
