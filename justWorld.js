@@ -116,7 +116,7 @@ function init() {
 
 function populateLevel_3() {
 	var bankShape, prisonShape, companyShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
-    var worldPopulation = 20;
+    var worldPopulation = 2;
     var deathToll = 0;
     var movex = worldCanvas.width / 2;
     var movey = worldCanvas.height / 2;
