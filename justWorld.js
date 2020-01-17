@@ -201,223 +201,224 @@ function populateLevel_3() {
     // The Event! Button represents (for now) a single move in the game. Will infinite loop eventually.
     
 
-    $("#eventButton").click(function handleGo() {
-        
-        //TODO: fix this for loop. When implemented, it ran (invisibly) 10 moves and only rendered the end result. Surprise: everbody died!
-       // for (var d = 0; d < TOTALWORLDCYCLES; d++) {
-            spriteArray.forEach (function(citizen, i){
-                // Check if citizen is at the bank
-                if(atBank(citizen, bank, bankShape)) {
-                    if(citizen.wealth > 25) {
-                        citizen.wealth -= 25;
-                    }
-                    else {
-                        citizen.wealth = 5;
-                    }
-                    console.log("DEBUG: "+citizen.name + " received a loan!");
-                }
-
-                // Check if citizen is in prison
-                if(atPrison(citizen, prison, prisonShape)) {
-                    if(citizen.imprisoned == false) {
-                        if(calculateSentence(citizen, racism, misogyny)) {
-                            console.log("DEBUG: "+citizen.name + " has been put in prison. Timer: "+citizen.prisonTimer);
-                            citizen.imprisoned = true;
-                            citizen.employed = false;
-                            citizen.jobHistory = false;
-                            citizen.jobTimer = 5;
-                            citizen.prisonHistory = true;
-                        }
-                        else {
-                            console.log("DEBUG: "+citizen.name + " was released without a prison sentence!");
-                        }
-                        
-                    }
-                    if(citizen.imprisoned == true) {
-                        citizen.prisonTimer -= 1;
-                        if(citizen.prisonTimer <= 0) {
-                            console.log("DEBUG: "+citizen.name + " has been released from prison!");
-                            citizen.imprisoned = false;
-                            citizen.prisonTimer = 5;
-                            // move citizen to random non-prison spot
-                            citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
-                            citizeny = ((worldCanvas.height-prison.height) * Math.random() | 0)
-                        }
-                        else {
-                            console.log("DEBUG: "+citizen.name + " is still in prison. Timer: "+citizen.prisonTimer);
-                            citizenx = citizen.x;
-                            citizeny = citizen.y;
-                        }
-                    }
-                    
-                }
-
-                // Check if citizen is at the Company
-                if(atCompany(citizen, company, companyShape)) {
-                    if(citizen.employed == false) {
-                        console.log("DEBUG: "+citizen.name + " is applying for a job.");
-                        // TODO: make some calculation to determine jobworthiness
-                        if(calculateJobOffer(citizen, racism, misogyny)) {
-                            console.log("DEBUG: "+citizen.name + " received a job!");
-                            citizen.employed = true;
-                            citizen.jobHistory = true;
-                        }
-                        else {
-                            console.log("DEBUG: "+citizen.name + " didn't get the job.");
-                        }
-                        
-                    }
-                    
-                }
-                
-                // Pay Salary to employed Citizens
-                if(citizen.employed) {
-                    if(citizen.wealth > 15) {
-                        citizen.wealth -= 15;
-                    }
-                    else {
-                        citizen.wealth = 5;
-                    }
-                    console.log("DEBUG: "+citizen.name + " earned a salary!");
-                    citizen.jobTimer -= 1;
-                    if(citizen.jobTimer <= 0) {
-                        console.log("DEBUG: "+citizen.name + " has retired from a job.");
-                        citizen.employed = false;
-                        citizen.jobHistory = true;
-                        citizen.jobTimer =10; // greater than the init value, because repeat jobs last longer
-                        // Move citizen to a non-company spot
-                        citizenx = company.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
-                        citizeny = company.height + ((worldCanvas.height - prison.height) * Math.random() | 0)
-                    }
-                }
-
-                // Decrement Wealth
-                citizen.wealth += 5;
-                citizen.reRender();
-                //citizen.bodyShape.draw();
-
-                // Determine mortality and move accordingly
-                if(citizen.wealth > 85){
-                    citizenx = graveyard.width - 25*deathToll;
-                    citizeny = worldCanvas.height - graveyard.height / 2;
-                    deathToll += 1;
-                    deadArray.push(spriteArray.splice(i,1));
-                    console.log("DEBUG: "+citizen.name + " has died.");
-                }
-                // If not imprisoned and not dead, perform Random Move
-                else {
-                    if(citizen.imprisoned == false) {
-                        if(inQuadrantOne(citizen, worldCanvas)) {
-                            citizenx = 15 + ((worldCanvas.width/2)*Math.random() | 0);
-                            citizeny = worldCanvas.height/2 + (((worldCanvas.height-50)/2)*Math.random() | 0);
-                        }
-                        else if(inQuadrantTwo(citizen, worldCanvas)) {
-                            citizenx = worldCanvas.width/2 + ((worldCanvas.width/2)*Math.random() | 0);
-                            citizeny = worldCanvas.height/2 + (((worldCanvas.height-50)/2)*Math.random() | 0);
-                        }
-                        else if(inQuadrantThree(citizen, worldCanvas)) {
-                            citizenx = worldCanvas.width/2 + ((worldCanvas.width/2)*Math.random() | 0);
-                            citizeny = 15 + (((worldCanvas.height-50)/2)*Math.random() | 0);
-                        }
-                        else if(inQuadrantFour(citizen, worldCanvas)) {
-                            citizenx = 15 + ((worldCanvas.width/2)*Math.random() | 0);
-                            citizeny = 15 + (((worldCanvas.height-50)/2)*Math.random() | 0);
-                        }
-                        else {
-                            citizenx = 15 + (400 * Math.random() | 0)
-                            citizeny = 15 + (350 * Math.random() | 0)
-                        }
-                        
-                    }
-                    
-                }
-                
-                createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500, createjs.Ease.quadInOut).call(tweenComplete) //, createjs.Ease.getPowInOut(2))
-            /*.call(function(citizen){
-                console.log("DEBUG: "+this.name +","+this.wealth+"% is now at (" +this.x+","+this.y+"). Living Population: "+spriteArray.length+".");
-            })*/;
-            
-            }); //end of foreach Sprite Loop
-        
-
-            //TODO: Report onscreen the result of the round - statistics on mortality, wealth distribution, by gender and race.
-            //reminder, 0=white, 1=color
-            
-            //worldStage.update();
-            
-            var whitedead = 0, colordead = 0;
-            var whitepop = 0, colorpop = 0;
-            var maledead = 0, femaledead = 0;
-            var malepop = 0, femalepop = 0;
-            var malewealth = 0, femalewealth = 0;
-            var whitewealth = 0, colorwealth = 0;
-
-            deadArray.forEach(function(citizen, y){
-                if(citizen[0].race < 1){ //Note: the deadArray is populated with single-member arrays (not just citizens) because of the use of Splice() to fill it, which returns arrays not elements.
-                    whitedead += 1;
-                }
-                else{
-                    colordead += 1;
-                }
-                if(citizen[0].gender < 1){
-                    maledead += 1;
-                }
-                else{
-                    femaledead += 1;
-                }
-                //console.log("Citizen "+y+" has race "+citizen[0].race)
-            });
-            spriteArray.forEach(function(citizen, b){
-                if(citizen.race < 1){
-                    whitepop += 1;
-                    whitewealth += (100 - citizen.wealth)
-                }else{
-                    colorpop += 1;
-                    colorwealth += (100 - citizen.wealth)
-                }
-                
-                if(citizen.gender < 1){
-                    malepop += 1;
-                    malewealth += (100 - citizen.wealth)
-                }else{
-                    femalepop += 1;
-                    femalewealth += (100 - citizen.wealth)
-                }
-            });
-
-            // I am here deliberately calculating per-person wealth before dead population is added to the total pop
-            whitewealth = whitewealth / whitepop;
-            colorwealth = colorwealth / colorpop;
-            malewealth = malewealth / malepop;
-            femalewealth = femalewealth / femalepop;
-
-            whitepop += whitedead;
-            colorpop += colordead;
-            malepop += maledead;
-            femalepop += femaledead;
-            var whiteMortality = 100*(whitedead / whitepop);
-            var colorMortality = 100*(colordead / colorpop);
-            var maleMortality = 100*(maledead / malepop);
-            var femaleMortality = 100*(femaledead / femalepop);
-            
-            
-            $("#mortalityRaceWhite").text(whiteMortality.toFixed(1));
-            $("#mortalityRaceColor").text(colorMortality.toFixed(1));
-            $("#mortalityGenderMale").text(maleMortality.toFixed(1));
-            $("#mortalityGenderFemale").text(femaleMortality.toFixed(1));
-            $("#wealthRaceWhite").text(whitewealth.toFixed(1));
-            $("#wealthRaceColor").text(colorwealth.toFixed(1));
-            $("#wealthGenderMale").text(malewealth.toFixed(1));
-            $("#wealthGenderFemale").text(femalewealth.toFixed(1));
-       // } //end of for loop TOTALWORLDCYCLES
-       
-    }); // End of Click Event Handler
+    $("#eventButton").click(handleGo()); // End of Click Event Handler
         
 	//worldStage.update();
 	
 	//update = true; 
 }; // end of Populate Lvl3
 
+
+function handleGo(spriteArray, ) {
+        
+        
+    spriteArray.forEach (function(citizen, i){
+        // Check if citizen is at the bank
+        if(atBank(citizen, bank, bankShape)) {
+            if(citizen.wealth > 25) {
+                citizen.wealth -= 25;
+            }
+            else {
+                citizen.wealth = 5;
+            }
+            console.log("DEBUG: "+citizen.name + " received a loan!");
+        }
+
+        // Check if citizen is in prison
+        if(atPrison(citizen, prison, prisonShape)) {
+            if(citizen.imprisoned == false) {
+                if(calculateSentence(citizen, racism, misogyny)) {
+                    console.log("DEBUG: "+citizen.name + " has been put in prison. Timer: "+citizen.prisonTimer);
+                    citizen.imprisoned = true;
+                    citizen.employed = false;
+                    citizen.jobHistory = false;
+                    citizen.jobTimer = 5;
+                    citizen.prisonHistory = true;
+                }
+                else {
+                    console.log("DEBUG: "+citizen.name + " was released without a prison sentence!");
+                }
+                
+            }
+            if(citizen.imprisoned == true) {
+                citizen.prisonTimer -= 1;
+                if(citizen.prisonTimer <= 0) {
+                    console.log("DEBUG: "+citizen.name + " has been released from prison!");
+                    citizen.imprisoned = false;
+                    citizen.prisonTimer = 5;
+                    // move citizen to random non-prison spot
+                    citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
+                    citizeny = ((worldCanvas.height-prison.height) * Math.random() | 0)
+                }
+                else {
+                    console.log("DEBUG: "+citizen.name + " is still in prison. Timer: "+citizen.prisonTimer);
+                    citizenx = citizen.x;
+                    citizeny = citizen.y;
+                }
+            }
+            
+        }
+
+        // Check if citizen is at the Company
+        if(atCompany(citizen, company, companyShape)) {
+            if(citizen.employed == false) {
+                console.log("DEBUG: "+citizen.name + " is applying for a job.");
+                // TODO: make some calculation to determine jobworthiness
+                if(calculateJobOffer(citizen, racism, misogyny)) {
+                    console.log("DEBUG: "+citizen.name + " received a job!");
+                    citizen.employed = true;
+                    citizen.jobHistory = true;
+                }
+                else {
+                    console.log("DEBUG: "+citizen.name + " didn't get the job.");
+                }
+                
+            }
+            
+        }
+        
+        // Pay Salary to employed Citizens
+        if(citizen.employed) {
+            if(citizen.wealth > 15) {
+                citizen.wealth -= 15;
+            }
+            else {
+                citizen.wealth = 5;
+            }
+            console.log("DEBUG: "+citizen.name + " earned a salary!");
+            citizen.jobTimer -= 1;
+            if(citizen.jobTimer <= 0) {
+                console.log("DEBUG: "+citizen.name + " has retired from a job.");
+                citizen.employed = false;
+                citizen.jobHistory = true;
+                citizen.jobTimer =10; // greater than the init value, because repeat jobs last longer
+                // Move citizen to a non-company spot
+                citizenx = company.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
+                citizeny = company.height + ((worldCanvas.height - prison.height) * Math.random() | 0)
+            }
+        }
+
+        // Decrement Wealth
+        citizen.wealth += 5;
+        citizen.reRender();
+        //citizen.bodyShape.draw();
+
+        // Determine mortality and move accordingly
+        if(citizen.wealth > 85){
+            citizenx = graveyard.width - 25*deathToll;
+            citizeny = worldCanvas.height - graveyard.height / 2;
+            deathToll += 1;
+            deadArray.push(spriteArray.splice(i,1));
+            console.log("DEBUG: "+citizen.name + " has died.");
+        }
+        // If not imprisoned and not dead, perform Random Move
+        else {
+            if(citizen.imprisoned == false) {
+                if(inQuadrantOne(citizen, worldCanvas)) {
+                    citizenx = 15 + ((worldCanvas.width/2)*Math.random() | 0);
+                    citizeny = worldCanvas.height/2 + (((worldCanvas.height-50)/2)*Math.random() | 0);
+                }
+                else if(inQuadrantTwo(citizen, worldCanvas)) {
+                    citizenx = worldCanvas.width/2 + ((worldCanvas.width/2)*Math.random() | 0);
+                    citizeny = worldCanvas.height/2 + (((worldCanvas.height-50)/2)*Math.random() | 0);
+                }
+                else if(inQuadrantThree(citizen, worldCanvas)) {
+                    citizenx = worldCanvas.width/2 + ((worldCanvas.width/2)*Math.random() | 0);
+                    citizeny = 15 + (((worldCanvas.height-50)/2)*Math.random() | 0);
+                }
+                else if(inQuadrantFour(citizen, worldCanvas)) {
+                    citizenx = 15 + ((worldCanvas.width/2)*Math.random() | 0);
+                    citizeny = 15 + (((worldCanvas.height-50)/2)*Math.random() | 0);
+                }
+                else {
+                    citizenx = 15 + (400 * Math.random() | 0)
+                    citizeny = 15 + (350 * Math.random() | 0)
+                }
+                
+            }
+            
+        }
+        
+        createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500, createjs.Ease.quadInOut).call(tweenComplete) //, createjs.Ease.getPowInOut(2))
+    /*.call(function(citizen){
+        console.log("DEBUG: "+this.name +","+this.wealth+"% is now at (" +this.x+","+this.y+"). Living Population: "+spriteArray.length+".");
+    })*/;
+    
+    }); //end of foreach Sprite Loop
+
+
+    //TODO: Report onscreen the result of the round - statistics on mortality, wealth distribution, by gender and race.
+    //reminder, 0=white, 1=color
+    
+    //worldStage.update();
+    
+    var whitedead = 0, colordead = 0;
+    var whitepop = 0, colorpop = 0;
+    var maledead = 0, femaledead = 0;
+    var malepop = 0, femalepop = 0;
+    var malewealth = 0, femalewealth = 0;
+    var whitewealth = 0, colorwealth = 0;
+
+    deadArray.forEach(function(citizen, y){
+        if(citizen[0].race < 1){ //Note: the deadArray is populated with single-member arrays (not just citizens) because of the use of Splice() to fill it, which returns arrays not elements.
+            whitedead += 1;
+        }
+        else{
+            colordead += 1;
+        }
+        if(citizen[0].gender < 1){
+            maledead += 1;
+        }
+        else{
+            femaledead += 1;
+        }
+        //console.log("Citizen "+y+" has race "+citizen[0].race)
+    });
+    spriteArray.forEach(function(citizen, b){
+        if(citizen.race < 1){
+            whitepop += 1;
+            whitewealth += (100 - citizen.wealth)
+        }else{
+            colorpop += 1;
+            colorwealth += (100 - citizen.wealth)
+        }
+        
+        if(citizen.gender < 1){
+            malepop += 1;
+            malewealth += (100 - citizen.wealth)
+        }else{
+            femalepop += 1;
+            femalewealth += (100 - citizen.wealth)
+        }
+    });
+
+    // I am here deliberately calculating per-person wealth before dead population is added to the total pop
+    whitewealth = whitewealth / whitepop;
+    colorwealth = colorwealth / colorpop;
+    malewealth = malewealth / malepop;
+    femalewealth = femalewealth / femalepop;
+
+    whitepop += whitedead;
+    colorpop += colordead;
+    malepop += maledead;
+    femalepop += femaledead;
+    var whiteMortality = 100*(whitedead / whitepop);
+    var colorMortality = 100*(colordead / colorpop);
+    var maleMortality = 100*(maledead / malepop);
+    var femaleMortality = 100*(femaledead / femalepop);
+    
+    
+    $("#mortalityRaceWhite").text(whiteMortality.toFixed(1));
+    $("#mortalityRaceColor").text(colorMortality.toFixed(1));
+    $("#mortalityGenderMale").text(maleMortality.toFixed(1));
+    $("#mortalityGenderFemale").text(femaleMortality.toFixed(1));
+    $("#wealthRaceWhite").text(whitewealth.toFixed(1));
+    $("#wealthRaceColor").text(colorwealth.toFixed(1));
+    $("#wealthGenderMale").text(malewealth.toFixed(1));
+    $("#wealthGenderFemale").text(femalewealth.toFixed(1));
+
+
+}
 
 function tweenComplete() {
     TOTALWORLDCYCLES --;
