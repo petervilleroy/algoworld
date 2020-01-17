@@ -421,12 +421,13 @@ function populateLevel_3() {
 
 function tweenComplete() {
     TOTALWORLDCYCLES --;
+    if(TOTALWORLDCYCLES) {
+        handleGo();
+        
+    }
 }
 function tick(tickEvent) {
-    if(TOTALWORLDCYCLES) {
-        //handleGo();
-        worldStage.update(tickEvent);
-    }
+    worldStage.update(tickEvent);
 }
 function atCompany(c, comp, compShape) {
     if(c.x < compShape.x + comp.width && 
