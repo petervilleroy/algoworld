@@ -9,7 +9,7 @@ var movex, movey;
 var graveyard, bank, prison, company;
 var misogyny, racism;
 var tooltip;
-var onlyOnce;
+var onlyOnce, finishedTweens;
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -117,7 +117,8 @@ function init() {
     misogyny = .8;
     racism = .8;
     tooltip = new createjs.Text("");
-    
+    onlyOnce = true;
+    finishedTweens = 0;
 
     tooltip.x = tooltip.y = 10;
     
@@ -202,14 +203,14 @@ function populateLevel_3() {
         
     }
     spriteArray.forEach(function(citizen, i){createjs.Tween.get(citizen).to({x: movex, y: movey}, 1500, createjs.Ease.quadInOut)
-    .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");})});
+    .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");}).call(handleGo())});
     
     createjs.Ticker.addEventListener("tick", tick);
     
     // The Event! Button represents (for now) a single move in the game. Will infinite loop eventually.
     
 
-    $("#eventButton").click(handleGo()); // End of Click Event Handler
+    //$("#eventButton").click(handleGo()); // End of Click Event Handler
         
 	//worldStage.update();
 	
@@ -430,11 +431,12 @@ function handleGo() {
 }
 
 function tweenComplete(i) {
-    
-    console.log ("DEBUG::: TOTALWORLDCYCLES = "+TOTALWORLDCYCLES + " index: "+i)
-    if(i == 0 && TOTALWORLDCYCLES > 0) {
+    finishedTweens++;
+    console.log ("DEBUG::: TOTALWORLDCYCLES = "+TOTALWORLDCYCLES + " movedThisTurn: "+finishedTweens)
+    if(finishedTweens >= spriteArray.length && TOTALWORLDCYCLES > 0) {
         TOTALWORLDCYCLES --;
         onlyOnce = false;
+        finishedTweens = 0;
         handleGo();
         
     }
