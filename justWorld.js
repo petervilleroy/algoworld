@@ -9,6 +9,7 @@ var movex, movey;
 var graveyard, bank, prison, company;
 var misogyny, racism;
 var tooltip;
+var onlyOnce;
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -105,7 +106,7 @@ function init() {
     spriteArray = new Array();
     deadArray = new Array();
     worldPopulation = 5;
-    TOTALWORLDCYCLES = TOTALWORLDCYCLES * worldPopulation;
+    //TOTALWORLDCYCLES = TOTALWORLDCYCLES * worldPopulation;
     deathToll = 0;
     movex = worldCanvas.width / 2;
     movey = worldCanvas.height / 2;
@@ -218,7 +219,7 @@ function populateLevel_3() {
 
 function handleGo() {
         
-        
+    
     spriteArray.forEach (function(citizen, i){
         // Check if citizen is at the bank
         if(atBank(citizen, bank, bankShape)) {
@@ -346,6 +347,7 @@ function handleGo() {
             
         }
         
+        onlyOnce = true;
         createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500, createjs.Ease.quadInOut).call(tweenComplete) //, createjs.Ease.getPowInOut(2))
     /*.call(function(citizen){
         console.log("DEBUG: "+this.name +","+this.wealth+"% is now at (" +this.x+","+this.y+"). Living Population: "+spriteArray.length+".");
@@ -428,9 +430,11 @@ function handleGo() {
 }
 
 function tweenComplete() {
-    TOTALWORLDCYCLES --;
+    
     console.log ("DEBUG::: TOTALWORLDCYCLES = "+TOTALWORLDCYCLES)
-    if(TOTALWORLDCYCLES > 0) {
+    if(onlyOnce && TOTALWORLDCYCLES > 0) {
+        TOTALWORLDCYCLES --;
+        onlyOnce = false;
         handleGo();
         
     }
