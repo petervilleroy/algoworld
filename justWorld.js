@@ -2,6 +2,7 @@ var worldCanvas, worldStage;
 var spriteArray;
 var currentLevel = 3;
 var update = true;
+var TOTALWORLDCYCLES = 10;
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -126,7 +127,7 @@ function populateLevel_3() {
     var misogyny = .8;
     var racism = .8;
     var tooltip = new createjs.Text("");
-    var TOTALWORLDCYCLES = 10;
+    
 
     tooltip.x = tooltip.y = 10;
 
