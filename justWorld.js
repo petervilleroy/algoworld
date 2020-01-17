@@ -428,6 +428,7 @@ function handleGo() {
 
 function tweenComplete() {
     TOTALWORLDCYCLES --;
+    console.log ("DEBUG::: TOTALWORLDCYCLES = "+TOTALWORLDCYCLES)
     if(TOTALWORLDCYCLES) {
         handleGo();
         
