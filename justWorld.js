@@ -1,6 +1,7 @@
 var worldCanvas, worldStage;
 var spriteArray;
 var currentLevel = 3;
+var update = true;
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -125,7 +126,8 @@ function populateLevel_3() {
     var misogyny = .8;
     var racism = .8;
     var tooltip = new createjs.Text("");
-    
+    var TOTALWORLDCYCLES = 10;
+
     tooltip.x = tooltip.y = 10;
 
     prisonShape = new createjs.Shape();
@@ -193,13 +195,13 @@ function populateLevel_3() {
     spriteArray.forEach(function(citizen, i){createjs.Tween.get(citizen).to({x: movex, y: movey}, 1500, createjs.Ease.quadInOut)
     .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");})});
     
-    createjs.Ticker.addEventListener("tick", worldStage);
+    createjs.Ticker.addEventListener("tick", tick);
     
     // The Event! Button represents (for now) a single move in the game. Will infinite loop eventually.
     
 
     $("#eventButton").click(function handleGo() {
-        var TOTALWORLDCYCLES = 10;
+        
         //TODO: fix this for loop. When implemented, it ran (invisibly) 10 moves and only rendered the end result. Surprise: everbody died!
        // for (var d = 0; d < TOTALWORLDCYCLES; d++) {
             spriteArray.forEach (function(citizen, i){
@@ -329,7 +331,7 @@ function populateLevel_3() {
                     
                 }
                 
-                createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500, createjs.Ease.quadInOut) //, createjs.Ease.getPowInOut(2))
+                createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500, createjs.Ease.quadInOut).call(tweenComplete) //, createjs.Ease.getPowInOut(2))
             /*.call(function(citizen){
                 console.log("DEBUG: "+this.name +","+this.wealth+"% is now at (" +this.x+","+this.y+"). Living Population: "+spriteArray.length+".");
             })*/;
@@ -340,7 +342,7 @@ function populateLevel_3() {
             //TODO: Report onscreen the result of the round - statistics on mortality, wealth distribution, by gender and race.
             //reminder, 0=white, 1=color
             
-            worldStage.update();
+            //worldStage.update();
             
             var whitedead = 0, colordead = 0;
             var whitepop = 0, colorpop = 0;
@@ -407,15 +409,24 @@ function populateLevel_3() {
             $("#wealthGenderMale").text(malewealth.toFixed(1));
             $("#wealthGenderFemale").text(femalewealth.toFixed(1));
        // } //end of for loop TOTALWORLDCYCLES
-
+       
     }); // End of Click Event Handler
         
-	worldStage.update();
+	//worldStage.update();
 	
-	update = true; 
+	//update = true; 
 }; // end of Populate Lvl3
 
 
+function tweenComplete() {
+    TOTALWORLDCYCLES --;
+}
+function tick(tickEvent) {
+    if(TOTALWORLDCYCLES) {
+        //handleGo();
+        worldStage.update(tickEvent);
+    }
+}
 function atCompany(c, comp, compShape) {
     if(c.x < compShape.x + comp.width && 
         c.x > compShape.x &&
