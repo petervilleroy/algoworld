@@ -203,7 +203,7 @@ function populateLevel_3() {
         
     }
     spriteArray.forEach(function(citizen, i){createjs.Tween.get(citizen).to({x: movex, y: movey}, 1500, createjs.Ease.quadInOut)
-    .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");}).call(handleGo())});
+    .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");}).call(tweenComplete)});
     
     createjs.Ticker.addEventListener("tick", tick);
     
