@@ -429,7 +429,7 @@ function handleGo() {
 function tweenComplete() {
     TOTALWORLDCYCLES --;
     console.log ("DEBUG::: TOTALWORLDCYCLES = "+TOTALWORLDCYCLES)
-    if(TOTALWORLDCYCLES) {
+    if(TOTALWORLDCYCLES > 0) {
         handleGo();
         
     }
