@@ -1,8 +1,14 @@
 var worldCanvas, worldStage;
-var spriteArray;
+var spriteArray, deadArray;
 var currentLevel = 3;
 var update = true;
 var TOTALWORLDCYCLES = 10;
+var bankShape, prisonShape, companyShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
+var worldPopulation, deathToll;
+var movex, movey;
+var graveyard, bank, prison, company;
+var misogyny, racism;
+var tooltip;
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -98,18 +104,17 @@ function init() {
 	worldStage = new createjs.Stage(worldCanvas);
     spriteArray = new Array();
     deadArray = new Array();
-    var bankShape, prisonShape, companyShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
-    var worldPopulation = 2;
-    var deathToll = 0;
-    var movex = worldCanvas.width / 2;
-    var movey = worldCanvas.height / 2;
-    var graveyard = {height: 50, width: worldCanvas.width};
-    var bank = {height: worldCanvas.height/4, width: worldCanvas.width/4};
-    var prison = {height: worldCanvas.height/4, width: worldCanvas.width/4};
-    var company = {height: worldCanvas.height/4, width: worldCanvas.width/4};
-    var misogyny = .8;
-    var racism = .8;
-    var tooltip = new createjs.Text("");
+    worldPopulation = 2;
+    deathToll = 0;
+    movex = worldCanvas.width / 2;
+    movey = worldCanvas.height / 2;
+    graveyard = {height: 50, width: worldCanvas.width};
+    bank = {height: worldCanvas.height/4, width: worldCanvas.width/4};
+    prison = {height: worldCanvas.height/4, width: worldCanvas.width/4};
+    company = {height: worldCanvas.height/4, width: worldCanvas.width/4};
+    misogyny = .8;
+    racism = .8;
+    tooltip = new createjs.Text("");
     
 
     tooltip.x = tooltip.y = 10;
