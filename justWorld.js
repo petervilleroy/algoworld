@@ -348,7 +348,7 @@ function handleGo() {
         }
         
         onlyOnce = true;
-        createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500, createjs.Ease.quadInOut).call(tweenComplete) //, createjs.Ease.getPowInOut(2))
+        createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500, createjs.Ease.quadInOut).call(tweenComplete(i)) //, createjs.Ease.getPowInOut(2))
     /*.call(function(citizen){
         console.log("DEBUG: "+this.name +","+this.wealth+"% is now at (" +this.x+","+this.y+"). Living Population: "+spriteArray.length+".");
     })*/;
@@ -429,9 +429,9 @@ function handleGo() {
 
 }
 
-function tweenComplete() {
+function tweenComplete(i) {
     
-    console.log ("DEBUG::: TOTALWORLDCYCLES = "+TOTALWORLDCYCLES)
+    console.log ("DEBUG::: TOTALWORLDCYCLES = "+TOTALWORLDCYCLES + " index: "+i)
     if(onlyOnce && TOTALWORLDCYCLES > 0) {
         TOTALWORLDCYCLES --;
         onlyOnce = false;
