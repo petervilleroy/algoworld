@@ -105,7 +105,7 @@ function init() {
 	worldStage = new createjs.Stage(worldCanvas);
     spriteArray = new Array();
     deadArray = new Array();
-    worldPopulation = 5;
+    worldPopulation = 20;
     //TOTALWORLDCYCLES = TOTALWORLDCYCLES * worldPopulation;
     deathToll = 0;
     movex = worldCanvas.width / 2;
