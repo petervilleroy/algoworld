@@ -2,7 +2,7 @@ var worldCanvas, worldStage;
 var spriteArray, deadArray;
 var currentLevel = 3;
 var update = true;
-var TOTALWORLDCYCLES = 10;
+var TOTALWORLDCYCLES = 20;
 var bankShape, prisonShape, companyShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
 var worldPopulation, deathToll;
 var movex, movey;
