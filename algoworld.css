@@ -12,3 +12,6 @@ canvas {
     border: 5px solid green;
     border-radius: 7px;
 }
+.tab {
+   margin-left: 40px;
+}
