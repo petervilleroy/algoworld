@@ -19,7 +19,7 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.race = race;
     this.gender = gender;
     this.imprisoned = false;
-    this.prisonTimer = 3;
+    this.prisonTimer = 5;
     this.prisonHistory = false;
     this.employed = false;
     this.jobHistory = false;
@@ -254,7 +254,7 @@ function handleGo() {
                 if(citizen.prisonTimer <= 0) {
                     console.log("DEBUG: "+citizen.name + " has been released from prison!");
                     citizen.imprisoned = false;
-                    citizen.prisonTimer = 5;
+                    citizen.prisonTimer = 7;
                     // move citizen to random non-prison spot
                     citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
                     citizeny = ((worldCanvas.height-prison.height) * Math.random() | 0)
