@@ -8,8 +8,12 @@ var worldPopulation, deathToll;
 var movex, movey;
 var graveyard, bank, prison, company;
 var misogyny, racism;
-var tooltip;
+var tooltip,tooltip_target;
 var onlyOnce, finishedTweens;
+
+//TODO: adjust Tooltip to update with each move to include updated data from selected citizen
+//TODO: make checkboxes change behavior of bases
+//TODO: slider for speed control
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -168,6 +172,7 @@ function populateLevel_3() {
     worldStage.update();
     
     worldStage.on("click", function(evt) {
+        tooltip_target = evt.target.parent;
         tooltip.text = " " + evt.target.parent.name +", "+(evt.target.parent.gender == 0 ? "Male" : "Female") +
         ", "+(evt.target.parent.race == 0 ? "White" : "Color") + 
         ", "+(evt.target.parent.employed == false ? "Unemployed" : "Employed") +
@@ -401,6 +406,13 @@ function handleGo() {
             femalewealth += (100 - citizen.wealth)
         }
     });
+
+    //Update tooltip
+    tooltip.text = " " + tooltip_target.name +", "+(tooltip_target.gender == 0 ? "Male" : "Female") +
+    ", "+(tooltip_target.race == 0 ? "White" : "Color") + 
+    ", "+(tooltip_target.employed == false ? "Unemployed" : "Employed") +
+    ", Wealth: "+(100-tooltip_target.wealth).toFixed(0) +
+    ", "+ (tooltip_target.imprisoned == true? "Imprisoned" : "");
 
     // I am here deliberately calculating per-person wealth before dead population is added to the total pop
     whitewealth = whitewealth / whitepop;
