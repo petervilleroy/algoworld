@@ -212,7 +212,7 @@ function populateLevel_3() {
     
     createjs.Ticker.addEventListener("tick", tick);
     
-    $("#speedSlider").oninput(function() {
+    $("#speedSlider").mouseup(function() {
         tweenSpeed = this.value;
         $("#currentSpeedLabel").innerHTML = this.value;
     })
