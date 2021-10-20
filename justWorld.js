@@ -104,19 +104,22 @@ Citizen.prototype.reRender = function() {
     this.addChildAt(this.bodyShape, 0);
 };
 
-// Button Handler functions for level navigation
-$("#lvl1Button").click(function() {
-    console.log("--- DEBUG: switching to level 1...");
-    currentLevel = 1;
-    init();
-})
-$("#lvl3Button").click(function() {
-    console.log("--- DEBUG: switching to level 1...");
-    currentLevel = 3;
-    init();
-})
+
 
 function init() {
+
+    // Button Handler functions for level navigation
+    $("#lvl1Button").click(function() {
+        console.log("--- DEBUG: switching to level 1...");
+        currentLevel = 1;
+    
+    })
+    $("#lvl3Button").click(function() {
+        console.log("--- DEBUG: switching to level 1...");
+        currentLevel = 3;
+        
+    })
+    
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
     spriteArray = new Array();
