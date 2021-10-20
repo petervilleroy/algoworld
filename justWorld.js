@@ -128,6 +128,48 @@ function init() {
         init();
     })
 
+    
+    
+	switch(currentLevel) {
+		case 1: 
+			populateLevel_1();
+            break;
+        case 2: 
+			populateLevel_2();
+            break;
+        case 3: 
+			populateLevel_3();
+			break;
+		default: 
+			populateLevel_3();
+	}
+};
+
+function populateLevel_1() {
+    $(".level3").hide();
+    worldCanvas = document.getElementById("myWorldCanvas");
+	worldStage = new createjs.Stage(worldCanvas);
+    spriteArray = new Array();
+    
+    movex = worldCanvas.width / 2;
+    movey = worldCanvas.height / 2;
+    
+    tooltip = new createjs.Text("");
+    onlyOnce = true;
+    finishedTweens = 0;
+    tweenSpeed = 50;
+    tooltip.x = tooltip.y = 10;
+    
+    companyShape = new createjs.Shape();
+    companyShape.graphics.beginFill('blue').drawCircle(20,20,5);
+    companyShape.x = 45;
+    companyShape.y = 45;
+    worldStage.addChild(companyShape);
+    worldStage.update();
+}
+function populateLevel_3() {
+	$(".level3").show();
+
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
     spriteArray = new Array();
@@ -149,34 +191,6 @@ function init() {
     tweenSpeed = 50;
 
     tooltip.x = tooltip.y = 10;
-    
-	switch(currentLevel) {
-		case 1: 
-			populateLevel_1();
-            break;
-        case 2: 
-			populateLevel_2();
-            break;
-        case 3: 
-			populateLevel_3();
-			break;
-		default: 
-			populateLevel_3();
-	}
-};
-
-function populateLevel_1() {
-    $(".level3").hide();
-    companyShape = new createjs.Shape();
-    companyShape.graphics.beginFill('blue').drawCircle(20,20,5);
-    companyShape.x = 45;
-    companyShape.y = 45;
-    worldStage.addChild(companyShape);
-    worldStage.update();
-}
-function populateLevel_3() {
-	$(".level3").show();
-
     prisonShape = new createjs.Shape();
     prisonShape.graphics.beginFill('red').drawRect(0,0,prison.width, prison.height);
     prisonShape.x = 0;
