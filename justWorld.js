@@ -214,7 +214,7 @@ function populateLevel_3() {
     
     $("#speedSlider").mouseup(function() {
         tweenSpeed = this.value;
-        $("#currentSpeedLabel").innerHTML = this.value;
+        $("#currentSpeedLabel").innerHTML = this.value.toString();
     })
     //Find more about handling checkbox events at this useful entry: https://stackoverflow.com/questions/3442322/jquery-checkbox-event-handling
 
