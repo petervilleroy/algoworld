@@ -112,14 +112,14 @@ function init() {
     $("#lvl1Button").click(function() {
         console.log("--- DEBUG: switching to level 1...");
         currentLevel = 1;
-    
+        init();
     })
     $("#lvl3Button").click(function() {
         console.log("--- DEBUG: switching to level 1...");
         currentLevel = 3;
-        
+        init();
     })
-    
+
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
     spriteArray = new Array();
