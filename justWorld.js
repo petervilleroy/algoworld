@@ -12,6 +12,7 @@ var tooltip,tooltip_target;
 var onlyOnce, finishedTweens, tweenSpeed;
 
 //TODO: make checkboxes change behavior of bases
+//TODO: rework the calculate_loan, calculate_job functions to be statistic rather than binary
 
 
 //Define the Citizen Prototype as inheriting from createjs.Container
@@ -141,8 +142,17 @@ function init() {
 	}
 };
 
+function populateLevel_1() {
+    $(".level3").hide();
+    companyShape = new createjs.Shape();
+    companyShape.graphics.beginFill('blue').drawCircle(20,20,5);
+    companyShape.x = 45;
+    companyShape.y = 45;
+    worldStage.addChild(companyShape);
+    worldStage.update();
+}
 function populateLevel_3() {
-	
+	$(".level3").show();
 
     prisonShape = new createjs.Shape();
     prisonShape.graphics.beginFill('red').drawRect(0,0,prison.width, prison.height);

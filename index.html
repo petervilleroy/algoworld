@@ -39,7 +39,7 @@
                 <button id="eventButton" >Event!</button>
             </td>
             <td>
-                <div id="eventResults">
+                <div id="eventResults" class="level3">
                     <h2>Results:</h2>
                     <p>Extreme Poverty:</p>
                     <p>White: <span id="mortalityRaceWhite">30</span>%<br/>Color: <span id="mortalityRaceColor">70</span>%</p>
@@ -50,36 +50,40 @@
                 </div>
             </td>
             <td>
-                <p>Box Building Canvas:</p><br/>
-                <div id="myBoxCanvas" width="200" height="450">
-                    
-                
-                    <u><b>Data for Bank Loan</b></u><br>
-                    <input type="checkbox" name="vehicle1" value="Bike">Amazon History<br>
-                    <p class="tab"></p><input type="checkbox" name="vehicle2" value="Car">DMV Records<br>
-                    <input type="checkbox" name="subcat01" value="SubCat01">Gender</input>
-                    <input type="checkbox" name="vehicle3" value="Boat" >Zipcode<br><p></p>
-                    <p class="tab"><input type="checkbox" name="criminalRecord" value="crimeRec">Criminal Record</input><p>
-                    
-                    <u><b>Data for Job Application</b></u><br>
-                        <input type="checkbox" name="vehicle1" value="Bike">Amazon History<br>
-                        <p class="tab"></p><input type="checkbox" name="vehicle2" value="Car" checked>DMV Records<br>
-                        <input type="checkbox" name="subcat01" value="SubCat01" checked>Gender</input>
-                        <input type="checkbox" name="vehicle3" value="Boat" checked>Zipcode<br><p></p>
-                        <p class="tab"><input type="checkbox" name="criminalRecord" value="crimeRec" checked>Criminal Record</input><p>
+                <div class="level3">
+                    <p>Box Building Canvas:</p><br/>
+                    <div id="myBoxCanvas" width="200" height="450">
                         
+                    
+                        <u><b>Data for Bank Loan</b></u><br>
+                        <input type="checkbox" name="vehicle1" value="Bike">Amazon History<br>
+                        <p class="tab"></p><input type="checkbox" name="vehicle2" value="Car">DMV Records<br>
+                        <input type="checkbox" name="subcat01" value="SubCat01">Gender</input>
+                        <input type="checkbox" name="vehicle3" value="Boat" >Zipcode<br><p></p>
+                        <p class="tab"><input type="checkbox" name="criminalRecord" value="crimeRec">Criminal Record</input><p>
+                        
+                        <u><b>Data for Job Application</b></u><br>
+                            <input type="checkbox" name="vehicle1" value="Bike">Amazon History<br>
+                            <p class="tab"></p><input type="checkbox" name="vehicle2" value="Car" checked>DMV Records<br>
+                            <input type="checkbox" name="subcat01" value="SubCat01" checked>Gender</input>
+                            <input type="checkbox" name="vehicle3" value="Boat" checked>Zipcode<br><p></p>
+                            <p class="tab"><input type="checkbox" name="criminalRecord" value="crimeRec" checked>Criminal Record</input><p>
+                            
+                    </div>
                 </div>
             </td>
         </tr>
         <tr>
             <td>
-                <p>Speed: <span id="currentSpeedLabel">50</span></p>
-                <div class="slidecontainer">
-                    <input type="range" min="1" max="100" value="50" class="slider" id="speedSlider">
-                  </div>
-                  <div>
-                      <button id="pauseButton">PAUSE</button>
-                  </div>
+                <div class="level3">
+                    <p>Speed: <span id="currentSpeedLabel">50</span></p>
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="100" value="50" class="slider" id="speedSlider">
+                    </div>
+                    <div>
+                        <button id="pauseButton">PAUSE</button>
+                    </div>
+                </div>
             </td>
         </tr>
     </table>
