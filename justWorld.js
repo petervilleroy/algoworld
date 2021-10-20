@@ -167,6 +167,30 @@ function populateLevel_1() {
     worldStage.addChild(companyShape);
     worldStage.update();
 }
+
+function populateLevel_2() {
+    $(".level3").hide();
+    worldCanvas = document.getElementById("myWorldCanvas");
+	worldStage = new createjs.Stage(worldCanvas);
+    spriteArray = new Array();
+    TOTALWORLDCYCLES = 20;
+    movex = worldCanvas.width / 2;
+    movey = worldCanvas.height / 2;
+    
+    tooltip = new createjs.Text("");
+    onlyOnce = true;
+    finishedTweens = 0;
+    tweenSpeed = 50;
+    tooltip.x = tooltip.y = 10;
+
+    companyShape = new createjs.Shape();
+    companyShape.graphics.beginFill('green').drawCircle(40,20,5);
+    companyShape.x = 90;
+    companyShape.y = 180;
+    worldStage.addChild(companyShape);
+    worldStage.update();
+}
+
 function populateLevel_3() {
 	$(".level3").show();
 
