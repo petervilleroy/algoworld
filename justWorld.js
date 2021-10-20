@@ -9,9 +9,8 @@ var movex, movey;
 var graveyard, bank, prison, company;
 var misogyny, racism;
 var tooltip,tooltip_target;
-var onlyOnce, finishedTweens;
+var onlyOnce, finishedTweens, tweenSpeed;
 
-//TODO: adjust Tooltip to update with each move to include updated data from selected citizen
 //TODO: make checkboxes change behavior of bases
 //TODO: slider for speed control
 
@@ -123,6 +122,7 @@ function init() {
     tooltip = new createjs.Text("");
     onlyOnce = true;
     finishedTweens = 0;
+    tweenSpeed = 50;
 
     tooltip.x = tooltip.y = 10;
     
@@ -212,6 +212,13 @@ function populateLevel_3() {
     
     createjs.Ticker.addEventListener("tick", tick);
     
+    $("#speedSlider").onInput(function() {
+        tweenSpeed = this.value;
+        $("#currentSpeedLabel").innerHTML = this.value;
+    })
+    //Find more about handling checkbox events at this useful entry: https://stackoverflow.com/questions/3442322/jquery-checkbox-event-handling
+
+    //$("#checkbox1").
     // The Event! Button represents (for now) a single move in the game. Will infinite loop eventually.
     
 
@@ -223,7 +230,7 @@ function populateLevel_3() {
 }; // end of Populate Lvl3
 
 
-function handleGo() {
+function handleGo() { //This function is the main animation loop. It is re-executed after every Tween
         
     
     spriteArray.forEach (function(citizen, i){
@@ -354,15 +361,13 @@ function handleGo() {
         }
         
         onlyOnce = true;
-        createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 1500, createjs.Ease.quadInOut).call(tweenComplete); //, createjs.Ease.getPowInOut(2))
+        createjs.Tween.get(citizen).to({x: citizenx, y: citizeny}, 30*tweenSpeed, createjs.Ease.quadInOut).call(tweenComplete); //, createjs.Ease.getPowInOut(2))
     /*.call(function(citizen){
         console.log("DEBUG: "+this.name +","+this.wealth+"% is now at (" +this.x+","+this.y+"). Living Population: "+spriteArray.length+".");
     })*/;
     
     }); //end of foreach Sprite Loop
 
-
-    //TODO: Report onscreen the result of the round - statistics on mortality, wealth distribution, by gender and race.
     //reminder, 0=white, 1=color
     
     //worldStage.update();
@@ -440,7 +445,7 @@ function handleGo() {
     $("#wealthGenderFemale").text(femalewealth.toFixed(1));
 
 
-}
+} // End of HandleGo, the main animation loop.
 
 function tweenComplete() {
     finishedTweens++;
