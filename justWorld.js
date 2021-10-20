@@ -110,13 +110,21 @@ function init() {
 
     // Button Handler functions for level navigation
     $("#lvl1Button").click(function() {
+        //TODO: fix the issue where going from level1 to level3 kills the tick functionality. maybe need to destroy and re-create createjs.Ticker.addEventListener("tick", tick);
         console.log("--- DEBUG: switching to level 1...");
         currentLevel = 1;
+        worldCanvas = null;
+        init();
+    })
+    $("#lvl2Button").click(function() {
+        console.log("--- DEBUG: switching to level 2...");
+        currentLevel = 2;
         init();
     })
     $("#lvl3Button").click(function() {
-        console.log("--- DEBUG: switching to level 1...");
+        console.log("--- DEBUG: switching to level 3...");
         currentLevel = 3;
+        worldCanvas = null;
         init();
     })
 
