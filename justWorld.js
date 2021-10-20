@@ -105,12 +105,12 @@ Citizen.prototype.reRender = function() {
 };
 
 // Button Handler functions for level navigation
-$("#lvl1Button").onclick(function() {
+$("#lvl1Button").click(function() {
     console.log("--- DEBUG: switching to level 1...");
     currentLevel = 1;
     init();
 })
-$("#lvl3Button").onclick(function() {
+$("#lvl3Button").click(function() {
     console.log("--- DEBUG: switching to level 1...");
     currentLevel = 3;
     init();
