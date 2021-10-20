@@ -2,7 +2,7 @@ var worldCanvas, worldStage;
 var spriteArray, deadArray;
 var currentLevel = 3;
 var update = true;
-var TOTALWORLDCYCLES = 20;
+var TOTALWORLDCYCLES;
 var bankShape, prisonShape, companyShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
 var worldPopulation, deathToll;
 var movex, movey;
@@ -150,7 +150,7 @@ function populateLevel_1() {
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
     spriteArray = new Array();
-    
+    TOTALWORLDCYCLES = 20;
     movex = worldCanvas.width / 2;
     movey = worldCanvas.height / 2;
     
@@ -159,7 +159,7 @@ function populateLevel_1() {
     finishedTweens = 0;
     tweenSpeed = 50;
     tooltip.x = tooltip.y = 10;
-    
+
     companyShape = new createjs.Shape();
     companyShape.graphics.beginFill('blue').drawCircle(20,20,5);
     companyShape.x = 45;
@@ -176,6 +176,7 @@ function populateLevel_3() {
     deadArray = new Array();
     worldPopulation = 20;
     //TOTALWORLDCYCLES = TOTALWORLDCYCLES * worldPopulation;
+    TOTALWORLDCYCLES = 20;
     deathToll = 0;
     movex = worldCanvas.width / 2;
     movey = worldCanvas.height / 2;
