@@ -104,6 +104,16 @@ Citizen.prototype.reRender = function() {
     this.addChildAt(this.bodyShape, 0);
 };
 
+// Button Handler functions for level navigation
+$("#lvl1Button").click(function() {
+    currentLevel = 1;
+    init();
+})
+$("#lvl3Button").click(function() {
+    currentLevel = 3;
+    init();
+})
+
 function init() {
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
