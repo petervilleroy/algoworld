@@ -12,7 +12,7 @@ var tooltip,tooltip_target;
 var onlyOnce, finishedTweens, tweenSpeed;
 
 //TODO: make checkboxes change behavior of bases
-//TODO: slider for speed control
+
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -236,13 +236,19 @@ function handleGo() { //This function is the main animation loop. It is re-execu
     spriteArray.forEach (function(citizen, i){
         // Check if citizen is at the bank
         if(atBank(citizen, bank, bankShape)) {
-            if(citizen.wealth > 25) {
-                citizen.wealth -= 25;
+            if(calculateLoan(citizen, racism, misogyny)) {
+                if(citizen.wealth > 25) {
+                    citizen.wealth -= 25;
+                }
+                else {
+                    citizen.wealth = 5;
+                }
+                console.log("DEBUG: "+citizen.name + " received a loan!");
             }
             else {
-                citizen.wealth = 5;
+                console.log("DEBUG: "+citizen.name + " was rejected for a bank loan!");
             }
-            console.log("DEBUG: "+citizen.name + " received a loan!");
+            
         }
 
         // Check if citizen is in prison
@@ -513,6 +519,16 @@ function calculateSentence(c, r, m) {
 function calculateJobOffer(c, r, m) {
     var score = r*c.race + m*c.gender;
     console.log("---DEBUG: citizen employment score: "+score);
+    if(score > 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+function calculateLoan(c, r, m) {
+    var score = r*c.race + m*c.gender;
+    console.log("---DEBUG: citizen loan score: "+score);
     if(score > 0) {
         return false;
     }
