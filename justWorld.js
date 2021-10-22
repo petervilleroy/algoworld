@@ -42,6 +42,12 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.darkHead = "#876127";
     this.bodyColor = 'orange';
 
+    this.degree=0;
+    this.attendance=0;
+    this.kindness=0;
+    this.coolfactor=0;
+    this.testscores=0;
+
 }
 Citizen.prototype = Object.create(createjs.Container.prototype);
 
@@ -146,7 +152,9 @@ function init() {
 };
 
 function populateLevel_1() {
+    $(".level2").hide();
     $(".level3").hide();
+    $(".level1").show();
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
     spriteArray = new Array();
@@ -161,7 +169,7 @@ function populateLevel_1() {
     tooltip.x = tooltip.y = 10;
 
     companyShape = new createjs.Shape();
-    companyShape.graphics.beginFill('blue').drawCircle(20,20,5);
+    companyShape.graphics.beginFill('blue').drawCircle(0,0,5);
     companyShape.x = 45;
     companyShape.y = 45;
     worldStage.addChild(companyShape);
@@ -169,30 +177,141 @@ function populateLevel_1() {
 }
 
 function populateLevel_2() {
+    $(".level1").hide();
     $(".level3").hide();
+    $(".level2").show();
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
-    spriteArray = new Array();
-    TOTALWORLDCYCLES = 20;
-    movex = worldCanvas.width / 2;
-    movey = worldCanvas.height / 2;
+    var l2spriteArray = new Array();
+    //TOTALWORLDCYCLES = 20;
+    //movex = worldCanvas.width / 2;
+    //movey = worldCanvas.height / 2;
     
     tooltip = new createjs.Text("");
     onlyOnce = true;
     finishedTweens = 0;
     tweenSpeed = 50;
     tooltip.x = tooltip.y = 10;
+    var degreeP, attendanceP, kindnessP, coolfactorP, testscoresP = 50;
+
+    // Draw Ms. Adams
+    shapex = worldCanvas.width * .1; 
+    shapey = worldCanvas.height *.8; 
+    shaper = 20;
+    shapeRace = 0;
+    shapeGender = 1;
+    shapeInitWealth = 65;
+    citizen = new Citizen("a", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
+    citizen.degree=95;
+    citizen.attendance=80;
+    citizen.kindness=35;
+    citizen.coolfactor=40;
+    citizen.testscores=90;
+    citizen.render();
+    l2spriteArray.push(citizen);
+    worldStage.addChild(citizen);
+    
+    // Draw Mr. Baker
+    shapex = worldCanvas.width * .3; 
+    shapey = worldCanvas.height *.8; 
+    shaper = 20;
+    shapeRace = 0;
+    shapeGender = 0;
+    shapeInitWealth = 25;
+    citizen = new Citizen("b", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
+    citizen.degree=75;
+    citizen.attendance=95;
+    citizen.kindness=50;
+    citizen.coolfactor=50;
+    citizen.testscores=20;
+    citizen.render();
+    l2spriteArray.push(citizen);
+    worldStage.addChild(citizen);
+
+    // Draw Mr. Cohen
+    shapex = worldCanvas.width * .5;  
+    shapey = worldCanvas.height *.8; 
+    shaper = 20;
+    shapeRace = 0;
+    shapeGender = 0;
+    shapeInitWealth = 40;
+    citizen = new Citizen("c", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
+    citizen.degree=20;  //nothing to write home about
+    citizen.attendance=30;  //often replaced by a substitute
+    citizen.kindness=95;    //especially nice
+    citizen.coolfactor=70;  //cooler than avg teacher
+    citizen.testscores=60;  //doesn't always grade tests fairly
+    citizen.render();
+    l2spriteArray.push(citizen);
+    worldStage.addChild(citizen);
+
+    // Draw Mr. Darden
+    shapex = worldCanvas.width * .7; 
+    shapey = worldCanvas.height *.8; 
+    shaper = 20;
+    shapeRace = 1;
+    shapeGender = 0;
+    shapeInitWealth = 70;
+    citizen = new Citizen("d", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
+    citizen.degree=50;
+    citizen.attendance=20;
+    citizen.kindness=95;
+    citizen.coolfactor=99;
+    citizen.testscores=99;
+    citizen.render();
+    l2spriteArray.push(citizen);
+    worldStage.addChild(citizen);
+
+    // Draw Ms. Edwards
+    shapex = worldCanvas.width * .9; 
+    shapey = worldCanvas.height *.8; 
+    shaper = 20;
+    shapeRace = 1;
+    shapeGender = 1;
+    shapeInitWealth = 50;
+    citizen = new Citizen("e", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
+    citizen.degree=85;
+    citizen.attendance=80;
+    citizen.kindness=35;
+    citizen.coolfactor=75;
+    citizen.testscores=60;
+    citizen.render();
+    l2spriteArray.push(citizen);
+    worldStage.addChild(citizen);
 
     companyShape = new createjs.Shape();
-    companyShape.graphics.beginFill('green').drawCircle(40,20,5);
+    companyShape.graphics.beginFill('green').drawCircle(0,0,15);
     companyShape.x = 90;
     companyShape.y = 180;
     worldStage.addChild(companyShape);
     worldStage.update();
+
+    $("#degreeSlider").mouseup(function() {
+        tweenSpeed = this.value;
+        $("#currentSpeedLabel").text(this.value);
+    })
+    $("#coolfactorSlider").mouseup(function() {
+        tweenSpeed = this.value;
+        $("#currentSpeedLabel").text(this.value);
+    })
+    $("#kindnessSlider").mouseup(function() {
+        tweenSpeed = this.value;
+        $("#currentSpeedLabel").text(this.value);
+    })
+    $("#attendanceSlider").mouseup(function() {
+        tweenSpeed = this.value;
+        $("#currentSpeedLabel").text(this.value);
+    })
+    $("#testscoresSlider").mouseup(function() {
+        tweenSpeed = this.value;
+        $("#currentSpeedLabel").text(this.value);
+    })
 }
 
 function populateLevel_3() {
-	$(".level3").show();
+	$(".level1").hide();
+    $(".level2").hide();
+    $(".level3").show();
 
     worldCanvas = document.getElementById("myWorldCanvas");
 	worldStage = new createjs.Stage(worldCanvas);
