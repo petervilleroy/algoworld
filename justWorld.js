@@ -19,9 +19,8 @@ var whiteMortality, colorMortality, maleMortality, femaleMortality, whitewealth,
 //TODO: figure out a way to show wealth with a skinny-fat instead of full-empty.
 //TODO: Bios are not showing in Chrome!
 
-//TODO-Today: Label the 3 boxes in lvl3 ***
+
 //TODO-Today: Fix the results box to update 'not only when a user is clicked' WTF
-//TODO-Today: Fix the text in canvas to be bigger, sharper
 
 
 //Define the Citizen Prototype as inheriting from createjs.Container
@@ -457,22 +456,6 @@ function populateLevel_3() {
     worldStage.update();
     
     worldStage.on("click", function(evt) {
-        tooltip_target = evt.target.parent;
-        //This removal of rendering doesn't work at all.
-        spriteArray.forEach(function(sprite, i) {
-            sprite.selected = false;
-            sprite.reRender();
-        });
-        evt.target.parent.selected = true;
-        evt.target.parent.reRender();
-        
-        tooltip.text = " " + evt.target.parent.name +", "+(evt.target.parent.gender == 0 ? "Male" : "Female") +
-        ", "+(evt.target.parent.race == 0 ? "White" : "Color") + 
-        ", "+(evt.target.parent.employed == false ? "Unemployed" : "Employed") +
-        ", Wealth: "+(100-evt.target.parent.wealth).toFixed(0) +
-        ", "+ (evt.target.parent.imprisoned == true? "Imprisoned" : "");
-
-// If the click was on one of the world entities, update the checkbox area to reflect that entity
         if(evt.target == companyShape) {
             $(".lvl3BankSelectors").hide();
             $(".lvl3PrisonSelectors").hide();
@@ -488,6 +471,23 @@ function populateLevel_3() {
             $(".lvl3BankSelectors").hide();
             $(".lvl3PrisonSelectors").show();
         }
+        tooltip_target = evt.target.parent;
+        //This removal of rendering doesn't work at all.
+        spriteArray.forEach(function(sprite, i) {
+            sprite.selected = false;
+            sprite.reRender();
+        });
+        evt.target.parent.selected = true;
+        evt.target.parent.reRender();
+        
+        tooltip.text = " " + evt.target.parent.name +", "+(evt.target.parent.gender == 0 ? "Male" : "Female") +
+        ", "+(evt.target.parent.race == 0 ? "White" : "Color") + 
+        ", "+(evt.target.parent.employed == false ? "Unemployed" : "Employed") +
+        ", Wealth: "+(100-evt.target.parent.wealth).toFixed(0) +
+        ", "+ (evt.target.parent.imprisoned == true? "Imprisoned" : "");
+
+        // If the click was on one of the world entities, update the checkbox area to reflect that entity
+        
 
         worldStage.update();
     });
