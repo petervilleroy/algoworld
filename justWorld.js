@@ -674,12 +674,13 @@ function handleGo() { //This function is the main animation loop. It is re-execu
     });
 
     //Update tooltip
+    if(currentLevel == 3){
     tooltip.text = " " + tooltip_target.name +", "+(tooltip_target.gender == 0 ? "Male" : "Female") +
     ", "+(tooltip_target.race == 0 ? "White" : "Color") + 
     ", "+(tooltip_target.employed == false ? "Unemployed" : "Employed") +
     ", Wealth: "+(100-tooltip_target.wealth).toFixed(0) +
     ", "+ (tooltip_target.imprisoned == true? "Imprisoned" : "");
-
+    }
     // I am here deliberately calculating per-person wealth before dead population is added to the total pop
     whitewealth = whitewealth / whitepop;
     colorwealth = colorwealth / colorpop;
