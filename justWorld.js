@@ -688,12 +688,12 @@ function handleGo() { //This function is the main animation loop. It is re-execu
     
     //worldStage.update();
     
-    var whitedead = 0, colordead = 0;
-    var whitepop = 0, colorpop = 0;
-    var maledead = 0, femaledead = 0;
-    var malepop = 0, femalepop = 0;
-    var malewealth = 0, femalewealth = 0;
-    var whitewealth = 0, colorwealth = 0;
+    whitedead = 0, colordead = 0;
+    whitepop = 0, colorpop = 0;
+    maledead = 0, femaledead = 0;
+    malepop = 0, femalepop = 0;
+    malewealth = 0, femalewealth = 0;
+    whitewealth = 0, colorwealth = 0;
 
     deadArray.forEach(function(citizen, y){
         if(citizen[0].race < 1){ //Note: the deadArray is populated with single-member arrays (not just citizens) because of the use of Splice() to fill it, which returns arrays not elements.
@@ -728,14 +728,7 @@ function handleGo() { //This function is the main animation loop. It is re-execu
         }
     });
 
-    //Update tooltip
-    if(currentLevel == 3){
-    tooltip.text = " " + tooltip_target.name +", "+(tooltip_target.gender == 0 ? "Male" : "Female") +
-    ", "+(tooltip_target.race == 0 ? "White" : "Color") + 
-    ", "+(tooltip_target.employed == false ? "Unemployed" : "Employed") +
-    ", Wealth: "+(100-tooltip_target.wealth).toFixed(0) +
-    ", "+ (tooltip_target.imprisoned == true? "Imprisoned" : "");
-    }
+   
     // I am here deliberately calculating per-person wealth before dead population is added to the total pop
     whitewealth = whitewealth / whitepop;
     colorwealth = colorwealth / colorpop;
@@ -752,7 +745,14 @@ function handleGo() { //This function is the main animation loop. It is re-execu
     femaleMortality = 100*(femaledead / femalepop);
     
     
-    
+    //Update tooltip
+    if(currentLevel == 3 && tooltip_target){
+    tooltip.text = " " + tooltip_target.name +", "+(tooltip_target.gender == 0 ? "Male" : "Female") +
+    ", "+(tooltip_target.race == 0 ? "White" : "Color") + 
+    ", "+(tooltip_target.employed == false ? "Unemployed" : "Employed") +
+    ", Wealth: "+(100-tooltip_target.wealth).toFixed(0) +
+    ", "+ (tooltip_target.imprisoned == true? "Imprisoned" : "");
+    };
 
 
 } // End of HandleGo, the main animation loop.
@@ -777,6 +777,7 @@ function tick(tickEvent) {
     $("#wealthRaceColor").text(colorwealth.toFixed(1));
     $("#wealthGenderMale").text(malewealth.toFixed(1));
     $("#wealthGenderFemale").text(femalewealth.toFixed(1));
+
     worldStage.update(tickEvent);
 }
 function atCompany(c, comp, compShape) {
