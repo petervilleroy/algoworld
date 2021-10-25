@@ -22,10 +22,7 @@ var whiteMortality, colorMortality, maleMortality, femaleMortality, whitewealth,
 //TODO-Today: Label the 3 boxes in lvl3 ***
 //TODO-Today: Fix the results box to update 'not only when a user is clicked' WTF
 //TODO-Today: Fix the text in canvas to be bigger, sharper
-//TODO-Today: make boxes lvl3 click-able, alter the contents of Green selection boxes ****
 
-
-//TODO-Today: write proper bios for 5 teachers lvl2 ****
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -415,16 +412,25 @@ function populateLevel_3() {
     prisonShape.graphics.beginFill('red').drawRect(0,0,prison.width, prison.height);
     prisonShape.x = 0;
     prisonShape.y = worldCanvas.height - prison.height - graveyard.height;
+    prisonText = new createjs.Text("PRISON", "16pt Arial")
+    prisonText.x = prisonShape.x + 5;
+    prisonText.y = prisonShape.y + 5;
 
     bankShape = new createjs.Shape();
     bankShape.graphics.beginFill('green').drawRect(0, 0, bank.width, bank.height);
     bankShape.x = worldCanvas.width - (worldCanvas.width/4 + bank.width/2);
     bankShape.y = 0 + worldCanvas.height/4 - bank.height/2;
+    bankText = new createjs.Text("Bank", "16pt Times New Roman", "orange");
+    bankText.x = bankShape.x + 5;
+    bankText.y = bankShape.y + 5;
 
     companyShape = new createjs.Shape();
     companyShape.graphics.beginFill('blue').drawRect(0,0,company.width, company.height);
     companyShape.x = 0 + worldCanvas.width/4 - company.width/2;
     companyShape.y = 0 + worldCanvas.height/4 - company.height/2;
+    companyText = new createjs.Text("Company", "16pt Times New Roman", "white");
+    companyText.x = companyShape.x + 5;
+    companyText.y = companyShape.y + 5;
 
     graveyardShape = new createjs.Shape();
     graveyardShape.graphics.beginFill('grey').drawRect(0, 0, graveyard.width, graveyard.height);
@@ -441,8 +447,11 @@ function populateLevel_3() {
     femalewealth = 0;
 
     worldStage.addChild(prisonShape);
+    worldStage.addChild(prisonText);
     worldStage.addChild(bankShape);
+    worldStage.addChild(bankText);
     worldStage.addChild(companyShape);
+    worldStage.addChild(companyText);
     worldStage.addChild(graveyardShape);
     worldStage.addChild(tooltip);
     worldStage.update();
