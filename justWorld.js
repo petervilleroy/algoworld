@@ -23,6 +23,8 @@ var whiteMortality, colorMortality, maleMortality, femaleMortality, whitewealth,
 //TODO-Today: Fix the results box to update 'not only when a user is clicked' WTF
 //TODO-Today: Fix the text in canvas to be bigger, sharper
 //TODO-Today: make boxes lvl3 click-able, alter the contents of Green selection boxes ****
+
+
 //TODO-Today: write proper bios for 5 teachers lvl2 ****
 
 //Define the Citizen Prototype as inheriting from createjs.Container
@@ -433,6 +435,23 @@ function populateLevel_3() {
         ", "+(evt.target.parent.employed == false ? "Unemployed" : "Employed") +
         ", Wealth: "+(100-evt.target.parent.wealth).toFixed(0) +
         ", "+ (evt.target.parent.imprisoned == true? "Imprisoned" : "");
+
+// If the click was on one of the world entities, update the checkbox area to reflect that entity
+        if(evt.target == companyShape) {
+            $(".lvl3BankSelectors").hide();
+            $(".lvl3PrisonSelectors").hide();
+            $(".lvl3CompanySelectors").show();
+        }
+        if(evt.target == bankShape) {
+            $(".lvl3CompanySelectors").hide();
+            $(".lvl3PrisonSelectors").hide();
+            $(".lvl3BankSelectors").show();
+        }
+        if(evt.tartget == prisonShape) {
+            $(".lvl3CompanySelectors").hide();
+            $(".lvl3BankSelectors").hide();
+            $(".lvl3PrisonSelectors").show();
+        }
 
         worldStage.update();
     });
