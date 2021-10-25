@@ -447,7 +447,7 @@ function populateLevel_3() {
             $(".lvl3PrisonSelectors").hide();
             $(".lvl3BankSelectors").show();
         }
-        if(evt.tartget == prisonShape) {
+        if(evt.target == prisonShape) {
             $(".lvl3CompanySelectors").hide();
             $(".lvl3BankSelectors").hide();
             $(".lvl3PrisonSelectors").show();
