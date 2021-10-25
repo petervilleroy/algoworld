@@ -53,6 +53,8 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.darkOutline = "#6F4F1D";
     this.darkHead = "#876127";
     this.bodyColor = 'orange';
+    this.selected = false;
+    this.selectShape = new createjs.Shape();
 
     this.degree=0;
     this.attendance=0;
@@ -111,9 +113,16 @@ Citizen.prototype.render = function() {
         this.genderShape.y = this.shapey;
         this.addChild(this.genderShape);
     }
+    /*this.selectShape = new createjs.Shape();
+    this.selectShape.graphics.moveTo(-1.5*this.shaper,0);
+    this.selectShape.graphics.beginStroke('orange').lineTo(-1.5*this.shaper,1.5*this.shaper).lineTo(1.5*this.shaper, 1.5*this.shaper)
+            .lineTo(1.5*this.shaper,-1.5*this.shaper).lineTo(-1.5*this.shaper,-1.5*this.shaper).lineTo(-1.5*this.shaper,1.5*this.shaper);
+    this.addChild(this.selectShape);
+    */
     
 };
 Citizen.prototype.reRender = function() {
+    
     this.removeChild(this.bodyShape);
     this.bodyShape = new createjs.Shape();
     this.bodyShape.graphics.beginFill(this.bodyColor).arc(0, 0, this.shaper*2, 
@@ -121,6 +130,16 @@ Citizen.prototype.reRender = function() {
     this.bodyShape.x = this.shapex;
     this.bodyShape.y = this.shapey+(this.shaper*2.5);
     this.addChildAt(this.bodyShape, 0);
+    if(this.selected){
+        this.selectShape = new createjs.Shape();
+        this.selectShape.graphics.moveTo(-1.5*this.shaper,0);
+        this.selectShape.graphics.beginStroke('orange').lineTo(-1.5*this.shaper,1.5*this.shaper).lineTo(1.5*this.shaper, 1.5*this.shaper)
+                .lineTo(1.5*this.shaper,-1.5*this.shaper).lineTo(-1.5*this.shaper,-1.5*this.shaper).lineTo(-1.5*this.shaper,1.5*this.shaper);
+        this.addChild(this.selectShape);
+    }
+    else {
+        this.removeChild(this.selectShape);
+    }
 };
 
 
@@ -430,6 +449,14 @@ function populateLevel_3() {
     
     worldStage.on("click", function(evt) {
         tooltip_target = evt.target.parent;
+        //This removal of rendering doesn't work at all.
+        spriteArray.forEach(function(sprite, i) {
+            sprite.selected = false;
+            sprite.reRender();
+        });
+        evt.target.parent.selected = true;
+        evt.target.parent.reRender();
+        
         tooltip.text = " " + evt.target.parent.name +", "+(evt.target.parent.gender == 0 ? "Male" : "Female") +
         ", "+(evt.target.parent.race == 0 ? "White" : "Color") + 
         ", "+(evt.target.parent.employed == false ? "Unemployed" : "Employed") +
