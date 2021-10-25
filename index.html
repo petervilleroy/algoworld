@@ -20,23 +20,28 @@
         <tr>
             <td>
                 Levels:
-            </td>
-            <td>
+            
                 <button id="lvl1Button" > _1_ </button>
-            </td>
-            <td>
                 <button id="lvl2Button" > _2_ </button>
+                <button id="lvl3Button" > _3_ </button>
             </td>
             <td>
-                <button id="lvl3Button" > _3_ </button>
+                
+            </td>
+            <td>
+                
             </td>
         </tr>
         <tr>
             <td>
-                <p>Animation Canvas:</p><br/>
+                <p>Instructions:</p>
+                <span class="level2">Click on each teacher to learn about them. Use the sliders on the right to decide which attributes are most important, and click go to see who wins Teacher of the Year</span>
+                <span class="level3">Choose the data available to banks and employers and watch who can manage to avoid extreme poverty.</span>
+                <br/>
                 <canvas id="myWorldCanvas" width="500" height="450"></canvas>
-
-                <button id="eventButton" >Event!</button>
+            </td>
+            <td>
+                
             </td>
             <td>
                 <div id="eventResults" class="level3">
@@ -95,12 +100,28 @@
                         </td>
                     </tr>
                     <tr>
+                        
+                        <td>
+                            <span class="sliderBox" id="genderSliderBox">Gender<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="genderSlider">
+                            </span>
+                            <span class="lvl2Adder">+</span>
+                        </td>
+                        <td>
+                            <span class="sliderBox" id="raceSliderBox">Race<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="raceSlider">
+                            </span>
+                            <span class="lvl2Adder">+</span>
+                        </td>
+                   
                         <td>
                             <span class="sliderBox" id="attendanceSliderBox">Attendance<br/>
                                 <input type="range" min="1" max="100" value="50" class="slider" id="attendanceSlider">
                             </span>
                             <span class="lvl2Adder">+</span>
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             <span class="sliderBox" id="testscoresSliderBox">Test Scores<br/>
                                 <input type="range" min="1" max="100" value="50" class="slider" id="testscoresSlider">
@@ -109,6 +130,11 @@
                         </td>
                         <td>
                             Crown Image
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id="eventButton" >Event!</button>
                         </td>
                     </tr>
                 </table>

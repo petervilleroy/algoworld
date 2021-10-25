@@ -47,6 +47,7 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.kindness=0;
     this.coolfactor=0;
     this.testscores=0;
+    this.teacherBio="";
 
 }
 Citizen.prototype = Object.create(createjs.Container.prototype);
@@ -191,8 +192,10 @@ function populateLevel_2() {
     onlyOnce = true;
     finishedTweens = 0;
     tweenSpeed = 50;
-    tooltip.x = tooltip.y = 10;
-    var degreeP, attendanceP, kindnessP, coolfactorP, testscoresP = 50;
+    tooltip.x = 15;
+    tooltip.y = 130;
+    var degreeP, attendanceP, kindnessP, coolfactorP, testscoresP, raceP, genderP;
+    degreeP = attendanceP = kindnessP = coolfactorP = testscoresP = raceP = genderP = 50;
 
     // Draw Ms. Adams
     shapex = worldCanvas.width * .1; 
@@ -207,6 +210,7 @@ function populateLevel_2() {
     citizen.kindness=35;
     citizen.coolfactor=40;
     citizen.testscores=90;
+    citizen.teacherBio="Above average attendance, not so kind or cool, but very fair in grading tests, and with the best degree available."
     citizen.render();
     l2spriteArray.push(citizen);
     worldStage.addChild(citizen);
@@ -279,33 +283,73 @@ function populateLevel_2() {
     l2spriteArray.push(citizen);
     worldStage.addChild(citizen);
 
-    companyShape = new createjs.Shape();
-    companyShape.graphics.beginFill('green').drawCircle(0,0,15);
-    companyShape.x = 90;
-    companyShape.y = 180;
-    worldStage.addChild(companyShape);
+    crownShape = new createjs.Shape();
+    crownShape.graphics.beginFill('green').drawCircle(0,0,15);
+    crownShape.x = worldCanvas.width / 2;
+    crownShape.y = 90;
+    worldStage.addChild(crownShape);
+    worldStage.addChild(tooltip);
     worldStage.update();
 
     $("#degreeSlider").mouseup(function() {
-        tweenSpeed = this.value;
-        $("#currentSpeedLabel").text(this.value);
+        degreeP = this.value;
+        
     })
     $("#coolfactorSlider").mouseup(function() {
-        tweenSpeed = this.value;
-        $("#currentSpeedLabel").text(this.value);
+        coolfactorP = this.value;
+       
     })
     $("#kindnessSlider").mouseup(function() {
-        tweenSpeed = this.value;
-        $("#currentSpeedLabel").text(this.value);
+        kindnessP = this.value;
+        
     })
     $("#attendanceSlider").mouseup(function() {
-        tweenSpeed = this.value;
-        $("#currentSpeedLabel").text(this.value);
+        attendanceP = this.value;
+        
     })
     $("#testscoresSlider").mouseup(function() {
-        tweenSpeed = this.value;
-        $("#currentSpeedLabel").text(this.value);
+        testscoresP = this.value;
+        
     })
+    $("#genderSlider").mouseup(function() {
+        genderP = this.value;
+        
+    })
+    $("#raceSlider").mouseup(function() {
+        raceP = this.value;
+        
+    })
+    worldStage.on("click", function(evt) {
+        tooltip_target = evt.target.parent;
+        tooltip.text = " " + evt.target.parent.name +", "+(evt.target.parent.gender == 0 ? "Male" : "Female") +
+        ", "+(evt.target.parent.race == 0 ? "White" : "Color") + 
+        ", "+(evt.target.parent.employed == false ? "Unemployed" : "Employed") +
+        ", Wealth: "+(100-evt.target.parent.wealth).toFixed(0) +
+        ", "+ evt.target.parent.teacherBio;
+        
+        worldStage.update();
+    });
+
+    $("#eventButton").click(function() {
+        // Calculate the new Teacher of the Year
+        var TeacherOfTheYear;
+
+        var bestScore = 0;
+        l2spriteArray.forEach(function(citizen, i) {
+            var currentScore = citizen.degree*degreeP + citizen.attendance*attendanceP + citizen.kindness*kindnessP +
+                citizen.coolfactor*coolfactorP + citizen.testscores*testscoresP + (citizen.gender?0:99)*genderP + (citizen.race?0:99)*raceP;
+            if(currentScore > bestScore) {
+                bestScore = currentScore;
+                TeacherOfTheYear = citizen;
+            }
+
+        });
+        console.log("---DEBUG: "+TeacherOfTheYear.name + " is Teacher of the Year!");
+
+        // Tween the Crown to directly above that Teacher
+        createjs.Tween.get(crownShape).to({x: TeacherOfTheYear.shapex, y: crownShape.y}, 30*(101-tweenSpeed), createjs.Ease.quadInOut);//.call(tweenComplete);
+    })
+
 }
 
 function populateLevel_3() {
