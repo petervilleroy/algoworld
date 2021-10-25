@@ -730,10 +730,10 @@ function handleGo() { //This function is the main animation loop. It is re-execu
 
    
     // I am here deliberately calculating per-person wealth before dead population is added to the total pop
-    whitewealth = whitewealth / whitepop;
-    colorwealth = colorwealth / colorpop;
-    malewealth = malewealth / malepop;
-    femalewealth = femalewealth / femalepop;
+    if(whitepop > 0) {whitewealth = whitewealth / whitepop;} else {whitewealth = 0}
+    if(colorpop > 0) {colorwealth = colorwealth / colorpop;} else {colorwealth = 0}
+    if(malepop > 0) {malewealth = malewealth / malepop;} else {malewealth = 0}
+    if(femalepop > 0) {femalewealth = femalewealth / femalepop;} else {femalewealth = 0}
 
     whitepop += whitedead;
     colorpop += colordead;
