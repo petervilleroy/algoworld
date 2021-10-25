@@ -10,10 +10,13 @@ var graveyard, bank, prison, company;
 var misogyny, racism;
 var tooltip,tooltip_target;
 var onlyOnce, finishedTweens, tweenSpeed;
+var whiteMortality, colorMortality, maleMortality, femaleMortality;
 
 //TODO: make checkboxes change behavior of bases
 //TODO: rework the calculate_loan, calculate_job functions to be statistic rather than binary
 
+//TODO-Today: Label the 3 boxes in lvl3
+//TODO-Today: 
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -399,6 +402,11 @@ function populateLevel_3() {
     graveyardShape.x = 0;
     graveyardShape.y = worldCanvas.height - graveyard.height;
 
+     whiteMortality = 0;
+     colorMortality = 0;
+     maleMortality = 0;
+     femaleMortality = 0;
+
     worldStage.addChild(prisonShape);
     worldStage.addChild(bankShape);
     worldStage.addChild(companyShape);
@@ -670,10 +678,10 @@ function handleGo() { //This function is the main animation loop. It is re-execu
     colorpop += colordead;
     malepop += maledead;
     femalepop += femaledead;
-    var whiteMortality = 100*(whitedead / whitepop);
-    var colorMortality = 100*(colordead / colorpop);
-    var maleMortality = 100*(maledead / malepop);
-    var femaleMortality = 100*(femaledead / femalepop);
+     whiteMortality = 100*(whitedead / whitepop);
+     colorMortality = 100*(colordead / colorpop);
+     maleMortality = 100*(maledead / malepop);
+     femaleMortality = 100*(femaledead / femalepop);
     
     
     $("#mortalityRaceWhite").text(whiteMortality.toFixed(1));
