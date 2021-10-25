@@ -10,13 +10,20 @@ var graveyard, bank, prison, company;
 var misogyny, racism;
 var tooltip,tooltip_target;
 var onlyOnce, finishedTweens, tweenSpeed;
-var whiteMortality, colorMortality, maleMortality, femaleMortality;
+var whiteMortality, colorMortality, maleMortality, femaleMortality, whitewealth, colorwealth, malewealth, femalewealth;
 
-//TODO: make checkboxes change behavior of bases
+//TODO: make checkboxes change behavior of bases (with no data, nobody gets anything)
+//TODO: allow for re-running level 3.
 //TODO: rework the calculate_loan, calculate_job functions to be statistic rather than binary
+//TODO: for results calculation, make divide by zero NOT result in NaN
+//TODO: figure out a way to show wealth with a skinny-fat instead of full-empty.
+//TODO: Bios are not showing in Chrome!
 
-//TODO-Today: Label the 3 boxes in lvl3
-//TODO-Today: 
+//TODO-Today: Label the 3 boxes in lvl3 ***
+//TODO-Today: Fix the results box to update 'not only when a user is clicked' WTF
+//TODO-Today: Fix the text in canvas to be bigger, sharper
+//TODO-Today: make boxes lvl3 click-able, alter the contents of Green selection boxes ****
+//TODO-Today: write proper bios for 5 teachers lvl2 ****
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -191,12 +198,13 @@ function populateLevel_2() {
     //movex = worldCanvas.width / 2;
     //movey = worldCanvas.height / 2;
     
-    tooltip = new createjs.Text("");
+    tooltip = new createjs.Text(" ", "20px Arial");
     onlyOnce = true;
     finishedTweens = 0;
     tweenSpeed = 50;
     tooltip.x = 15;
     tooltip.y = 130;
+    tooltip.lineWidth = worldCanvas.width - 30;
     var degreeP, attendanceP, kindnessP, coolfactorP, testscoresP, raceP, genderP;
     degreeP = attendanceP = kindnessP = coolfactorP = testscoresP = raceP = genderP = 50;
 
@@ -208,13 +216,13 @@ function populateLevel_2() {
     shapeGender = 1;
     shapeInitWealth = 65;
     citizen = new Citizen("a", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
-    citizen.degree=95;
-    citizen.attendance=80;
-    citizen.kindness=35;
-    citizen.coolfactor=40;
-    citizen.testscores=90;
-    citizen.teacherBio="Above average attendance, not so kind or cool, but very fair in grading tests, and with the best degree available."
-    citizen.render();
+        citizen.degree=95;
+        citizen.attendance=80;
+        citizen.kindness=35;
+        citizen.coolfactor=40;
+        citizen.testscores=90;
+        citizen.teacherBio="Ms. Adams: She's not especially kind nor particularly cool, but she is very fair in grading tests, and she comes with the best degree you could want. Sometimes she misses class, but not often."
+        citizen.render();
     l2spriteArray.push(citizen);
     worldStage.addChild(citizen);
     
@@ -231,6 +239,7 @@ function populateLevel_2() {
     citizen.kindness=50;
     citizen.coolfactor=50;
     citizen.testscores=20;
+    citizen.teacherBio="Mr. Baker: He almost never has a substitute! He's pretty average from a kindness and coolness standpoint, but he has a degree from a pretty impressive school. Sadly, his test scoring is pretty unfair!"
     citizen.render();
     l2spriteArray.push(citizen);
     worldStage.addChild(citizen);
@@ -248,6 +257,7 @@ function populateLevel_2() {
     citizen.kindness=95;    //especially nice
     citizen.coolfactor=70;  //cooler than avg teacher
     citizen.testscores=60;  //doesn't always grade tests fairly
+    citizen.teacherBio="Mr. Cohen: He is just as nice as you could wish, even though his degree is from a pretty poor school. He usually grades test fairly, but not always. He misses class a lot and we're stuck with a substitute more than you'd like, but still he's quite a cool guy all around."
     citizen.render();
     l2spriteArray.push(citizen);
     worldStage.addChild(citizen);
@@ -265,6 +275,7 @@ function populateLevel_2() {
     citizen.kindness=95;
     citizen.coolfactor=99;
     citizen.testscores=99;
+    citizen.teacherBio="Mr. Darden: He's the coolest teacher by far, and he has never graded any test lower than a B! He has a bad degree from a nameless school, and he misses class very regularly, but he's certainly the nicest teacher in school."
     citizen.render();
     l2spriteArray.push(citizen);
     worldStage.addChild(citizen);
@@ -282,6 +293,7 @@ function populateLevel_2() {
     citizen.kindness=35;
     citizen.coolfactor=75;
     citizen.testscores=60;
+    citizen.teacherBio="Ms. Edwards: Kindness is not her strong suit, but Ms. Edwards does boast a decently impressive degree. She rarely misses class, and kids agree she's pretty cool. Sadly, her test grading is usually fair but not always."
     citizen.render();
     l2spriteArray.push(citizen);
     worldStage.addChild(citizen);
@@ -324,11 +336,7 @@ function populateLevel_2() {
     })
     worldStage.on("click", function(evt) {
         tooltip_target = evt.target.parent;
-        tooltip.text = " " + evt.target.parent.name +", "+(evt.target.parent.gender == 0 ? "Male" : "Female") +
-        ", "+(evt.target.parent.race == 0 ? "White" : "Color") + 
-        ", "+(evt.target.parent.employed == false ? "Unemployed" : "Employed") +
-        ", Wealth: "+(100-evt.target.parent.wealth).toFixed(0) +
-        ", "+ evt.target.parent.teacherBio;
+        tooltip.text = " " + evt.target.parent.teacherBio;
         
         worldStage.update();
     });
@@ -402,10 +410,14 @@ function populateLevel_3() {
     graveyardShape.x = 0;
     graveyardShape.y = worldCanvas.height - graveyard.height;
 
-     whiteMortality = 0;
-     colorMortality = 0;
-     maleMortality = 0;
-     femaleMortality = 0;
+    whiteMortality = 0;
+    colorMortality = 0;
+    maleMortality = 0;
+    femaleMortality = 0;
+    whitewealth = 0;
+    colorwealth = 0;
+    malewealth = 0;
+    femalewealth = 0;
 
     worldStage.addChild(prisonShape);
     worldStage.addChild(bankShape);
@@ -678,20 +690,13 @@ function handleGo() { //This function is the main animation loop. It is re-execu
     colorpop += colordead;
     malepop += maledead;
     femalepop += femaledead;
-     whiteMortality = 100*(whitedead / whitepop);
-     colorMortality = 100*(colordead / colorpop);
-     maleMortality = 100*(maledead / malepop);
-     femaleMortality = 100*(femaledead / femalepop);
+    whiteMortality = 100*(whitedead / whitepop);
+    colorMortality = 100*(colordead / colorpop);
+    maleMortality = 100*(maledead / malepop);
+    femaleMortality = 100*(femaledead / femalepop);
     
     
-    $("#mortalityRaceWhite").text(whiteMortality.toFixed(1));
-    $("#mortalityRaceColor").text(colorMortality.toFixed(1));
-    $("#mortalityGenderMale").text(maleMortality.toFixed(1));
-    $("#mortalityGenderFemale").text(femaleMortality.toFixed(1));
-    $("#wealthRaceWhite").text(whitewealth.toFixed(1));
-    $("#wealthRaceColor").text(colorwealth.toFixed(1));
-    $("#wealthGenderMale").text(malewealth.toFixed(1));
-    $("#wealthGenderFemale").text(femalewealth.toFixed(1));
+    
 
 
 } // End of HandleGo, the main animation loop.
@@ -708,6 +713,14 @@ function tweenComplete() {
     }
 }
 function tick(tickEvent) {
+    $("#mortalityRaceWhite").text(whiteMortality.toFixed(1));
+    $("#mortalityRaceColor").text(colorMortality.toFixed(1));
+    $("#mortalityGenderMale").text(maleMortality.toFixed(1));
+    $("#mortalityGenderFemale").text(femaleMortality.toFixed(1));
+    $("#wealthRaceWhite").text(whitewealth.toFixed(1));
+    $("#wealthRaceColor").text(colorwealth.toFixed(1));
+    $("#wealthGenderMale").text(malewealth.toFixed(1));
+    $("#wealthGenderFemale").text(femalewealth.toFixed(1));
     worldStage.update(tickEvent);
 }
 function atCompany(c, comp, compShape) {
