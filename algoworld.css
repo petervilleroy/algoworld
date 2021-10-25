@@ -15,3 +15,9 @@ canvas {
 .tab {
    margin-left: 40px;
 }
+.lvl3CompanySelectors {
+  display: none;
+}
+.lvl3PrisonSelectors {
+  display: none;
+}
