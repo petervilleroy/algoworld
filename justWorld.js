@@ -15,12 +15,9 @@ var whiteMortality, colorMortality, maleMortality, femaleMortality, whitewealth,
 //TODO: make checkboxes change behavior of bases (with no data, nobody gets anything)
 //TODO: allow for re-running level 3.
 //TODO: rework the calculate_loan, calculate_job functions to be statistic rather than binary
-//TODO: for results calculation, make divide by zero NOT result in NaN
 //TODO: figure out a way to show wealth with a skinny-fat instead of full-empty.
 //TODO: Bios are not showing in Chrome!
 
-
-//TODO-Today: Fix the results box to update 'not only when a user is clicked' WTF
 
 
 //Define the Citizen Prototype as inheriting from createjs.Container
@@ -143,13 +140,13 @@ Citizen.prototype.reRender = function() {
 function init() {
 
     // Button Handler functions for level navigation
-    $("#lvl1Button").click(function() {
+   /* $("#lvl1Button").click(function() {
         //TODO: fix the issue where going from level1 to level3 kills the tick functionality. maybe need to destroy and re-create createjs.Ticker.addEventListener("tick", tick);
         console.log("--- DEBUG: switching to level 1...");
         currentLevel = 1;
         worldCanvas = null;
         init();
-    })
+    })*/
     $("#lvl2Button").click(function() {
         console.log("--- DEBUG: switching to level 2...");
         currentLevel = 2;
@@ -198,9 +195,12 @@ function populateLevel_1() {
 
     companyShape = new createjs.Shape();
     companyShape.graphics.beginFill('blue').drawCircle(0,0,5);
-    companyShape.x = 45;
-    companyShape.y = 45;
+    companyShape.x = worldCanvas.width * .3;
+    companyShape.y = worldCanvas.height * .75;
     worldStage.addChild(companyShape);
+    var roadShape = new createjs.Shape();
+    roadShape.graphics.moveTo(worldCanvas.width*.2,0).beginStroke('grey').lineTo(worldCanvas.width*.3,0).lineTo(worldCanvas.width,worldCanvas.height*.7).lineTo(worldCanvas.width,worldCanvas.height*.8).lineTo(worldCanvas.width*.2,0)
+    worldStage.addChild(roadShape);
     worldStage.update();
 }
 
