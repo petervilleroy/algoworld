@@ -10,6 +10,7 @@ var movex, movey;
 var trafficlight;
 var tooltip,tooltip_target;
 var finishedTweens, tweenSpeed;
+var keepgoing;
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -207,7 +208,7 @@ function populateLevel_1() {
     movey = worldCanvas.height / 2;
     
     tooltip = new createjs.Text("");
-    //onlyOnce = true;
+    keepgoing = true;
     finishedTweens = 0;
     tweenSpeed = 50;
     tooltip.x = tooltip.y = 10;
@@ -247,24 +248,26 @@ function populateLevel_1() {
     trafficlight.y = getRoadCoordinateY(5)-worldHeight*.15;
     worldStage.addChild(trafficlight);
 
-    createjs.Ticker.addEventListener("tick", tick);
-   
+    
     worldStage.update();
 
     //Make the first move
     finishedTweens = 0;
     spriteArray.forEach(function(sprite, i){
         if(sprite instanceof Citizen){
-        createjs.Tween.get(sprite).to({x: worldWidth*.2 * Math.random() | 0, y: worldHeight * Math.random() | 0}, 50*tweenSpeed, createjs.Ease.quadInOut)
-         .call(function(sprite){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");});
+        createjs.Tween.get(sprite).to({x: worldWidth*.2 * Math.random() | 0, y: worldHeight * Math.random() | 0}, 30*(101-tweenSpeed), createjs.Ease.quadInOut)
+         .call(function(sprite){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");}).call(tweenComplete);
         }
         if(sprite instanceof Car){
             var targetlocation = sprite.step+1;
-            createjs.Tween.get(sprite).to({x: getRoadCoordinateX(targetlocation), y: getRoadCoordinateY(targetlocation)}, 50*tweenSpeed, createjs.Ease.quadInOut)
-         .call(function(){console.log("DEBUG: "+this.name+" is now at ("+this.x+","+this.y+")");});
+            sprite.step = targetlocation;
+            createjs.Tween.get(sprite).to({x: getRoadCoordinateX(targetlocation), y: getRoadCoordinateY(targetlocation)}, 30*(101-tweenSpeed), createjs.Ease.quadInOut)
+         .call(function(sprite){console.log("DEBUG: "+this.name+" is now at ("+this.x+","+this.y+")");}).call(tweenComplete);
         }
-    }).call(tweenComplete());
+    });
     
+    createjs.Ticker.addEventListener("tick", tick);
+   
     
     //carArray.forEach(function(car, i){createjs.Tween.get(car).to({x: movex, y: movey}, 1500, createjs.Ease.quadInOut)
     //.call(function(car){console.log("DEBUG: car is now at ("+this.step+")");}).call(tweenComplete)});
@@ -272,11 +275,13 @@ function populateLevel_1() {
 
 function tweenComplete() {
     finishedTweens++;
+    if(spriteArray.length > 38) {keepgoing = false};
+
     console.log ("DEBUG::: Moving sprites. "+finishedTweens + " moves complete so far...");
-    if (keepgoing) { //(finishedTweens >= spriteArray.length && TOTALWORLDCYCLES > 0) {
+    if (finishedTweens >= spriteArray.length && keepgoing) {
         //onlyOnce = false;
         //reset the tween counter, and start another animation loop
-        //finishedTweens = 0;
+        finishedTweens = 0;
         handleGo();
         
     }
@@ -287,7 +292,58 @@ function tick(tickEvent) {
 }
 
 function handleGo() { //This function is the main animation loop. It is re-executed after every Tween
-
+    //add to the population
+    if(spriteArray.length % 2 == 0) {
+        // add a car
+        car = new Car("car"+spriteArray.length,"blue",0);
+        car.render();
+        car.x = getRoadCoordinateX(car.step);
+        car.y = getRoadCoordinateY(car.step);
+        carPopulation += 1;
+        spriteArray.push(car);
+        worldStage.addChild(car);
+    }
+    else {
+        // add 3 citizens
+        for (var i = 0; i < 3; i++) {
+            var citGender = (Math.random() >= 0.5  ? 0 : 1 );
+            var citRace = (Math.random() >= 0.3  ? 0 : 1 );
+            citizen = new Citizen("cit"+spriteArray.length,citRace,citGender,50,0,0,8);
+            citizen.x = worldWidth*.2 * Math.random() | 0;
+            citizen.y = worldHeight * Math.random() | 0;
+            citizen.render();
+            worldPopulation += 1;
+            spriteArray.push(citizen);
+            worldStage.addChild(citizen);
+        }
+    }
+    spriteArray.forEach(function(sprite, i){
+        if(sprite instanceof Citizen){
+        createjs.Tween.get(sprite).to({x: worldWidth*.2 * Math.random() | 0, y: worldHeight * Math.random() | 0}, 30*(101-tweenSpeed), createjs.Ease.quadInOut)
+         .call(tweenComplete);
+         //createjs.Tween.get(sprite).to({x: citizenx, y: citizeny}, 30*(101-tweenSpeed), createjs.Ease.quadInOut).call(tweenComplete); //, createjs.Ease.getPowInOut(2))
+   
+        }
+        if(sprite instanceof Car){
+            var targetlocation = sprite.step+1;
+            sprite.step = targetlocation;
+            // if the car is at the end of the road, delete it.
+            if(targetlocation > 10) {
+                //i is the index of this car in the spritearray...
+                spriteArray.splice(i,1);
+                carPopulation -=1;
+                worldStage.removeChild(sprite);
+                
+                createjs.Tween.get(sprite).to({x: getRoadCoordinateX(11), y: getRoadCoordinateY(11)}, 1000, createjs.Ease.quadInOut)
+                 .call(function(sprite){console.log("DEBUG: Removing "+sprite.name+" from the Array.")}).call(tweenComplete);
+            }
+            else {
+                createjs.Tween.get(sprite).to({x: getRoadCoordinateX(targetlocation), y: getRoadCoordinateY(targetlocation)}, 30*(101-tweenSpeed), createjs.Ease.quadInOut)
+                 .call(function(sprite){console.log("DEBUG: "+this.name+" is now at ("+this.x+","+this.y+")");}).call(tweenComplete);
+            }
+        }
+    });
+    
 } // end of handleGo() animation loop function
 
 
