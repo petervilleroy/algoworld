@@ -275,7 +275,7 @@ function populateLevel_1() {
 
 function tweenComplete() {
     finishedTweens++;
-    if(spriteArray.length > 38) {keepgoing = false};
+    if(spriteArray.length > 88) {keepgoing = false};
 
     console.log ("DEBUG::: Moving sprites. "+finishedTweens + " moves complete so far...");
     if (finishedTweens >= spriteArray.length && keepgoing) {
@@ -319,9 +319,11 @@ function handleGo() { //This function is the main animation loop. It is re-execu
     }
     spriteArray.forEach(function(sprite, i){
         if(sprite instanceof Citizen){
-        createjs.Tween.get(sprite).to({x: worldWidth*.2 * Math.random() | 0, y: worldHeight * Math.random() | 0}, 30*(101-tweenSpeed), createjs.Ease.quadInOut)
-         .call(tweenComplete);
-         //createjs.Tween.get(sprite).to({x: citizenx, y: citizeny}, 30*(101-tweenSpeed), createjs.Ease.quadInOut).call(tweenComplete); //, createjs.Ease.getPowInOut(2))
+            citizenx = worldWidth * Math.random() | 0;
+            citizeny = worldHeight - (worldHeight *(1-citizenx/worldWidth) * Math.random() | 0);
+            createjs.Tween.get(sprite).to({x: citizenx, y: citizeny}, 30*(101-tweenSpeed), createjs.Ease.quadInOut)
+            .call(tweenComplete);
+            //createjs.Tween.get(sprite).to({x: citizenx, y: citizeny}, 30*(101-tweenSpeed), createjs.Ease.quadInOut).call(tweenComplete); //, createjs.Ease.getPowInOut(2))
    
         }
         if(sprite instanceof Car){
