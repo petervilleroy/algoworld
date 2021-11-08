@@ -149,10 +149,10 @@ TrafficLight.prototype.render = function() {
     this.box.graphics.beginFill('black').drawRect(0,0,25,40);
     this.addChild(this.box);
 
-    this.redLight.graphics.beginFill('red').drawCircle(12.5,30,8);
+    this.redLight.graphics.beginFill('red').drawCircle(12.5,10,8);
     this.addChild(this.redLight);
 
-    this.greenLight.graphics.beginFill('green').drawCircle(12.5,10,8);
+    this.greenLight.graphics.beginFill('green').drawCircle(12.5,30,8);
     //this.addChild(this.greenLight);
 }
 
@@ -287,7 +287,7 @@ function tweenComplete() {
     }
 }
 function tick(tickEvent) {
-    
+    trafficlight.reRender();
     worldStage.update(tickEvent);
 }
 
@@ -317,20 +317,55 @@ function handleGo() { //This function is the main animation loop. It is re-execu
             worldStage.addChild(citizen);
         }
     }
+    /*if(spriteArray.length > 50) {
+        trafficlight.lightColor = 1;
+    }
+    if (spriteArray.length < 30) {
+        trafficlight.lightColor = 0;
+    }
+    */
     spriteArray.forEach(function(sprite, i){
         if(sprite instanceof Citizen){
-            citizenx = worldWidth * Math.random() | 0;
-            citizeny = worldHeight - (worldHeight *(1-citizenx/worldWidth) * Math.random() | 0);
-            createjs.Tween.get(sprite).to({x: citizenx, y: citizeny}, 30*(101-tweenSpeed), createjs.Ease.quadInOut)
-            .call(tweenComplete);
-            //createjs.Tween.get(sprite).to({x: citizenx, y: citizeny}, 30*(101-tweenSpeed), createjs.Ease.quadInOut).call(tweenComplete); //, createjs.Ease.getPowInOut(2))
-   
+            // if the light is green, cross the street
+            if(trafficlight.lightColor) {
+                if(i < 10){
+                    citizenx = worldWidth;
+                    citizeny = worldHeight *.6 * Math.random() | 0;
+
+                    
+
+                    createjs.Tween.get(sprite).to({x: getRoadCoordinateX(5)-worldWidth*.1, y: getRoadCoordinateY(5)+ worldHeight*.1}, 500, createjs.Ease.quadInOut)
+                    .to({x: citizenx, y: citizeny}, 30*(101-tweenSpeed)-500, createjs.Ease.quadInOut)
+                    .call(function(sprite){
+                        spriteArray.splice(i,1);
+                        worldPopulation -= 1;
+                        worldStage.removeChild(this);
+                    })
+                    .call(tweenComplete); 
+                    
+                }
+                else {
+                    citizenx = worldWidth * Math.random() | 0;
+                    citizeny = worldHeight - (worldHeight *(1-citizenx/worldWidth) * Math.random() | 0);
+                    createjs.Tween.get(sprite).to({x: citizenx, y: citizeny}, 30*(101-tweenSpeed), createjs.Ease.quadInOut)
+                    .call(tweenComplete);
+                }
+            }
+            else {
+                citizenx = worldWidth * Math.random() | 0;
+                citizeny = worldHeight - (worldHeight *(1-citizenx/worldWidth) * Math.random() | 0);
+                createjs.Tween.get(sprite).to({x: citizenx, y: citizeny}, 30*(101-tweenSpeed), createjs.Ease.quadInOut)
+                .call(tweenComplete);
+                //createjs.Tween.get(sprite).to({x: citizenx, y: citizeny}, 30*(101-tweenSpeed), createjs.Ease.quadInOut).call(tweenComplete); //, createjs.Ease.getPowInOut(2))
+    
+            }
+            
         }
         if(sprite instanceof Car){
             var targetlocation = sprite.step+1;
             sprite.step = targetlocation;
             // if the car is at the end of the road, delete it.
-            if(targetlocation > 10) {
+            if(targetlocation > 9) {
                 //i is the index of this car in the spritearray...
                 spriteArray.splice(i,1);
                 carPopulation -=1;
