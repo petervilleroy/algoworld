@@ -11,8 +11,13 @@ var trafficlight;
 var tooltip,tooltip_target;
 var finishedTweens, tweenSpeed;
 var keepgoing;
+var cmdTileIF1, cmdTileIF2, cmdTileWait1, cmdTileWait2, cmdTileGreen1, cmdTileGreen2, cmdTileRed1, cmdTileRed2, cmdTileTurnGreen1, cmdTileTurnGreen2, cmdTileTurnRed1, cmdTileTurnRed2;
+    //var cmdLabelIF1, cmdLabelIF2, cmdLabelGreen1, cmdLabelGreen2, cmdLabelRed1, cmdLabelRed2, cmdLabelTurnGreen1, cmdLabelTurnGreen2, cmdLabelTurnRed1, cmdLabelTurnRed2;
+var cmdBoxIF1, cmdBoxIF2, cmdBoxColor1, cmdBoxColor2, cmdBoxWait1, cmdBoxWait2, cmdBoxColor3, cmdBoxColor4;
+
 var selectedTile, startX, startY;
-;
+var closeEnough;
+var targetBoxOccupied;
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -180,6 +185,7 @@ function CommandTile(name, text, x, y, width, height) {
 
     this.boxShape = new createjs.Shape();
     this.label = new createjs.Text(text, "16pt Times New Roman", 'black');
+    this.dockedBox = null;
 
     this.x = x;
     this.y = y;
@@ -230,6 +236,8 @@ function populateLevel_1() {
     worldWidth = worldCanvas.width *.6;
     controlWidth = worldCanvas.width * .4;
     worldHeight = controlHeight = worldCanvas.height;
+    targetBoxOccupied = new Array(0,0,0,0,0,0,0,0);
+    closeEnough = 6;
 
     movex = worldCanvas.width / 2;
     movey = worldCanvas.height / 2;
@@ -245,30 +253,35 @@ function populateLevel_1() {
     dividerShape.graphics.moveTo(worldWidth,0).beginStroke('green').lineTo(worldWidth,worldHeight).lineTo(worldWidth,0);
     worldStage.addChild(dividerShape);
 
-    var cmdTileIF1, cmdTileIF2, cmdTileWait1, cmdTileWait2, cmdTileGreen1, cmdTileGreen2, cmdTileRed1, cmdTileRed2, cmdTileTurnGreen1, cmdTileTurnGreen2, cmdTileTurnRed1, cmdTileTurnRed2;
-    //var cmdLabelIF1, cmdLabelIF2, cmdLabelGreen1, cmdLabelGreen2, cmdLabelRed1, cmdLabelRed2, cmdLabelTurnGreen1, cmdLabelTurnGreen2, cmdLabelTurnRed1, cmdLabelTurnRed2;
-    var cmdBoxIF1, cmdBoxIF2, cmdBoxColor1, cmdBoxColor2, cmdBoxWait1, cmdBoxWait2, cmdBoxColor3, cmdBoxColor4;
-
+    
     cmdBoxIF1 = new createjs.Shape();
-    cmdBoxIF1.graphics.beginStroke('grey').drawRect(worldWidth+40,worldHeight*.6,50,50);
+    cmdBoxIF1.graphics.beginStroke('grey').drawRect(0,0,50,50);
+    cmdBoxIF1.x = worldWidth+40;
+    cmdBoxIF1.y = worldHeight*.6;
     worldStage.addChild(cmdBoxIF1);
     cmdBoxColor1 = new createjs.Shape();
     cmdBoxColor1.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25,worldHeight*.6,80,50);
     worldStage.addChild(cmdBoxColor1);
     cmdBoxWait1 = new createjs.Shape();
-    cmdBoxWait1.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25+80+25,worldHeight*.6,70,50);
+    cmdBoxWait1.graphics.beginStroke('grey').drawRect(0,0,70,50);
+    cmdBoxWait1.x = worldWidth+40+50+25+80+25;
+    cmdBoxWait1.y = worldHeight*.6;
     worldStage.addChild(cmdBoxWait1);
     cmdBoxColor3 = new createjs.Shape();
     cmdBoxColor3.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25+80+25+70+25,worldHeight*.6,100,50);
     worldStage.addChild(cmdBoxColor3);
     cmdBoxIF2 = new createjs.Shape();
-    cmdBoxIF2.graphics.beginStroke('grey').drawRect(worldWidth+40,worldHeight*.75,50,50);
+    cmdBoxIF2.graphics.beginStroke('grey').drawRect(0,0,50,50);
+    cmdBoxIF2.x = worldWidth+40;
+    cmdBoxIF2.y = worldHeight*.75;
     worldStage.addChild(cmdBoxIF2);
     cmdBoxColor2 = new createjs.Shape();
     cmdBoxColor2.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25,worldHeight*.75,80,50);
     worldStage.addChild(cmdBoxColor2);
     cmdBoxWait2 = new createjs.Shape();
-    cmdBoxWait2.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25+80+25,worldHeight*.75,70,50);
+    cmdBoxWait2.graphics.beginStroke('grey').drawRect(0,0,70,50);
+    cmdBoxWait2.x = worldWidth+40+50+25+80+25;
+    cmdBoxWait2.y = worldHeight*.75;
     worldStage.addChild(cmdBoxWait2);
     cmdBoxColor4 = new createjs.Shape();
     cmdBoxColor4.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25+80+25+70+25,worldHeight*.75,100,50);
@@ -282,6 +295,13 @@ function populateLevel_1() {
     cmdTileIF2.render();
     worldStage.addChild(cmdTileIF2);
 
+    cmdTileWait1 = new CommandTile("cmdTile3", "WAIT 3 Turns", worldWidth+50, worldHeight*.45, 70, 50);
+    cmdTileWait1.render();
+    worldStage.addChild(cmdTileWait1);
+
+    cmdTileWait2 = new CommandTile("cmdTile3", "WAIT 3 Turns", worldWidth+150, worldHeight*.45, 70, 50);
+    cmdTileWait2.render();
+    worldStage.addChild(cmdTileWait2);
 
 
     var roadShape = new createjs.Shape();
@@ -353,14 +373,50 @@ function populateLevel_1() {
     });
     worldStage.on("pressmove", function(evt) {
         if(selectedTile) {
+            // depending on the tile selected, determine the possible target boxes, and their availability
+            var targetBox1, targetBox2;
+            if(selectedTile == cmdTileIF1 || selectedTile == cmdTileIF2) {
+                targetBox1 = cmdBoxIF1;
+                targetBox2 = cmdBoxIF2;
+            }
+            else if(selectedTile == cmdTileWait1 || selectedTile == cmdTileWait2) {
+                targetBox1 = cmdBoxWait1;
+                targetBox2 = cmdBoxWait2;
+            }
+            else {
+                targetBox1 = null;
+                targetBox2 = null;
+            }
+            //... continue for all cmdTiles
+
             if(evt.stageX >= worldWidth + selectedTile.width) {
                 selectedTile.x += (evt.stageX - startX);
             }
-            
             selectedTile.y += (evt.stageY - startY);
-
             startX = evt.stageX;
             startY = evt.stageY;
+
+            if( (Math.abs(selectedTile.x - targetBox1.x) <= closeEnough) && 
+                (Math.abs(selectedTile.y - targetBox1.y) <= closeEnough) ) {
+                selectedTile.x = targetBox1.x;
+                selectedTile.y = targetBox1.y;
+                startX = evt.stageX;
+                startY = evt.stageY;
+                selectedTile.dockedBox = targetBox1;
+            }
+            else if( (Math.abs(selectedTile.x - targetBox2.x) <= closeEnough) && 
+                (Math.abs(selectedTile.y - targetBox2.y) <= closeEnough) ) {
+                selectedTile.x = targetBox2.x;
+                selectedTile.y = targetBox2.y;
+                startX = evt.stageX;
+                startY = evt.stageY;
+                selectedTile.dockedBox = targetBox2;
+            }
+            else {
+                selectedTile.dockedBox = null;
+            }
+            
+            
 
             worldStage.update();
         }
@@ -419,11 +475,17 @@ function handleGo() { //This function is the main animation loop. It is re-execu
             worldStage.addChild(citizen);
         }
     }
+    if(TOTALWORLDCYCLES % 3 == 0) {
+        if(cmdTileIF1.dockedBox && cmdTileIF2.dockedBox && cmdTileWait1.dockedBox && cmdTileWait2.dockedBox) {
+            // all the IFs and Waits are in place
+            console.log("___ DEBUG: all the IF blocks and all the WAIT blocks are in the correct position!");
+        }
+    }
     if(spriteArray.length > 50) {
         trafficlight.lightColor = 1;
     }
     if (spriteArray.length < 30) {
-        trafficlight.lightColor = 0;
+        //trafficlight.lightColor = 0;
     }
     
     spriteArray.forEach(function(sprite, i){
