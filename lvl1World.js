@@ -1,16 +1,18 @@
 var worldCanvas, worldStage;
 var worldWidth, worldHeight, controlWidth, controlHeight;
-var spriteArray;
+var spriteArray, trafficQueue;
 var currentLevel = 1;
 var update = true;
-var TOTALWORLDCYCLES;
+var TOTALWORLDCYCLES, worldState;
 var shapex, shapey, shaper, citizen, citizenx, citizeny, car, carx, cary;
-var worldPopulation, carPopulation, maxPeople, maxCars;
+var worldPopulation, carPopulation, maxPeople, maxCars, carCounter;
 var movex, movey;
 var trafficlight;
 var tooltip,tooltip_target;
 var finishedTweens, tweenSpeed;
 var keepgoing;
+var selectedTile, startX, startY;
+;
 
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
@@ -169,6 +171,29 @@ TrafficLight.prototype.reRender = function() {
     }
 }
 
+function CommandTile(name, text, x, y, width, height) {
+    createjs.Container.call(this);
+    this.name = name;
+    this.text = text;
+    this.width = width;
+    this.height = height;
+
+    this.boxShape = new createjs.Shape();
+    this.label = new createjs.Text(text, "16pt Times New Roman", 'black');
+
+    this.x = x;
+    this.y = y;
+}
+CommandTile.prototype = Object.create(createjs.Container.prototype);
+
+CommandTile.prototype.render = function() {
+    this.boxShape.graphics.beginFill('grey').drawRect(0,0,this.width,this.height);
+    
+    this.addChild(this.boxShape);
+    this.addChild(this.label);
+    //worldStage.addChild(this);
+}
+
 function init() {
     
       
@@ -195,9 +220,11 @@ function populateLevel_1() {
 	worldStage = new createjs.Stage(worldCanvas);
     spriteArray = new Array();
     carArray = new Array();
-    //TOTALWORLDCYCLES = 20;
+    trafficQueue = new Array(); //use push(Car) and shift() to enqueue and dequeue Car elements
+    TOTALWORLDCYCLES = 0;
+    worldState = 0; // 0= always red; 1= alternating; 2= always green;
     worldPopulation = 5;
-    carPopulation = 0;
+    carPopulation = 1;
     maxPeople = 20;
     maxCars = 5;
     worldWidth = worldCanvas.width *.6;
@@ -217,6 +244,45 @@ function populateLevel_1() {
     var dividerShape = new createjs.Shape();
     dividerShape.graphics.moveTo(worldWidth,0).beginStroke('green').lineTo(worldWidth,worldHeight).lineTo(worldWidth,0);
     worldStage.addChild(dividerShape);
+
+    var cmdTileIF1, cmdTileIF2, cmdTileWait1, cmdTileWait2, cmdTileGreen1, cmdTileGreen2, cmdTileRed1, cmdTileRed2, cmdTileTurnGreen1, cmdTileTurnGreen2, cmdTileTurnRed1, cmdTileTurnRed2;
+    //var cmdLabelIF1, cmdLabelIF2, cmdLabelGreen1, cmdLabelGreen2, cmdLabelRed1, cmdLabelRed2, cmdLabelTurnGreen1, cmdLabelTurnGreen2, cmdLabelTurnRed1, cmdLabelTurnRed2;
+    var cmdBoxIF1, cmdBoxIF2, cmdBoxColor1, cmdBoxColor2, cmdBoxWait1, cmdBoxWait2, cmdBoxColor3, cmdBoxColor4;
+
+    cmdBoxIF1 = new createjs.Shape();
+    cmdBoxIF1.graphics.beginStroke('grey').drawRect(worldWidth+40,worldHeight*.6,50,50);
+    worldStage.addChild(cmdBoxIF1);
+    cmdBoxColor1 = new createjs.Shape();
+    cmdBoxColor1.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25,worldHeight*.6,80,50);
+    worldStage.addChild(cmdBoxColor1);
+    cmdBoxWait1 = new createjs.Shape();
+    cmdBoxWait1.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25+80+25,worldHeight*.6,70,50);
+    worldStage.addChild(cmdBoxWait1);
+    cmdBoxColor3 = new createjs.Shape();
+    cmdBoxColor3.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25+80+25+70+25,worldHeight*.6,100,50);
+    worldStage.addChild(cmdBoxColor3);
+    cmdBoxIF2 = new createjs.Shape();
+    cmdBoxIF2.graphics.beginStroke('grey').drawRect(worldWidth+40,worldHeight*.75,50,50);
+    worldStage.addChild(cmdBoxIF2);
+    cmdBoxColor2 = new createjs.Shape();
+    cmdBoxColor2.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25,worldHeight*.75,80,50);
+    worldStage.addChild(cmdBoxColor2);
+    cmdBoxWait2 = new createjs.Shape();
+    cmdBoxWait2.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25+80+25,worldHeight*.75,70,50);
+    worldStage.addChild(cmdBoxWait2);
+    cmdBoxColor4 = new createjs.Shape();
+    cmdBoxColor4.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25+80+25+70+25,worldHeight*.75,100,50);
+    worldStage.addChild(cmdBoxColor4);
+
+    cmdTileIF1 = new CommandTile("cmdTile1", "IF", worldWidth+50, worldHeight*.2, 50, 50);
+    cmdTileIF1.render();
+    worldStage.addChild(cmdTileIF1);
+
+    cmdTileIF2 = new CommandTile("cmdTile2", "IF", worldWidth+150, worldHeight*.2, 50, 50);
+    cmdTileIF2.render();
+    worldStage.addChild(cmdTileIF2);
+
+
 
     var roadShape = new createjs.Shape();
     roadShape.graphics.moveTo(worldWidth*.2,0).beginStroke('grey').lineTo(worldWidth*.3,0).lineTo(worldWidth,worldHeight*.7).lineTo(worldWidth,worldHeight*.8).lineTo(worldWidth*.2,0)
@@ -240,6 +306,8 @@ function populateLevel_1() {
     car.y = getRoadCoordinateY(car.step);
 
     spriteArray.push(car);
+    trafficQueue.push(car);
+    carCounter = 1;
     worldStage.addChild(car);
    
     trafficlight = new TrafficLight("mainLight", 0, 0, 0, 0);
@@ -262,13 +330,44 @@ function populateLevel_1() {
             var targetlocation = sprite.step+1;
             sprite.step = targetlocation;
             createjs.Tween.get(sprite).to({x: getRoadCoordinateX(targetlocation), y: getRoadCoordinateY(targetlocation)}, 30*(101-tweenSpeed), createjs.Ease.quadInOut)
-         .call(function(sprite){console.log("DEBUG: "+this.name+" is now at ("+this.x+","+this.y+")");}).call(tweenComplete);
+         .call(function(sprite){console.log("DEBUG: "+sprite.name+" is now at ("+this.x+","+this.y+")");}).call(tweenComplete);
         }
     });
     
     createjs.Ticker.addEventListener("tick", tick);
    
-    
+    worldStage.on("mousedown", function(evt) {
+        selectedTile = null;
+        if(evt.target instanceof CommandTile ) {
+            selectedTile = evt.target; 
+        }
+        if(evt.target.parent instanceof CommandTile) {
+            selectedTile = evt.target.parent;
+        }
+        if(selectedTile) {
+            startX = evt.stageX;
+            startY = evt.stageY;
+        }
+        
+
+    });
+    worldStage.on("pressmove", function(evt) {
+        if(selectedTile) {
+            if(evt.stageX >= worldWidth + selectedTile.width) {
+                selectedTile.x += (evt.stageX - startX);
+            }
+            
+            selectedTile.y += (evt.stageY - startY);
+
+            startX = evt.stageX;
+            startY = evt.stageY;
+
+            worldStage.update();
+        }
+    })
+    worldStage.on("mouseup", function(evt) {
+        selectedTile = null;
+    })
     //carArray.forEach(function(car, i){createjs.Tween.get(car).to({x: movex, y: movey}, 1500, createjs.Ease.quadInOut)
     //.call(function(car){console.log("DEBUG: car is now at ("+this.step+")");}).call(tweenComplete)});
 }
@@ -293,14 +392,17 @@ function tick(tickEvent) {
 
 function handleGo() { //This function is the main animation loop. It is re-executed after every Tween
     //add to the population
+    TOTALWORLDCYCLES += 1;
     if(spriteArray.length % 2 == 0) {
         // add a car
-        car = new Car("car"+spriteArray.length,"blue",0);
+        car = new Car("car"+carCounter,"blue",0);
         car.render();
         car.x = getRoadCoordinateX(car.step);
         car.y = getRoadCoordinateY(car.step);
         carPopulation += 1;
+        carCounter += 1;
         spriteArray.push(car);
+        trafficQueue.push(car);
         worldStage.addChild(car);
     }
     else {
@@ -317,29 +419,31 @@ function handleGo() { //This function is the main animation loop. It is re-execu
             worldStage.addChild(citizen);
         }
     }
-    /*if(spriteArray.length > 50) {
+    if(spriteArray.length > 50) {
         trafficlight.lightColor = 1;
     }
     if (spriteArray.length < 30) {
         trafficlight.lightColor = 0;
     }
-    */
+    
     spriteArray.forEach(function(sprite, i){
         if(sprite instanceof Citizen){
             // if the light is green, cross the street
             if(trafficlight.lightColor) {
-                if(i < 10){
+                if(i < 9){
                     citizenx = worldWidth;
                     citizeny = worldHeight *.6 * Math.random() | 0;
+                    spriteArray.splice(i,1);
+                    worldPopulation -= 1;
+                        
 
-                    
-
-                    createjs.Tween.get(sprite).to({x: getRoadCoordinateX(5)-worldWidth*.1, y: getRoadCoordinateY(5)+ worldHeight*.1}, 500, createjs.Ease.quadInOut)
+                    createjs.Tween.get(sprite).to({x: getRoadCoordinateX(6)-worldWidth*.1, y: getRoadCoordinateY(6)+ worldHeight*.1}, 500, createjs.Ease.quadInOut)
                     .to({x: citizenx, y: citizeny}, 30*(101-tweenSpeed)-500, createjs.Ease.quadInOut)
                     .call(function(sprite){
-                        spriteArray.splice(i,1);
-                        worldPopulation -= 1;
+                        //spriteArray.splice(i,1);
+                        //worldPopulation -= 1;
                         worldStage.removeChild(this);
+                        console.log("---DEBUG: removed "+this.name+" from the world.");
                     })
                     .call(tweenComplete); 
                     
@@ -363,20 +467,45 @@ function handleGo() { //This function is the main animation loop. It is re-execu
         }
         if(sprite instanceof Car){
             var targetlocation = sprite.step+1;
-            sprite.step = targetlocation;
-            // if the car is at the end of the road, delete it.
-            if(targetlocation > 9) {
-                //i is the index of this car in the spritearray...
-                spriteArray.splice(i,1);
-                carPopulation -=1;
-                worldStage.removeChild(sprite);
-                
-                createjs.Tween.get(sprite).to({x: getRoadCoordinateX(11), y: getRoadCoordinateY(11)}, 1000, createjs.Ease.quadInOut)
-                 .call(function(sprite){console.log("DEBUG: Removing "+sprite.name+" from the Array.")}).call(tweenComplete);
-            }
-            else {
+            if(trafficlight.lightColor && sprite.step < 5) { // People have the right of way AND car before light
+                for(var c = 0; c < trafficQueue.length; c++ ) {
+                    if( trafficQueue[c].name == sprite.name){
+                        trafficQueue[c].step = Math.min(4 - (.5*c), targetlocation);
+                        if ( trafficQueue[c].step < 0) {keepgoing = false;}
+                    }
+                }
                 createjs.Tween.get(sprite).to({x: getRoadCoordinateX(targetlocation), y: getRoadCoordinateY(targetlocation)}, 30*(101-tweenSpeed), createjs.Ease.quadInOut)
-                 .call(function(sprite){console.log("DEBUG: "+this.name+" is now at ("+this.x+","+this.y+")");}).call(tweenComplete);
+                    .call(function(sprite){console.log("DEBUG: "+sprite.name+" is now at ("+this.x+","+this.y+")");}).call(tweenComplete);
+                
+            }
+            else{ // Cars have the right of way or car has passed the light
+                //var targetlocation = sprite.step+1;
+                sprite.step = targetlocation;
+                
+                // if the car just crossed the traffic light, remove it from traffic array.
+                // assumption: only 1 car crosses the light per move, and it is first in the queue.
+                if(targetlocation >= 6 && targetlocation < 7) {
+                    //trafficQueue.splice(0,1);
+                    var tmpcar = trafficQueue.shift();
+                    console.log("+++ DEBUG: car "+tmpcar.name+" is no longer in traffic. " +trafficQueue.length +" cars remaining...");
+                    }
+                // if the car is at the end of the road, delete it.
+                
+                if(targetlocation > 9) {
+                    //i is the index of this car in the spritearray...
+                    spriteArray.splice(i,1);
+                    carPopulation -=1;
+                    worldStage.removeChild(sprite);
+                    
+                    createjs.Tween.get(sprite).to({x: getRoadCoordinateX(11), y: getRoadCoordinateY(11)}, 1000, createjs.Ease.quadInOut)
+                    .call(function(sprite){console.log("DEBUG: Removing "+this.name+" from the Array.")}).call(tweenComplete);
+                }
+                else { //Car is beyond the light, but not yet off the screen.
+                    createjs.Tween.get(sprite).to({x: getRoadCoordinateX(targetlocation), y: getRoadCoordinateY(targetlocation)}, 30*(101-tweenSpeed), createjs.Ease.quadInOut)
+                    .call(function(sprite){console.log("DEBUG: "+sprite.name+" is now at ("+this.x+","+this.y+")");}).call(tweenComplete);
+                }
+                console.log("+++ DEBUG: There are currently "+trafficQueue.length+ " cars in traffic.");
+                
             }
         }
     });
