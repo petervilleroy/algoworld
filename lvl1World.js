@@ -17,6 +17,7 @@ var cmdBoxIF1, cmdBoxIF2, cmdBoxColor1, cmdBoxColor2, cmdBoxWait1, cmdBoxWait2, 
 
 var selectedTile, startX, startY;
 var closeEnough;
+var dockedTotal;
 var targetBoxOccupied;
 
 //Define the Citizen Prototype as inheriting from createjs.Container
@@ -238,6 +239,7 @@ function populateLevel_1() {
     worldHeight = controlHeight = worldCanvas.height;
     targetBoxOccupied = new Array(0,0,0,0,0,0,0,0);
     closeEnough = 6;
+    dockedTotal = 0;
 
     movex = worldCanvas.width / 2;
     movey = worldCanvas.height / 2;
@@ -260,7 +262,9 @@ function populateLevel_1() {
     cmdBoxIF1.y = worldHeight*.6;
     worldStage.addChild(cmdBoxIF1);
     cmdBoxColor1 = new createjs.Shape();
-    cmdBoxColor1.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25,worldHeight*.6,80,50);
+    cmdBoxColor1.graphics.beginStroke('grey').drawRect(0,0,80,50);
+    cmdBoxColor1.x = worldWidth+40+50+25;
+    cmdBoxColor1.y = worldHeight*.6;
     worldStage.addChild(cmdBoxColor1);
     cmdBoxWait1 = new createjs.Shape();
     cmdBoxWait1.graphics.beginStroke('grey').drawRect(0,0,70,50);
@@ -268,7 +272,9 @@ function populateLevel_1() {
     cmdBoxWait1.y = worldHeight*.6;
     worldStage.addChild(cmdBoxWait1);
     cmdBoxColor3 = new createjs.Shape();
-    cmdBoxColor3.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25+80+25+70+25,worldHeight*.6,100,50);
+    cmdBoxColor3.graphics.beginStroke('grey').drawRect(0,0,100,50);
+    cmdBoxColor3.x = worldWidth+40+50+25+80+25+70+25;
+    cmdBoxColor3.y = worldHeight*.6;
     worldStage.addChild(cmdBoxColor3);
     cmdBoxIF2 = new createjs.Shape();
     cmdBoxIF2.graphics.beginStroke('grey').drawRect(0,0,50,50);
@@ -276,7 +282,9 @@ function populateLevel_1() {
     cmdBoxIF2.y = worldHeight*.75;
     worldStage.addChild(cmdBoxIF2);
     cmdBoxColor2 = new createjs.Shape();
-    cmdBoxColor2.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25,worldHeight*.75,80,50);
+    cmdBoxColor2.graphics.beginStroke('grey').drawRect(0,0,80,50);
+    cmdBoxColor2.x = worldWidth+40+50+25;
+    cmdBoxColor2.y = worldHeight*.75;
     worldStage.addChild(cmdBoxColor2);
     cmdBoxWait2 = new createjs.Shape();
     cmdBoxWait2.graphics.beginStroke('grey').drawRect(0,0,70,50);
@@ -284,7 +292,9 @@ function populateLevel_1() {
     cmdBoxWait2.y = worldHeight*.75;
     worldStage.addChild(cmdBoxWait2);
     cmdBoxColor4 = new createjs.Shape();
-    cmdBoxColor4.graphics.beginStroke('grey').drawRect(worldWidth+40+50+25+80+25+70+25,worldHeight*.75,100,50);
+    cmdBoxColor4.graphics.beginStroke('grey').drawRect(0,0,100,50);
+    cmdBoxColor4.x = worldWidth+40+50+25+80+25+70+25;
+    cmdBoxColor4.y = worldHeight*.75;
     worldStage.addChild(cmdBoxColor4);
 
     cmdTileIF1 = new CommandTile("cmdTile1", "IF", worldWidth+50, worldHeight*.2, 50, 50);
@@ -295,14 +305,45 @@ function populateLevel_1() {
     cmdTileIF2.render();
     worldStage.addChild(cmdTileIF2);
 
-    cmdTileWait1 = new CommandTile("cmdTile3", "WAIT 3 Turns", worldWidth+50, worldHeight*.45, 70, 50);
+    cmdTileWait1 = new CommandTile("cmdTile3", "WAIT 3\n Turns", worldWidth+50, worldHeight*.45, 70, 50);
     cmdTileWait1.render();
     worldStage.addChild(cmdTileWait1);
 
-    cmdTileWait2 = new CommandTile("cmdTile3", "WAIT 3 Turns", worldWidth+150, worldHeight*.45, 70, 50);
+    cmdTileWait2 = new CommandTile("cmdTile4", "WAIT 3\n Turns", worldWidth+150, worldHeight*.45, 70, 50);
     cmdTileWait2.render();
     worldStage.addChild(cmdTileWait2);
 
+    cmdTileGreen1 = new CommandTile("cmdTile5", "is Green", worldWidth+210, worldHeight*.2, 80, 50);
+    cmdTileGreen1.render();
+    worldStage.addChild(cmdTileGreen1);
+
+    cmdTileGreen2 = new CommandTile("cmdTile6", "is Green", worldWidth+230, worldHeight*.45, 80, 50);
+    cmdTileGreen2.render();
+    worldStage.addChild(cmdTileGreen2);
+
+    cmdTileRed1 = new CommandTile("cmdTile7", "is Red", worldWidth+300, worldHeight*.2, 80, 50);
+    cmdTileRed1.render();
+    worldStage.addChild(cmdTileRed1);
+
+    cmdTileRed2 = new CommandTile("cmdTile8", "is Red", worldWidth+320, worldHeight*.45, 80, 50);
+    cmdTileRed2.render();
+    worldStage.addChild(cmdTileRed2);
+
+    cmdTileTurnGreen1 = new CommandTile("cmdTile9", "turn Green", worldWidth+15, worldHeight*.05, 100, 50);
+    cmdTileTurnGreen1.render();
+    worldStage.addChild(cmdTileTurnGreen1);
+
+    cmdTileTurnGreen2 = new CommandTile("cmdTile10", "turn Green", worldWidth+135, worldHeight*.05, 100, 50);
+    cmdTileTurnGreen2.render();
+    worldStage.addChild(cmdTileTurnGreen2);
+
+    cmdTileTurnRed1 = new CommandTile("cmdTile11", "turn Red", worldWidth+245, worldHeight*.05, 100, 50);
+    cmdTileTurnRed1.render();
+    worldStage.addChild(cmdTileTurnRed1);
+
+    cmdTileTurnRed2 = new CommandTile("cmdTile12", "turn Red", worldWidth+135, worldHeight*.32, 100, 50);
+    cmdTileTurnRed2.render();
+    worldStage.addChild(cmdTileTurnRed2);
 
     var roadShape = new createjs.Shape();
     roadShape.graphics.moveTo(worldWidth*.2,0).beginStroke('grey').lineTo(worldWidth*.3,0).lineTo(worldWidth,worldHeight*.7).lineTo(worldWidth,worldHeight*.8).lineTo(worldWidth*.2,0)
@@ -383,6 +424,14 @@ function populateLevel_1() {
                 targetBox1 = cmdBoxWait1;
                 targetBox2 = cmdBoxWait2;
             }
+            else if(selectedTile == cmdTileGreen1 || selectedTile == cmdTileGreen2 || selectedTile == cmdTileRed1 || selectedTile == cmdTileRed2) {
+                targetBox1 = cmdBoxColor1;
+                targetBox2 = cmdBoxColor2;
+            }
+            else if(selectedTile == cmdTileTurnGreen1 || selectedTile == cmdTileTurnGreen2 || selectedTile == cmdTileTurnRed1 || selectedTile == cmdTileTurnRed2) {
+                targetBox1 = cmdBoxColor3;
+                targetBox2 = cmdBoxColor4;
+            }
             else {
                 targetBox1 = null;
                 targetBox2 = null;
@@ -402,7 +451,12 @@ function populateLevel_1() {
                 selectedTile.y = targetBox1.y;
                 startX = evt.stageX;
                 startY = evt.stageY;
+                if( ! selectedTile.dockedBox) {
+                    dockedTotal += 1;
+                    console.log("[] - DEBUG: Docked tiles: " + dockedTotal);
+                }
                 selectedTile.dockedBox = targetBox1;
+                
             }
             else if( (Math.abs(selectedTile.x - targetBox2.x) <= closeEnough) && 
                 (Math.abs(selectedTile.y - targetBox2.y) <= closeEnough) ) {
@@ -410,10 +464,20 @@ function populateLevel_1() {
                 selectedTile.y = targetBox2.y;
                 startX = evt.stageX;
                 startY = evt.stageY;
+                if( ! selectedTile.dockedBox) {
+                    dockedTotal += 1;
+                    console.log("[] - DEBUG: Docked tiles: " + dockedTotal);
+                }
                 selectedTile.dockedBox = targetBox2;
+                
             }
             else {
-                selectedTile.dockedBox = null;
+                if(selectedTile.dockedBox) {
+                    selectedTile.dockedBox = null;
+                    dockedTotal -= 1;
+                    console.log("[] - DEBUG: Docked tiles: " + dockedTotal);
+                }
+           
             }
             
             
@@ -479,6 +543,33 @@ function handleGo() { //This function is the main animation loop. It is re-execu
         if(cmdTileIF1.dockedBox && cmdTileIF2.dockedBox && cmdTileWait1.dockedBox && cmdTileWait2.dockedBox) {
             // all the IFs and Waits are in place
             console.log("___ DEBUG: all the IF blocks and all the WAIT blocks are in the correct position!");
+            
+            
+            ///////////////////////////////////////////////////////////////////////////
+            //  All possible combinations                                            //
+            //  Combo                                     |     Result               //
+            //  ------------------------------------------|------------------------  //
+            //  if-green-wait-red / if-green-wait-red     | Always Red      x         //
+            //  if-green-wait-red / if-red-wait-red       | Always Red      x         //            
+            //  if-green-wait-red / if-green-wait-green   | Always Red               //
+            //  if-green-wait-green / if-green-wait-red   | Always Red               //
+            //  if-red-wait-red / if-red-wait-red         | Always Red      x         //
+            //  if-red-wait-red / if-red-wait-green       | Always Green             //
+            //  if-red-wait-green / if-red-wait-red       | Always Green             //
+            //  if-red-wait-green / if-red-wait-green     | Always Green    x         //
+            //  if-green-wait-green / if-green-wait-green | Always Green    x         //
+            //  if-red-wait-green / if-green-wait-green   | Always Green    x         //
+            //  if-green-wait-red / if-red-wait-green     | ALTERNATING              //
+            //  if-red-wait-green / if-green-wait-red     | ALTERNATING              //
+            //                                            |                          //
+            ///////////////////////////////////////////////////////////////////////////
+            
+            if(cmdTileTurnGreen1.dockedBox && cmdTileTurnGreen2.dockedBox ) {worldState=2 } // Combos 8-10 TurnGreen-TurnGreen
+            
+            else if(cmdTileTurnRed1.dockedBox && cmdTileTurnRed2.dockedBox) {worldState=0 } // Combos 1,2,5 TurnRed-TurnRed
+
+            //else if()
+        
         }
     }
     if(spriteArray.length > 50) {
