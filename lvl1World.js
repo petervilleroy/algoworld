@@ -539,10 +539,11 @@ function handleGo() { //This function is the main animation loop. It is re-execu
             worldStage.addChild(citizen);
         }
     }
+    console.log("___DEBUG: world state currently "+worldState+" after "+TOTALWORLDCYCLES+" cycles... Population: "+worldPopulation+", Cars: "+carPopulation);
     if(TOTALWORLDCYCLES % 3 == 0) {
-        if(cmdTileIF1.dockedBox && cmdTileIF2.dockedBox && cmdTileWait1.dockedBox && cmdTileWait2.dockedBox) {
+        if(dockedTotal == 8) { //cmdTileIF1.dockedBox && cmdTileIF2.dockedBox && cmdTileWait1.dockedBox && cmdTileWait2.dockedBox) {
             // all the IFs and Waits are in place
-            console.log("___ DEBUG: all the IF blocks and all the WAIT blocks are in the correct position!");
+            //console.log("___ DEBUG: all the IF blocks and all the WAIT blocks are in the correct position!");
             
             
             ///////////////////////////////////////////////////////////////////////////
@@ -551,11 +552,11 @@ function handleGo() { //This function is the main animation loop. It is re-execu
             //  ------------------------------------------|------------------------  //
             //  if-green-wait-red / if-green-wait-red     | Always Red      x         //
             //  if-green-wait-red / if-red-wait-red       | Always Red      x         //            
-            //  if-green-wait-red / if-green-wait-green   | Always Red               //
-            //  if-green-wait-green / if-green-wait-red   | Always Red               //
+            //  if-green-wait-red / if-green-wait-green   | Always Red      x         //
+            //  if-green-wait-green / if-green-wait-red   | Always Red      x         //
             //  if-red-wait-red / if-red-wait-red         | Always Red      x         //
-            //  if-red-wait-red / if-red-wait-green       | Always Green             //
-            //  if-red-wait-green / if-red-wait-red       | Always Green             //
+            //  if-red-wait-red / if-red-wait-green       | Always Green    x         //
+            //  if-red-wait-green / if-red-wait-red       | Always Green    x         //
             //  if-red-wait-green / if-red-wait-green     | Always Green    x         //
             //  if-green-wait-green / if-green-wait-green | Always Green    x         //
             //  if-red-wait-green / if-green-wait-green   | Always Green    x         //
@@ -563,21 +564,60 @@ function handleGo() { //This function is the main animation loop. It is re-execu
             //  if-red-wait-green / if-green-wait-red     | ALTERNATING              //
             //                                            |                          //
             ///////////////////////////////////////////////////////////////////////////
-            
-            if(cmdTileTurnGreen1.dockedBox && cmdTileTurnGreen2.dockedBox ) {worldState=2 } // Combos 8-10 TurnGreen-TurnGreen
-            
-            else if(cmdTileTurnRed1.dockedBox && cmdTileTurnRed2.dockedBox) {worldState=0 } // Combos 1,2,5 TurnRed-TurnRed
+            if(trafficlight.lightColor) { // Traffic light is Green
+                if(cmdTileRed1.dockedBox && cmdTileRed2.dockedBox) {worldState = 0} //Combos 6-7 isRed-isRed
 
-            //else if()
+                else if(cmdTileTurnGreen1.dockedBox && cmdTileTurnGreen2.dockedBox ) {worldState=2 } // Combos 8-10 TurnGreen-TurnGreen
+            
+                else if(cmdTileTurnRed1.dockedBox && cmdTileTurnRed2.dockedBox) {worldState=0 } // Combos 1,2,5 TurnRed-TurnRed
+                // At this point, the cmdBoxColor3 & cmdBoxColor4 are NOT equal
+                else if(cmdTileGreen1.dockedBox && cmdTileGreen2.dockedBox) {worldState=0;}    // Combos 3-4 isGreen-isGreen
+                    
+                    
+                
+            
+                /*else if(cmdTileRed1.dockedBox && cmdTileRed2.dockedBox) { // Combox 6-7 isRed-isRed
+                    if(trafficlight.lightColor == 0) {
+                        worldState = 2;
+                    }
+                }*/
+                else {worldState = 1}
+            }
+            else { // Traffic light is Red
+                if(cmdTileGreen1.dockedBox && cmdTileGreen2.dockedBox) {worldState=0}   // Combos 3-4 isGreen-isGreen
+
+                else if(cmdTileTurnGreen1.dockedBox && cmdTileTurnGreen2.dockedBox ) {worldState=2 } // Combos 8-10 TurnGreen-TurnGreen
+            
+                else if(cmdTileTurnRed1.dockedBox && cmdTileTurnRed2.dockedBox) {worldState=0 } // Combos 1,2,5 TurnRed-TurnRed
+
+                else if(cmdTileRed1.dockedBox && cmdTileRed2.dockedBox) {worldState = 2} // Combox 6-7 isRed-isRed
+                    
+                else {worldState = 1}
+                
+            }
+           
+        }
         
+        switch(worldState) {
+            case 0: 
+                if(trafficlight.lightColor) {trafficlight.lightColor = 0}
+                break;
+
+            case 1:
+                if(trafficlight.lightColor) {trafficlight.lightColor = 0}
+                else {trafficlight.lightColor = 1}
+                break;
+            
+            case 2:
+                if(trafficlight.lightColor == 0) {trafficlight.lightColor = 1};
         }
     }
-    if(spriteArray.length > 50) {
+    /*if(spriteArray.length > 50) {
         trafficlight.lightColor = 1;
     }
     if (spriteArray.length < 30) {
         //trafficlight.lightColor = 0;
-    }
+    }*/
     
     spriteArray.forEach(function(sprite, i){
         if(sprite instanceof Citizen){
