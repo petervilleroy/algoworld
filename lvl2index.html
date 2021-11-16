@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AlgoWorld | Learning about Algorithms Playfully</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!--script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script> -->
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
+    <script src="https://use.typekit.net/cek3iwo.js"></script>
+    <script src="lvl2World.js"></script>
+    <link rel="stylesheet" type="text/css" href="algoworld.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+
+<body onload="init();">
+    <table>
+        <tr>
+            <td>
+                Levels:
+            
+                <a href="lvl1index.html"><button id="lvl1Button" > _1_ </button></a>
+                <button id="lvl2Button" > _2_ </button>
+                <a href="index.html"><button id="lvl3Button" > _3_ </button></a>
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Instructions:</p>
+                <span class="level2">Click on each teacher to learn about them. Use the sliders on the right to decide which attributes are most important, and click go to see who wins Teacher of the Year</span>
+                <br/>
+                <canvas id="myWorldCanvas" width="500" height="450"></canvas>
+            </td>
+            <td>
+                
+            </td>
+            <td>
+               
+            </td>
+            
+            <td class="level2">
+                <table class="sliderTable">
+                    <tr>
+                        <td>
+                            <span class="sliderBox" id="degreeSliderBox">Degree<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="degreeSlider">
+                            </span>
+                            
+                        </td>
+                        <td>
+                            <span class="sliderBox" id="coolfactorSliderBox">Cool Factor<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="coolfactorSlider">
+                            </span>
+                            
+                        </td>
+                        <td>
+                            <span class="sliderBox" id="kindnessSliderBox">Kindness<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="kindnessSlider">
+                            </span>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>
+                            <span class="sliderBox" id="genderSliderBox">Gender<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="genderSlider">
+                            </span>
+                            
+                        </td>
+                        <td>
+                            <span class="sliderBox" id="raceSliderBox">Race<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="raceSlider">
+                            </span>
+                            
+                        </td>
+                   
+                        <td>
+                            <span class="sliderBox" id="attendanceSliderBox">Attendance<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="attendanceSlider">
+                            </span>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="sliderBox" id="testscoresSliderBox">Test Scores<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="testscoresSlider">
+                            </span>
+                            
+                        </td>
+                        <td>
+                            Crown Image
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id="eventButton" >Event!</button>
+                        </td>
+                    </tr>
+                </table>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                
+            </td>
+        </tr>
+    </table>
+   
+    
+
+   
+</body>
+
+</html>
