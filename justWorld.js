@@ -3,18 +3,19 @@ var spriteArray, deadArray;
 var currentLevel = 3;
 var update = true;
 var TOTALWORLDCYCLES;
+var PAUSE;
 var bankShape, prisonShape, companyShape, shapex, shapey, shaper, citizen, citizenx, citizeny;
 var worldPopulation, deathToll;
 var movex, movey;
 var graveyard, bank, prison, company;
-var misogyny, racism;
+var misogyny, racism, employmentProb, loanProb, prisonProb;
+var prisonRacism, bankRacism, companyRacism, bankMisogyny, companyMisogyny;
+var prisonPrisonRelevant, bankPrisonRelevant, companyPrisonRelevant;
 var tooltip,tooltip_target;
 var onlyOnce, finishedTweens, tweenSpeed;
 var whiteMortality, colorMortality, maleMortality, femaleMortality, whitewealth, colorwealth, malewealth, femalewealth;
 
-//TODO: make checkboxes change behavior of bases (with no data, nobody gets anything)
 //TODO: allow for re-running level 3.
-//TODO: rework the calculate_loan, calculate_job functions to be statistic rather than binary
 //TODO: figure out a way to show wealth with a skinny-fat instead of full-empty.
 //TODO: Bios are not showing in Chrome!
 
@@ -176,210 +177,6 @@ function init() {
 	}
 };
 
-function populateLevel_1() {
-    $(".level2").hide();
-    $(".level3").hide();
-    $(".level1").show();
-    worldCanvas = document.getElementById("myWorldCanvas");
-	worldStage = new createjs.Stage(worldCanvas);
-    spriteArray = new Array();
-    TOTALWORLDCYCLES = 20;
-    movex = worldCanvas.width / 2;
-    movey = worldCanvas.height / 2;
-    
-    tooltip = new createjs.Text("");
-    onlyOnce = true;
-    finishedTweens = 0;
-    tweenSpeed = 50;
-    tooltip.x = tooltip.y = 10;
-
-    companyShape = new createjs.Shape();
-    companyShape.graphics.beginFill('blue').drawCircle(0,0,5);
-    companyShape.x = worldCanvas.width * .3;
-    companyShape.y = worldCanvas.height * .75;
-    worldStage.addChild(companyShape);
-    var roadShape = new createjs.Shape();
-    roadShape.graphics.moveTo(worldCanvas.width*.2,0).beginStroke('grey').lineTo(worldCanvas.width*.3,0).lineTo(worldCanvas.width,worldCanvas.height*.7).lineTo(worldCanvas.width,worldCanvas.height*.8).lineTo(worldCanvas.width*.2,0)
-    worldStage.addChild(roadShape);
-    worldStage.update();
-}
-
-function populateLevel_2() {
-    $(".level1").hide();
-    $(".level3").hide();
-    $(".level2").show();
-    worldCanvas = document.getElementById("myWorldCanvas");
-	worldStage = new createjs.Stage(worldCanvas);
-    var l2spriteArray = new Array();
-    //TOTALWORLDCYCLES = 20;
-    //movex = worldCanvas.width / 2;
-    //movey = worldCanvas.height / 2;
-    
-    tooltip = new createjs.Text(" ", "20px Arial");
-    onlyOnce = true;
-    finishedTweens = 0;
-    tweenSpeed = 50;
-    tooltip.x = 15;
-    tooltip.y = 130;
-    tooltip.lineWidth = worldCanvas.width - 30;
-    var degreeP, attendanceP, kindnessP, coolfactorP, testscoresP, raceP, genderP;
-    degreeP = attendanceP = kindnessP = coolfactorP = testscoresP = raceP = genderP = 50;
-
-    // Draw Ms. Adams
-    shapex = worldCanvas.width * .1; 
-    shapey = worldCanvas.height *.8; 
-    shaper = 20;
-    shapeRace = 0;
-    shapeGender = 1;
-    shapeInitWealth = 65;
-    citizen = new Citizen("a", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
-        citizen.degree=95;
-        citizen.attendance=80;
-        citizen.kindness=35;
-        citizen.coolfactor=40;
-        citizen.testscores=90;
-        citizen.teacherBio="Ms. Adams: She's not especially kind nor particularly cool, but she is very fair in grading tests, and she comes with the best degree you could want. Sometimes she misses class, but not often."
-        citizen.render();
-    l2spriteArray.push(citizen);
-    worldStage.addChild(citizen);
-    
-    // Draw Mr. Baker
-    shapex = worldCanvas.width * .3; 
-    shapey = worldCanvas.height *.8; 
-    shaper = 20;
-    shapeRace = 0;
-    shapeGender = 0;
-    shapeInitWealth = 25;
-    citizen = new Citizen("b", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
-    citizen.degree=75;
-    citizen.attendance=95;
-    citizen.kindness=50;
-    citizen.coolfactor=50;
-    citizen.testscores=20;
-    citizen.teacherBio="Mr. Baker: He almost never has a substitute! He's pretty average from a kindness and coolness standpoint, but he has a degree from a pretty impressive school. Sadly, his test scoring is pretty unfair!"
-    citizen.render();
-    l2spriteArray.push(citizen);
-    worldStage.addChild(citizen);
-
-    // Draw Mr. Cohen
-    shapex = worldCanvas.width * .5;  
-    shapey = worldCanvas.height *.8; 
-    shaper = 20;
-    shapeRace = 0;
-    shapeGender = 0;
-    shapeInitWealth = 40;
-    citizen = new Citizen("c", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
-    citizen.degree=20;  //nothing to write home about
-    citizen.attendance=30;  //often replaced by a substitute
-    citizen.kindness=95;    //especially nice
-    citizen.coolfactor=70;  //cooler than avg teacher
-    citizen.testscores=60;  //doesn't always grade tests fairly
-    citizen.teacherBio="Mr. Cohen: He is just as nice as you could wish, even though his degree is from a pretty poor school. He usually grades test fairly, but not always. He misses class a lot and we're stuck with a substitute more than you'd like, but still he's quite a cool guy all around."
-    citizen.render();
-    l2spriteArray.push(citizen);
-    worldStage.addChild(citizen);
-
-    // Draw Mr. Darden
-    shapex = worldCanvas.width * .7; 
-    shapey = worldCanvas.height *.8; 
-    shaper = 20;
-    shapeRace = 1;
-    shapeGender = 0;
-    shapeInitWealth = 70;
-    citizen = new Citizen("d", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
-    citizen.degree=50;
-    citizen.attendance=20;
-    citizen.kindness=95;
-    citizen.coolfactor=99;
-    citizen.testscores=99;
-    citizen.teacherBio="Mr. Darden: He's the coolest teacher by far, and he has never graded any test lower than a B! He has a bad degree from a nameless school, and he misses class very regularly, but he's certainly the nicest teacher in school."
-    citizen.render();
-    l2spriteArray.push(citizen);
-    worldStage.addChild(citizen);
-
-    // Draw Ms. Edwards
-    shapex = worldCanvas.width * .9; 
-    shapey = worldCanvas.height *.8; 
-    shaper = 20;
-    shapeRace = 1;
-    shapeGender = 1;
-    shapeInitWealth = 50;
-    citizen = new Citizen("e", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
-    citizen.degree=85;
-    citizen.attendance=80;
-    citizen.kindness=35;
-    citizen.coolfactor=75;
-    citizen.testscores=60;
-    citizen.teacherBio="Ms. Edwards: Kindness is not her strong suit, but Ms. Edwards does boast a decently impressive degree. She rarely misses class, and kids agree she's pretty cool. Sadly, her test grading is usually fair but not always."
-    citizen.render();
-    l2spriteArray.push(citizen);
-    worldStage.addChild(citizen);
-
-    crownShape = new createjs.Shape();
-    crownShape.graphics.beginFill('green').drawCircle(0,0,15);
-    crownShape.x = worldCanvas.width / 2;
-    crownShape.y = 90;
-    worldStage.addChild(crownShape);
-    worldStage.addChild(tooltip);
-    worldStage.update();
-
-    $("#degreeSlider").mouseup(function() {
-        degreeP = this.value;
-        
-    })
-    $("#coolfactorSlider").mouseup(function() {
-        coolfactorP = this.value;
-       
-    })
-    $("#kindnessSlider").mouseup(function() {
-        kindnessP = this.value;
-        
-    })
-    $("#attendanceSlider").mouseup(function() {
-        attendanceP = this.value;
-        
-    })
-    $("#testscoresSlider").mouseup(function() {
-        testscoresP = this.value;
-        
-    })
-    $("#genderSlider").mouseup(function() {
-        genderP = this.value;
-        
-    })
-    $("#raceSlider").mouseup(function() {
-        raceP = this.value;
-        
-    })
-    worldStage.on("click", function(evt) {
-        tooltip_target = evt.target.parent;
-        tooltip.text = " " + evt.target.parent.teacherBio;
-        
-        worldStage.update();
-    });
-
-    $("#eventButton").click(function() {
-        // Calculate the new Teacher of the Year
-        var TeacherOfTheYear;
-
-        var bestScore = 0;
-        l2spriteArray.forEach(function(citizen, i) {
-            var currentScore = citizen.degree*degreeP + citizen.attendance*attendanceP + citizen.kindness*kindnessP +
-                citizen.coolfactor*coolfactorP + citizen.testscores*testscoresP + (citizen.gender?0:99)*genderP + (citizen.race?0:99)*raceP;
-            if(currentScore > bestScore) {
-                bestScore = currentScore;
-                TeacherOfTheYear = citizen;
-            }
-
-        });
-        console.log("---DEBUG: "+TeacherOfTheYear.name + " is Teacher of the Year!");
-
-        // Tween the Crown to directly above that Teacher
-        createjs.Tween.get(crownShape).to({x: TeacherOfTheYear.shapex, y: crownShape.y}, 30*(101-tweenSpeed), createjs.Ease.quadInOut);//.call(tweenComplete);
-    })
-
-}
-
 function populateLevel_3() {
 	$(".level1").hide();
     $(".level2").hide();
@@ -392,6 +189,7 @@ function populateLevel_3() {
     worldPopulation = 20;
     //TOTALWORLDCYCLES = TOTALWORLDCYCLES * worldPopulation;
     TOTALWORLDCYCLES = 20;
+    PAUSE = false;
     deathToll = 0;
     movex = worldCanvas.width / 2;
     movey = worldCanvas.height / 2;
@@ -399,8 +197,19 @@ function populateLevel_3() {
     bank = {height: worldCanvas.height/4, width: worldCanvas.width/4};
     prison = {height: worldCanvas.height/4, width: worldCanvas.width/4};
     company = {height: worldCanvas.height/4, width: worldCanvas.width/4};
-    misogyny = .8;
-    racism = .8;
+    misogyny = 0;//.8;
+    bankMisogyny = 0;//.8;
+    companyMisogyny = 0;//.9;
+    racism = 0;//.8;
+    prisonRacism = 0;//.9;
+    bankRacism = 0;//.7;
+    companyRacism = 0;//.6;
+    employmentProb = .25;
+    loanProb = .25;
+    prisonProb = .25;
+    companyPrisonRelevant = false;
+    bankPrisonRelevant = false;
+    prisonPrisonRelevant = false;
     tooltip = new createjs.Text("");
     onlyOnce = true;
     finishedTweens = 0;
@@ -541,12 +350,44 @@ function populateLevel_3() {
 
 
 function handleGo() { //This function is the main animation loop. It is re-executed after every Tween
-        
+    //console.log("!!!DEBUG - Value of Bank Checkbox Race is "+ $("#bnkRace").prop("checked")); 
+    companyPrisonRelevant = $("#jobCrimes").prop("checked");
+    bankPrisonRelevant = $("#bnkCrimes").prop("checked");
+    prisonPrisonRelevant = $("#prsCrimes").prop("checked");
+
+ 
+    //Reminder: racism start values are bank: 0, company: 0, prison: 0
+    bankRacism = 0;
+    bankRacism += $("#bnkRace").prop("checked") ? 0.5 : 0; //if checked, racism increases .5
+    bankRacism += $("#bnkAmazon").prop("checked") ? 0.1 : 0; //if checked, racism increases .1
+
+    companyRacism = 0;
+    companyRacism += $("#jobRace").prop("checked") ? 0.5 : 0; //if checked, racism increases .5
+    companyRacism += $("#jobAmazon").prop("checked") ? 0.1 : 0; //if checked, racism increases .1
+
+    prisonRacism = 0;
+    prisonRacism += $("#prsRace").prop("checked") ? 0.9 : 0; //if checked, racism increases .5
+    prisonRacism += $("#prsAmazon").prop("checked") ? 0.1 : 0; //if checked, racism increases .1
     
+    //Reminder: misogyny start values are bank: 0, company: 0
+    bankMisogyny = 0;
+    bankMisogyny += $("#bnkGender").prop("checked") ? 0.5 : 0; //if checked, misogyny increases .5
+    bankMisogyny += $("#bnkSexuality").prop("checked") ? 0.1 : 0; //if checked, misogyny increases .2
+    bankMisogyny += $("#bnkAmazon").prop("checked") ? 0.1 : 0; //if checked, misogyny increases .1
+    bankMisogyny += $("#bnkSalary").prop("checked") ? 0.1 : 0; //if checked, misogyny increases .1
+
+    companyMisogyny = 0;
+    companyMisogyny += $("#jobGender").prop("checked") ? 0.6 : 0; //if checked, misogyny increases .5
+    companyMisogyny += $("#jobSexuality").prop("checked") ? 0.2 : 0; //if checked, misogyny increases .2
+    companyMisogyny += $("#jobAmazon").prop("checked") ? 0.1 : 0; //if checked, misogyny increases .1
+    companyMisogyny += $("#jobSalary").prop("checked") ? 0.1 : 0; //if checked, misogyny increases .1
+
+
+    console.log("!!!DEBUG - Racism and Misogyny levels- \nBank   : "+ bankRacism+","+bankMisogyny+"\nCompany: "+companyRacism+","+companyMisogyny+"\nPrison : "+prisonRacism);
     spriteArray.forEach (function(citizen, i){
         // Check if citizen is at the bank
         if(atBank(citizen, bank, bankShape)) {
-            if(calculateLoan(citizen, racism, misogyny)) {
+            if(calculateLoan(citizen, bankRacism, bankMisogyny)) {
                 if(citizen.wealth > 25) {
                     citizen.wealth -= 25;
                 }
@@ -564,7 +405,7 @@ function handleGo() { //This function is the main animation loop. It is re-execu
         // Check if citizen is in prison
         if(atPrison(citizen, prison, prisonShape)) {
             if(citizen.imprisoned == false) {
-                if(calculateSentence(citizen, racism, misogyny)) {
+                if(calculateSentence(citizen, prisonRacism, misogyny)) {
                     console.log("DEBUG: "+citizen.name + " has been put in prison. Timer: "+citizen.prisonTimer);
                     citizen.imprisoned = true;
                     citizen.employed = false;
@@ -601,7 +442,7 @@ function handleGo() { //This function is the main animation loop. It is re-execu
             if(citizen.employed == false) {
                 console.log("DEBUG: "+citizen.name + " is applying for a job.");
                 // TODO: make some calculation to determine jobworthiness
-                if(calculateJobOffer(citizen, racism, misogyny)) {
+                if(calculateJobOffer(citizen, companyRacism, companyMisogyny)) {
                     console.log("DEBUG: "+citizen.name + " received a job!");
                     citizen.employed = true;
                     citizen.jobHistory = true;
@@ -764,7 +605,10 @@ function tweenComplete() {
         TOTALWORLDCYCLES --;
         onlyOnce = false;
         finishedTweens = 0;
-        handleGo();
+        if(!PAUSE){
+            handleGo();
+        }
+        
         
     }
 }
@@ -820,9 +664,13 @@ function atBank(c, ba, bshape) {
        }
 }
 function calculateSentence(c, r, m) {
-    var score = r*c.race// + m*c.gender;
-    console.log("---DEBUG: citizen imprisonment score: "+score);
-    if(score > 0) {
+    if(prisonPrisonRelevant && c.prisonHistory) { // skip the calculations if the person has a prison sentence
+        return true;
+    }
+    var randomSentence = (Math.random()*2)-1 + prisonProb; // a number between -1+PP and 1+PP.
+    var score = r*c.race + randomSentence// + m*c.gender;
+    console.log("---DEBUG: "+c.name+" imprisonment score: "+score);
+    if(score > 1) {
         return true;
     }
     else {
@@ -830,9 +678,14 @@ function calculateSentence(c, r, m) {
     }
 }
 function calculateJobOffer(c, r, m) {
-    var score = r*c.race + m*c.gender;
-    console.log("---DEBUG: citizen employment score: "+score);
-    if(score > 0) {
+    if(companyPrisonRelevant && c.prisonHistory) { // skip the calculations if the person has a prison history
+        return false;
+    }
+    var randomOffer = (Math.random()*2)-1 + employmentProb; // a number between -1+EP and 1+EP.
+    var score = (r*c.race + m*c.gender + 2*randomOffer) /2;
+    console.log("---DEBUG: "+c.name+" employment score: "+score);
+    
+    if(score > 1) {
         return false;
     }
     else {
@@ -840,9 +693,13 @@ function calculateJobOffer(c, r, m) {
     }
 }
 function calculateLoan(c, r, m) {
-    var score = r*c.race + m*c.gender;
-    console.log("---DEBUG: citizen loan score: "+score);
-    if(score > 0) {
+    if(bankPrisonRelevant && c.prisonHistory) { // skip the calculations if the person has a prison history
+        return false;
+    }
+    var randomOffer = (Math.random()*2)-1 + loanProb;  // a number between -1+LP and 1+LP
+    var score = (r*c.race + m*c.gender + 2*randomOffer) /2;
+    console.log("---DEBUG: "+c.name+" loan score: "+score);
+    if(score > 1) {
         return false;
     }
     else {
