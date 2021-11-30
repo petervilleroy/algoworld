@@ -15,8 +15,7 @@ var tooltip,tooltip_target;
 var onlyOnce, finishedTweens, tweenSpeed;
 var whiteMortality, colorMortality, maleMortality, femaleMortality, whitewealth, colorwealth, malewealth, femalewealth;
 
-//TODO: allow for re-running level 3.
-//TODO: figure out a way to show wealth with a skinny-fat instead of full-empty.
+//TODO: figure out a way to show wealth with a skinny-fat instead of full-empty
 //TODO: Bios are not showing in Chrome!
 
 
@@ -142,13 +141,7 @@ function init() {
 
     tweenSpeed = 50;
     // Button Handler functions for level navigation
-   /* $("#lvl1Button").click(function() {
-        //TODO: fix the issue where going from level1 to level3 kills the tick functionality. maybe need to destroy and re-create createjs.Ticker.addEventListener("tick", tick);
-        console.log("--- DEBUG: switching to level 1...");
-        currentLevel = 1;
-        worldCanvas = null;
-        init();
-    })*/
+   
     $("#lvl2Button").click(function() {
         console.log("--- DEBUG: switching to level 2...");
         currentLevel = 2;
@@ -164,6 +157,7 @@ function init() {
     $("#pauseButton").click(function() {
         if(PAUSE) {
             console.log("--- DEBUG: Unpausing...");
+            $("#pauseButton").text("PAUSE");
             PAUSE = false;
             finishedTweens = 0;
             handleGo();
@@ -171,6 +165,7 @@ function init() {
         }
         else {
             console.log("--- DEBUG: Pausing...");
+            $("#pauseButton").text("UN-PAUSE");
             PAUSE = true;
         }
         
@@ -470,7 +465,7 @@ function handleGo() { //This function is the main animation loop. It is re-execu
         if(atCompany(citizen, company, companyShape)) {
             if(citizen.employed == false) {
                 console.log("DEBUG: "+citizen.name + " is applying for a job.");
-                // TODO: make some calculation to determine jobworthiness
+                
                 if(calculateJobOffer(citizen, companyRacism, companyMisogyny)) {
                     console.log("DEBUG: "+citizen.name + " received a job!");
                     citizen.employed = true;
