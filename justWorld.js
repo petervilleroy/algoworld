@@ -140,6 +140,7 @@ Citizen.prototype.reRender = function() {
 
 function init() {
 
+    tweenSpeed = 50;
     // Button Handler functions for level navigation
    /* $("#lvl1Button").click(function() {
         //TODO: fix the issue where going from level1 to level3 kills the tick functionality. maybe need to destroy and re-create createjs.Ticker.addEventListener("tick", tick);
@@ -160,7 +161,37 @@ function init() {
         init();
     })
 
+    $("#pauseButton").click(function() {
+        if(PAUSE) {
+            console.log("--- DEBUG: Unpausing...");
+            PAUSE = false;
+            finishedTweens = 0;
+            handleGo();
+
+        }
+        else {
+            console.log("--- DEBUG: Pausing...");
+            PAUSE = true;
+        }
+        
+        
+    })
     
+    $("#goButton").click(function() {
+        spriteArray.forEach(function(citizen, i) {worldStage.removeChild(this)})
+        worldStage = null;
+        spriteArray = null;
+        deadArray = null;
+        worldPopulation = 20;
+        TOTALWORLDCYCLES = 20;
+        PAUSE = false;
+        deathToll = 0;
+        populateLevel_3();
+    })
+    $("#speedSlider").mouseup(function() {
+        tweenSpeed = this.value;
+        $("#currentSpeedLabel").text(this.value);
+    })
     
 	switch(currentLevel) {
 		case 1: 
@@ -213,7 +244,7 @@ function populateLevel_3() {
     tooltip = new createjs.Text("");
     onlyOnce = true;
     finishedTweens = 0;
-    tweenSpeed = 50;
+    
 
     tooltip.x = tooltip.y = 10;
     prisonShape = new createjs.Shape();
@@ -270,33 +301,34 @@ function populateLevel_3() {
             $(".lvl3PrisonSelectors").hide();
             $(".lvl3CompanySelectors").show();
         }
-        if(evt.target == bankShape) {
+        else if(evt.target == bankShape) {
             $(".lvl3CompanySelectors").hide();
             $(".lvl3PrisonSelectors").hide();
             $(".lvl3BankSelectors").show();
         }
-        if(evt.target == prisonShape) {
+        else if(evt.target == prisonShape) {
             $(".lvl3CompanySelectors").hide();
             $(".lvl3BankSelectors").hide();
             $(".lvl3PrisonSelectors").show();
         }
-        tooltip_target = evt.target.parent;
-        //This removal of rendering doesn't work at all.
-        spriteArray.forEach(function(sprite, i) {
-            sprite.selected = false;
-            sprite.reRender();
-        });
-        evt.target.parent.selected = true;
-        evt.target.parent.reRender();
-        
-        tooltip.text = " " + evt.target.parent.name +", "+(evt.target.parent.gender == 0 ? "Male" : "Female") +
-        ", "+(evt.target.parent.race == 0 ? "White" : "Color") + 
-        ", "+(evt.target.parent.employed == false ? "Unemployed" : "Employed") +
-        ", Wealth: "+(100-evt.target.parent.wealth).toFixed(0) +
-        ", "+ (evt.target.parent.imprisoned == true? "Imprisoned" : "");
+        else {
+            tooltip_target = evt.target.parent;
+            //This removal of rendering doesn't work at all.
+            spriteArray.forEach(function(sprite, i) {
+                sprite.selected = false;
+                sprite.reRender();
+            });
+            evt.target.parent.selected = true;
+            evt.target.parent.reRender();
+            
+            tooltip.text = " " + evt.target.parent.name +", "+(evt.target.parent.gender == 0 ? "Male" : "Female") +
+            ", "+(evt.target.parent.race == 0 ? "White" : "Color") + 
+            ", "+(evt.target.parent.employed == false ? "Unemployed" : "Employed") +
+            ", Wealth: "+(100-evt.target.parent.wealth).toFixed(0) +
+            ", "+ (evt.target.parent.imprisoned == true? "Imprisoned" : "");
 
-        // If the click was on one of the world entities, update the checkbox area to reflect that entity
-        
+            // If the click was on one of the world entities, update the checkbox area to reflect that entity
+        }
 
         worldStage.update();
     });
@@ -331,10 +363,7 @@ function populateLevel_3() {
     
     createjs.Ticker.addEventListener("tick", tick);
     
-    $("#speedSlider").mouseup(function() {
-        tweenSpeed = this.value;
-        $("#currentSpeedLabel").text(this.value);
-    })
+ 
     //Find more about handling checkbox events at this useful entry: https://stackoverflow.com/questions/3442322/jquery-checkbox-event-handling
 
     //$("#checkbox1").
