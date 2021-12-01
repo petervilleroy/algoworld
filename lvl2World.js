@@ -221,7 +221,7 @@ function populateLevel_2() {
     shapeRace = 0;
     shapeGender = 1;
     shapeInitWealth = 65;
-    citizen = new Citizen("a", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
+    citizen = new Citizen("Ms. Adams", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
         citizen.degree=95;
         citizen.attendance=80;
         citizen.kindness=35;
@@ -239,7 +239,7 @@ function populateLevel_2() {
     shapeRace = 0;
     shapeGender = 0;
     shapeInitWealth = 25;
-    citizen = new Citizen("b", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
+    citizen = new Citizen("Mr. Baker", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
     citizen.degree=75;
     citizen.attendance=95;
     citizen.kindness=50;
@@ -257,13 +257,13 @@ function populateLevel_2() {
     shapeRace = 0;
     shapeGender = 0;
     shapeInitWealth = 40;
-    citizen = new Citizen("c", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
+    citizen = new Citizen("Mr. Cohen", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
     citizen.degree=20;  //nothing to write home about
     citizen.attendance=30;  //often replaced by a substitute
     citizen.kindness=95;    //especially nice
     citizen.coolfactor=70;  //cooler than avg teacher
     citizen.testscores=60;  //doesn't always grade tests fairly
-    citizen.teacherBio="Mr. Cohen: He is just as nice as you could wish, even though his degree is from a pretty poor school. He usually grades test fairly, but not always. He misses class a lot and we're stuck with a substitute more than you'd like, but still he's quite a cool guy all around."
+    citizen.teacherBio="Mr. Cohen: He is just as nice as you could wish, even though his degree is from a pretty poor school. He usually grades tests fairly, but not always. He misses class a lot and we're stuck with a substitute more than you'd like, but still he's quite a cool guy all around."
     citizen.render();
     l2spriteArray.push(citizen);
     worldStage.addChild(citizen);
@@ -275,7 +275,7 @@ function populateLevel_2() {
     shapeRace = 1;
     shapeGender = 0;
     shapeInitWealth = 70;
-    citizen = new Citizen("d", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
+    citizen = new Citizen("Mr. Darden", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
     citizen.degree=50;
     citizen.attendance=20;
     citizen.kindness=95;
@@ -293,7 +293,7 @@ function populateLevel_2() {
     shapeRace = 1;
     shapeGender = 1;
     shapeInitWealth = 50;
-    citizen = new Citizen("e", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
+    citizen = new Citizen("Ms. Edwards", shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
     citizen.degree=85;
     citizen.attendance=80;
     citizen.kindness=35;
@@ -349,6 +349,7 @@ function populateLevel_2() {
 
     $("#eventButton").click(function() {
         // Calculate the new Teacher of the Year
+        tooltip.text = " ";
         var TeacherOfTheYear;
 
         var bestScore = 0;
@@ -363,6 +364,7 @@ function populateLevel_2() {
         });
         console.log("---DEBUG: "+TeacherOfTheYear.name + " is Teacher of the Year!");
 
+        tooltip.text = TeacherOfTheYear.name + " is Teacher of the Year!";
         // Tween the Crown to directly above that Teacher
         createjs.Tween.get(crownShape).to({x: TeacherOfTheYear.shapex, y: 100}, 30*(101-tweenSpeed), createjs.Ease.quadInOut).to({x: TeacherOfTheYear.shapex, y: TeacherOfTheYear.shapey-50}, 30*(101-tweenSpeed), createjs.Ease.quadInOut).call(tweenComplete);
     })

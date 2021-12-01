@@ -494,7 +494,7 @@ function populateLevel_1() {
 
 function tweenComplete() {
     finishedTweens++;
-    if(spriteArray.length > 88) {keepgoing = false};
+    if(spriteArray.length > 160) {keepgoing = false};
 
     console.log ("DEBUG::: Moving sprites. "+finishedTweens + " moves complete so far...");
     if (finishedTweens >= spriteArray.length && keepgoing) {

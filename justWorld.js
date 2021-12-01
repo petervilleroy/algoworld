@@ -295,20 +295,23 @@ function populateLevel_3() {
             $(".lvl3BankSelectors").hide();
             $(".lvl3PrisonSelectors").hide();
             $(".lvl3CompanySelectors").show();
+            $("#myBoxCanvas").css("border", "8px solid blue");
         }
         else if(evt.target == bankShape) {
             $(".lvl3CompanySelectors").hide();
             $(".lvl3PrisonSelectors").hide();
             $(".lvl3BankSelectors").show();
+            $("#myBoxCanvas").css("border", "8px solid green");
         }
         else if(evt.target == prisonShape) {
             $(".lvl3CompanySelectors").hide();
             $(".lvl3BankSelectors").hide();
             $(".lvl3PrisonSelectors").show();
+            $("#myBoxCanvas").css("border", "8px solid red");
         }
         else {
             tooltip_target = evt.target.parent;
-            //This removal of rendering doesn't work at all.
+            //remove selected shape for every sprite.
             spriteArray.forEach(function(sprite, i) {
                 sprite.selected = false;
                 sprite.reRender();
@@ -675,6 +678,7 @@ function atPrison(c, pr, prshape) {
        }
 }
 function atBank(c, ba, bshape) {
+    
     if(c.x < bshape.x + ba.width && 
         c.x > bshape.x &&
         c.y > bshape.y && 
