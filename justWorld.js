@@ -220,9 +220,9 @@ function populateLevel_3() {
     movex = worldCanvas.width / 2;
     movey = worldCanvas.height / 2;
     graveyard = {height: 50, width: worldCanvas.width};
-    bank = {height: worldCanvas.height/4, width: worldCanvas.width/4};
-    prison = {height: worldCanvas.height/4, width: worldCanvas.width/4};
-    company = {height: worldCanvas.height/4, width: worldCanvas.width/4};
+    bank = {height: worldCanvas.height/2, width: worldCanvas.width/2};//{height: worldCanvas.height/4, width: worldCanvas.width/4};
+    prison = {height: worldCanvas.height/2, width: worldCanvas.width/2};//{height: worldCanvas.height/4, width: worldCanvas.width/4};
+    company = {height: worldCanvas.height/2, width: worldCanvas.width/2};//{height: worldCanvas.height/4, width: worldCanvas.width/4};
     misogyny = 0;//.8;
     bankMisogyny = 0;//.8;
     companyMisogyny = 0;//.9;

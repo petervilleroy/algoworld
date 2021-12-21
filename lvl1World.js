@@ -20,6 +20,9 @@ var closeEnough;
 var dockedTotal;
 var targetBoxOccupied;
 
+//TODO: make the light obviously pedestrian by adding a black stick figure
+
+
 //Define the Citizen Prototype as inheriting from createjs.Container
 function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     //call super constructor
@@ -151,17 +154,23 @@ TrafficLight.prototype = Object.create(createjs.Container.prototype);
 
 TrafficLight.prototype.render = function() {
     //draw the light, default red
-    this.post.graphics.beginFill('black').drawRect(8,15,9,60);
+    this.post.graphics.beginFill('black').drawRect(8,15,15,70);
     this.addChild(this.post);
 
-    this.box.graphics.beginFill('black').drawRect(0,0,25,40);
+    this.box.graphics.beginFill('black').drawRect(-4,-60,40,80);
     this.addChild(this.box);
 
-    this.redLight.graphics.beginFill('red').drawCircle(12.5,10,8);
+    this.redLight.graphics.beginFill('red').drawCircle(16,-42,16);
+    this.redLight.graphics.beginFill('black').drawCircle(16,-51,4);
+    this.redLight.graphics.beginStroke('black').moveTo(16,-47).lineTo(16,-37).lineTo(20,-30)
+            .lineTo(16,-37).lineTo(12,-30).lineTo(16,-37).lineTo(16,-44).lineTo(12,-44).lineTo(20,-44);
     this.addChild(this.redLight);
 
-    this.greenLight.graphics.beginFill('green').drawCircle(12.5,30,8);
-    //this.addChild(this.greenLight);
+    this.greenLight.graphics.beginFill('green').drawCircle(16,0,16);
+    this.greenLight.graphics.beginFill('black').drawCircle(16,-9,4);
+    this.greenLight.graphics.beginStroke('black').moveTo(16,-5).lineTo(16,5).lineTo(22,7)
+    .lineTo(16,5).lineTo(15,12).lineTo(16,5).lineTo(16,-2).lineTo(14,-4).lineTo(20,-2);
+    this.addChild(this.greenLight);
 }
 
 TrafficLight.prototype.reRender = function() {
