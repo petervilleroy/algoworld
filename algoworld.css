@@ -16,8 +16,14 @@ canvas {
    margin-left: 40px;
 }
 .lvl3CompanySelectors {
-  display: none;
+  border: 5px solid blue;
+  border-radius: 7px;
 }
 .lvl3PrisonSelectors {
-  display: none;
+  border: 5px solid red;
+  border-radius: 7px;
+}
+.lvl3BankSelectors {
+  border: 5px solid green;
+  border-radius: 7px;
 }

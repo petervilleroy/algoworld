@@ -218,11 +218,11 @@ function populateLevel_3() {
     PAUSE = false;
     deathToll = 0;
     movex = worldCanvas.width / 2;
-    movey = worldCanvas.height / 2;
+    movey = (worldCanvas.height-50) / 2;
     graveyard = {height: 50, width: worldCanvas.width};
-    bank = {height: worldCanvas.height/2, width: worldCanvas.width/2};//{height: worldCanvas.height/4, width: worldCanvas.width/4};
-    prison = {height: worldCanvas.height/2, width: worldCanvas.width/2};//{height: worldCanvas.height/4, width: worldCanvas.width/4};
-    company = {height: worldCanvas.height/2, width: worldCanvas.width/2};//{height: worldCanvas.height/4, width: worldCanvas.width/4};
+    bank = {height: (worldCanvas.height-graveyard.height)/2, width: worldCanvas.width/2};//{height: worldCanvas.height/4, width: worldCanvas.width/4};
+    prison = {height: (worldCanvas.height-graveyard.height)/2, width: worldCanvas.width/2};//{height: worldCanvas.height/4, width: worldCanvas.width/4};
+    company = {height: (worldCanvas.height-graveyard.height)/2, width: worldCanvas.width/2};//{height: worldCanvas.height/4, width: worldCanvas.width/4};
     misogyny = 0;//.8;
     bankMisogyny = 0;//.8;
     companyMisogyny = 0;//.9;
@@ -230,8 +230,8 @@ function populateLevel_3() {
     prisonRacism = 0;//.9;
     bankRacism = 0;//.7;
     companyRacism = 0;//.6;
-    employmentProb = .25;
-    loanProb = .25;
+    employmentProb = .125;
+    loanProb = .125;
     prisonProb = .25;
     companyPrisonRelevant = false;
     bankPrisonRelevant = false;
@@ -246,14 +246,14 @@ function populateLevel_3() {
     prisonShape.graphics.beginFill('red').drawRect(0,0,prison.width, prison.height);
     prisonShape.x = 0;
     prisonShape.y = worldCanvas.height - prison.height - graveyard.height;
-    prisonText = new createjs.Text("PRISON", "16pt Arial")
+    prisonText = new createjs.Text("PRISON", "16pt Arial", "black");
     prisonText.x = prisonShape.x + 5;
     prisonText.y = prisonShape.y + 5;
 
     bankShape = new createjs.Shape();
     bankShape.graphics.beginFill('green').drawRect(0, 0, bank.width, bank.height);
     bankShape.x = worldCanvas.width - (worldCanvas.width/4 + bank.width/2);
-    bankShape.y = 0 + worldCanvas.height/4 - bank.height/2;
+    bankShape.y = 0;// + worldCanvas.height/4 - bank.height/2;
     bankText = new createjs.Text("Bank", "16pt Times New Roman", "orange");
     bankText.x = bankShape.x + 5;
     bankText.y = bankShape.y + 5;
@@ -261,7 +261,7 @@ function populateLevel_3() {
     companyShape = new createjs.Shape();
     companyShape.graphics.beginFill('blue').drawRect(0,0,company.width, company.height);
     companyShape.x = 0 + worldCanvas.width/4 - company.width/2;
-    companyShape.y = 0 + worldCanvas.height/4 - company.height/2;
+    companyShape.y = 0;// + worldCanvas.height/4 - company.height/2;
     companyText = new createjs.Text("Company", "16pt Times New Roman", "white");
     companyText.x = companyShape.x + 5;
     companyText.y = companyShape.y + 5;
@@ -270,6 +270,9 @@ function populateLevel_3() {
     graveyardShape.graphics.beginFill('grey').drawRect(0, 0, graveyard.width, graveyard.height);
     graveyardShape.x = 0;
     graveyardShape.y = worldCanvas.height - graveyard.height;
+    graveyardText = new createjs.Text("Poverty", "16pt Arial", "black");
+    graveyardText.x = graveyardShape.x+5;
+    graveyardText.y = graveyardShape.y+5;
 
     whiteMortality = 0;
     colorMortality = 0;
@@ -287,11 +290,12 @@ function populateLevel_3() {
     worldStage.addChild(companyShape);
     worldStage.addChild(companyText);
     worldStage.addChild(graveyardShape);
+    worldStage.addChild(graveyardText);
     worldStage.addChild(tooltip);
     worldStage.update();
     
     worldStage.on("click", function(evt) {
-        if(evt.target == companyShape) {
+        /*if(evt.target == companyShape) {
             $(".lvl3BankSelectors").hide();
             $(".lvl3PrisonSelectors").hide();
             $(".lvl3CompanySelectors").show();
@@ -309,7 +313,7 @@ function populateLevel_3() {
             $(".lvl3PrisonSelectors").show();
             $("#myBoxCanvas").css("border", "8px solid red");
         }
-        else {
+        else {*/
             tooltip_target = evt.target.parent;
             //remove selected shape for every sprite.
             spriteArray.forEach(function(sprite, i) {
@@ -326,7 +330,7 @@ function populateLevel_3() {
             ", "+ (evt.target.parent.imprisoned == true? "Imprisoned" : "");
 
             // If the click was on one of the world entities, update the checkbox area to reflect that entity
-        }
+        //}
 
         worldStage.update();
     });

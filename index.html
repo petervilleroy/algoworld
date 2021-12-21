@@ -36,48 +36,29 @@
             <td>
                 <p>Instructions:</p>
                 <span class="level2">Click on each teacher to learn about them. Use the sliders on the right to decide which attributes are most important, and click go to see who wins Teacher of the Year</span>
-                <span class="level3">Choose the data available to banks and employers and watch who can manage to avoid extreme poverty.</span>
+                <span class="level3">Choose the data available to banks and employers and watch who can<br> manage to avoid extreme poverty.</span>
                 <br/>
-                <canvas id="myWorldCanvas" width="500" height="450"></canvas>
+                <canvas id="myWorldCanvas" width="500" height="500"></canvas>
             </td>
-            <td>
-                
-            </td>
+            
             <td>
                 <div id="eventResults" class="level3">
                     <h2>Results:</h2>
                     <p>Extreme Poverty:</p>
                     <p>White: <span id="mortalityRaceWhite">30</span>%<br/>Color: <span id="mortalityRaceColor">70</span>%</p>
                     <p>Male: <span id="mortalityGenderMale">20</span>%<br/>Female: <span id="mortalityGenderFemale">80</span>%</p>
+                   
+                <!-- commented this statistic group out because it was distracting / confusing.
+
                     <p>Wealth Distribution among others: (per person)</p>
                     <p>White: <i class="fa fa-btc"></i><span id="wealthRaceWhite">30</span><br/>Color: <i class="fa fa-btc"></i><span id="wealthRaceColor">70</span></p>
                     <p>Male: <i class="fa fa-btc"></i><span id="wealthGenderMale">20</span><br/>Female: <i class="fa fa-btc"></i><span id="wealthGenderFemale">80</span></p>
-                </div>
+                //-->  
+            </div>
             </td>
+
             <td class="level3">
                 <div class="level3">
-                    <p>Box Building Canvas:</p><br/>
-                    <div id="myBoxCanvas" width="200" height="450">
-                        
-                        <div class="lvl3BankSelectors">
-                            <u><b>Data for Bank Loan</b></u><br>
-                            <p class="tab"></p>
-                            <b>Web History</b><br>
-                            <input type="checkbox" id="bnkAmazon" checked>Amazon Purchases<br>
-                            <p class="tab"></p>
-                            <b>DMV Records</b><br>
-                            
-                            <input type="checkbox" id="bnkRace" >Race<br>
-                            <input type="checkbox" id="bnkGender" >Gender<br>
-                            <input type="checkbox" id="bnkSexuality" >Sexuality<br>
-                            <input type="checkbox" id="bnkCrimes"  >Criminal Record<br><p></p>
-                            
-                            <b>Financial Data</b><br>
-                            
-                            <input type="checkbox" id="bnkSalary" >Current Salary<br>
-                            
-                        </div>
-
                         <div class="lvl3CompanySelectors">
                             <u><b>Data for Job Application</b></u><br>
                             <p class="tab"></p>
@@ -96,7 +77,35 @@
                             <input type="checkbox" id="jobSalary" >Current Salary<br>
                             
                         </div>
+                </div>
+            </td>
+            <td class="level3">
+                <div class="level3">
+                    
+                    
                         
+                    <div class="lvl3BankSelectors">
+                        <u><b>Data for Bank Loan</b></u><br>
+                        <p class="tab"></p>
+                        <b>Web History</b><br>
+                        <input type="checkbox" id="bnkAmazon" checked>Amazon Purchases<br>
+                        <p class="tab"></p>
+                        <b>DMV Records</b><br>
+                        
+                        <input type="checkbox" id="bnkRace" >Race<br>
+                        <input type="checkbox" id="bnkGender" >Gender<br>
+                        <input type="checkbox" id="bnkSexuality" >Sexuality<br>
+                        <input type="checkbox" id="bnkCrimes"  >Criminal Record<br><p></p>
+                        
+                        <b>Financial Data</b><br>
+                        
+                        <input type="checkbox" id="bnkSalary" >Current Salary<br>
+                        
+                    </div>
+                </div>
+            </td>
+            <td class="level3">
+                <div class="level3">            
                         <div class="lvl3PrisonSelectors">
                             <u><b>Data for Prison Sentence</b></u><br>
                             <p class="tab"></p>
@@ -116,72 +125,10 @@
                             
                         </div>
                         
-                    </div>
+                    
                 </div>
             </td>
-            <td class="level2">
-                <table class="sliderTable">
-                    <tr>
-                        <td>
-                            <span class="sliderBox" id="degreeSliderBox">Degree<br/>
-                                <input type="range" min="1" max="100" value="50" class="slider" id="degreeSlider">
-                            </span>
-                            <span class="lvl2Adder">+</span>
-                        </td>
-                        <td>
-                            <span class="sliderBox" id="coolfactorSliderBox">Cool Factor<br/>
-                                <input type="range" min="1" max="100" value="50" class="slider" id="coolfactorSlider">
-                            </span>
-                            <span class="lvl2Adder">+</span>
-                        </td>
-                        <td>
-                            <span class="sliderBox" id="kindnessSliderBox">Kindness<br/>
-                                <input type="range" min="1" max="100" value="50" class="slider" id="kindnessSlider">
-                            </span>
-                            <span class="lvl2Adder">+</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        
-                        <td>
-                            <span class="sliderBox" id="genderSliderBox">Gender<br/>
-                                <input type="range" min="1" max="100" value="50" class="slider" id="genderSlider">
-                            </span>
-                            <span class="lvl2Adder">+</span>
-                        </td>
-                        <td>
-                            <span class="sliderBox" id="raceSliderBox">Race<br/>
-                                <input type="range" min="1" max="100" value="50" class="slider" id="raceSlider">
-                            </span>
-                            <span class="lvl2Adder">+</span>
-                        </td>
-                   
-                        <td>
-                            <span class="sliderBox" id="attendanceSliderBox">Attendance<br/>
-                                <input type="range" min="1" max="100" value="50" class="slider" id="attendanceSlider">
-                            </span>
-                            <span class="lvl2Adder">+</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="sliderBox" id="testscoresSliderBox">Test Scores<br/>
-                                <input type="range" min="1" max="100" value="50" class="slider" id="testscoresSlider">
-                            </span>
-                            <span class="lvl2Adder">=</span>
-                        </td>
-                        <td>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button id="eventButton" >Event!</button>
-                        </td>
-                    </tr>
-                </table>
-                
-            </td>
+            
         </tr>
         <tr>
             <td>
