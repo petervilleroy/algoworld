@@ -232,7 +232,7 @@ function populateLevel_3() {
     companyRacism = 0;//.6;
     employmentProb = .5;
     loanProb = .5;
-    prisonProb = .25;
+    prisonProb = .7;
     companyPrisonRelevant = false;
     bankPrisonRelevant = false;
     prisonPrisonRelevant = false;
@@ -700,10 +700,10 @@ function calculateSentence(c, r, m) {
     if(prisonPrisonRelevant && c.prisonHistory) { // skip the calculations if the person has a prison sentence
         return true;
     }
-    var randomSentence = (Math.random()*2)-1 + prisonProb; // a number between -1+PP and 1+PP.
+    var randomSentence = Math.random(); //(Math.random()*2)-1 + prisonProb; // a number between -1+PP and 1+PP.
     var score = r*c.race + randomSentence// + m*c.gender;
     console.log("---DEBUG: "+c.name+" imprisonment score: "+score);
-    if(score > 1) {
+    if(score > prisonProb) {
         return true;
     }
     else {
