@@ -230,8 +230,8 @@ function populateLevel_3() {
     prisonRacism = 0;//.9;
     bankRacism = 0;//.7;
     companyRacism = 0;//.6;
-    employmentProb = .125;
-    loanProb = .125;
+    employmentProb = .5;
+    loanProb = .5;
     prisonProb = .25;
     companyPrisonRelevant = false;
     bankPrisonRelevant = false;
@@ -241,7 +241,8 @@ function populateLevel_3() {
     finishedTweens = 0;
     
 
-    tooltip.x = tooltip.y = 10;
+    tooltip.x = 10;
+    tooltip.y = worldCanvas.height- 10;
     prisonShape = new createjs.Shape();
     prisonShape.graphics.beginFill('red').drawRect(0,0,prison.width, prison.height);
     prisonShape.x = 0;
@@ -397,19 +398,19 @@ function handleGo() { //This function is the main animation loop. It is re-execu
     companyRacism += $("#jobAmazon").prop("checked") ? 0.1 : 0; //if checked, racism increases .1
 
     prisonRacism = 0;
-    prisonRacism += $("#prsRace").prop("checked") ? 0.9 : 0; //if checked, racism increases .5
+    prisonRacism += $("#prsRace").prop("checked") ? 0.9 : 0; //if checked, racism increases .9
     prisonRacism += $("#prsAmazon").prop("checked") ? 0.1 : 0; //if checked, racism increases .1
     
     //Reminder: misogyny start values are bank: 0, company: 0
     bankMisogyny = 0;
-    bankMisogyny += $("#bnkGender").prop("checked") ? 0.5 : 0; //if checked, misogyny increases .5
-    bankMisogyny += $("#bnkSexuality").prop("checked") ? 0.1 : 0; //if checked, misogyny increases .2
+    bankMisogyny += $("#bnkGender").prop("checked") ? 0.7 : 0; //if checked, misogyny increases .5
+    bankMisogyny += $("#bnkSexuality").prop("checked") ? 0.3 : 0; //if checked, misogyny increases .2
     bankMisogyny += $("#bnkAmazon").prop("checked") ? 0.1 : 0; //if checked, misogyny increases .1
     bankMisogyny += $("#bnkSalary").prop("checked") ? 0.1 : 0; //if checked, misogyny increases .1
 
     companyMisogyny = 0;
-    companyMisogyny += $("#jobGender").prop("checked") ? 0.6 : 0; //if checked, misogyny increases .5
-    companyMisogyny += $("#jobSexuality").prop("checked") ? 0.2 : 0; //if checked, misogyny increases .2
+    companyMisogyny += $("#jobGender").prop("checked") ? 0.7 : 0; //if checked, misogyny increases .5
+    companyMisogyny += $("#jobSexuality").prop("checked") ? 0.3 : 0; //if checked, misogyny increases .2
     companyMisogyny += $("#jobAmazon").prop("checked") ? 0.1 : 0; //if checked, misogyny increases .1
     companyMisogyny += $("#jobSalary").prop("checked") ? 0.1 : 0; //if checked, misogyny increases .1
 
@@ -713,11 +714,12 @@ function calculateJobOffer(c, r, m) {
     if(companyPrisonRelevant && c.prisonHistory) { // skip the calculations if the person has a prison history
         return false;
     }
-    var randomOffer = (Math.random()*2)-1 + employmentProb; // a number between -1+EP and 1+EP.
-    var score = (r*c.race + m*c.gender + 2*randomOffer) /2;
+    var randomOffer =  Math.random();//(Math.random()*2)-1 + employmentProb; // a number between -1+EP and 1+EP.
+    var score = (r*c.race + m*c.gender + randomOffer);
+    console.log("---PATH: "+c.name+" gender "+ (c.gender == 0 ? "male":"female") + " with randomOffer of "+randomOffer + " received employment score "+score);
     console.log("---DEBUG: "+c.name+" employment score: "+score);
     
-    if(score > 1) {
+    if(score > employmentProb) {
         return false;
     }
     else {
@@ -728,10 +730,11 @@ function calculateLoan(c, r, m) {
     if(bankPrisonRelevant && c.prisonHistory) { // skip the calculations if the person has a prison history
         return false;
     }
-    var randomOffer = (Math.random()*2)-1 + loanProb;  // a number between -1+LP and 1+LP
-    var score = (r*c.race + m*c.gender + 2*randomOffer) /2;
+    var randomOffer = Math.random();//(Math.random()*2)-1 + loanProb;  // a number between -1+LP and 1+LP
+    var score = (r*c.race + m*c.gender + randomOffer);
+    console.log("---PATH: "+c.name+" gender "+ (c.gender == 0 ? "male":"female") + " with randomOffer of "+randomOffer + " received loan score "+score);
     console.log("---DEBUG: "+c.name+" loan score: "+score);
-    if(score > 1) {
+    if(score > loanProb) {
         return false;
     }
     else {
