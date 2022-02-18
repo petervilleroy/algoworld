@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Algoworld</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "jquery_2.1.4_jquery.min" %>
+    <%= javascript_include_tag "createjs.min" %>
+    <%= javascript_include_tag "tweenjs.min" %>
+    <%= javascript_include_tag "cek3iwo" %>
+  </head>
+
+  <body>
+  
+<div id="user_header">
+  <% if current_user %>
+    Welcome, <span id="uname"><%= current_user.first_name %></span>.
+    <%= link_to "Account", edit_user_path(current_user) %>
+    <%= link_to "Log Out", logout_path %>
+    <span id="current_user" style="display:none"><%= current_user.first_name %></span>
+  <% else %>
+    <%= link_to "Sign Up", signup_path %> or
+    <%= link_to "Log In", login_path %>
+  <% end %>
+ </div>
+
+ <% flash.each do |key, value| %>
+  <%= content_tag(:div, class: "alert alert-#{key}") do %>
+    <p><%= value %></p>
+  <% end %>
+ <% end %>
+
+<%= yield %>
+
+  </body>
+</html>
