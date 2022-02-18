@@ -1,0 +1,228 @@
+<%= javascript_include_tag "lvl3World"  %>
+<table>
+        <tr>
+            <td>
+                Levels:
+            
+                <a href="lvl1"><button id="lvl1Button" > _1_ </button></a>
+                <a href="lvl2"><button id="lvl2Button" > _2_ </button></a>
+                <button id="lvl3Button" > _3_ </button>
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Instructions:</p>
+                <span class="level2">Click on each teacher to learn about them. Use the sliders on the right to decide which attributes are most important, and click go to see who wins Teacher of the Year</span>
+                <span class="level3">Choose the data available to banks and employers and watch who can<br> manage to avoid extreme poverty.</span>
+                <br/>
+                <canvas id="myWorldCanvas" width="500" height="500"></canvas>
+            </td>
+            
+            <td>
+                <div id="eventResults" class="level3">
+                    <div class="lvl3Results">
+                        <h2>Results:</h2>
+                        <p>Extreme Poverty:</p>
+                        <p>White: <span id="mortalityRaceWhite">30</span>%<br/>Color: <span id="mortalityRaceColor">70</span>%</p>
+                        <p>Male: <span id="mortalityGenderMale">20</span>%<br/>Female: <span id="mortalityGenderFemale">80</span>%</p>
+                    
+                    <!-- commented this statistic group out because it was distracting / confusing.
+
+                    <p>Wealth Distribution among others: (per person)</p>
+                    <p>White: <i class="fa fa-btc"></i><span id="wealthRaceWhite">30</span><br/>Color: <i class="fa fa-btc"></i><span id="wealthRaceColor">70</span></p>
+                    <p>Male: <i class="fa fa-btc"></i><span id="wealthGenderMale">20</span><br/>Female: <i class="fa fa-btc"></i><span id="wealthGenderFemale">80</span></p>
+                  //-->  
+                    </div>
+                </div>
+                <div class="level3">
+                    <p>Speed: <span id="currentSpeedLabel">50</span></p>
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="100" value="50" class="slider" id="speedSlider">
+                    </div>
+                    <div>
+                        <button id="pauseButton">PAUSE</button>
+                    </div>
+                    <div>
+                        <button id="goButton">Start Over</button>
+                    </div>
+                </div>
+            </td>
+
+            <td class="level3">
+                <div class="level3">
+                        <div class="lvl3CompanySelectors">
+                            <u><b>Data for Job Application</b></u><br>
+                            <p class="tab"></p>
+                            <b>Web History</b><br>
+                            <input type="checkbox" id="jobAmazon">Amazon Purchases<br>
+                            <p class="tab"></p>
+                            <b>DMV Records</b><br>
+                            
+                            <input type="checkbox" id="jobRace" checked >Race<br>
+                            <input type="checkbox" id="jobGender"  >Gender<br>
+                            <input type="checkbox" id="jobSexuality" >Sexuality<br>
+                            <input type="checkbox" id="jobCrimes" checked>Criminal Record<br><p></p>
+                            
+                            <b>Financial Data</b><br>
+                           
+                            <input type="checkbox" id="jobSalary" >Current Salary<br>
+                            
+                        </div>
+                </div>
+            </td>
+            <td class="level3">
+                <div class="level3">
+                    
+                    
+                        
+                    <div class="lvl3BankSelectors">
+                        <u><b>Data for Bank Loan</b></u><br>
+                        <p class="tab"></p>
+                        <b>Web History</b><br>
+                        <input type="checkbox" id="bnkAmazon" checked>Amazon Purchases<br>
+                        <p class="tab"></p>
+                        <b>DMV Records</b><br>
+                        
+                        <input type="checkbox" id="bnkRace" >Race<br>
+                        <input type="checkbox" id="bnkGender" >Gender<br>
+                        <input type="checkbox" id="bnkSexuality" >Sexuality<br>
+                        <input type="checkbox" id="bnkCrimes"  >Criminal Record<br><p></p>
+                        
+                        <b>Financial Data</b><br>
+                        
+                        <input type="checkbox" id="bnkSalary" >Current Salary<br>
+                        
+                    </div>
+                </div>
+            </td>
+            <td class="level3">
+                <div class="level3">            
+                        <div class="lvl3PrisonSelectors">
+                            <u><b>Data for Prison Sentence</b></u><br>
+                            <p class="tab"></p>
+                            <b>Web History</b><br>
+                            <input type="checkbox" id="prsAmazon">Amazon Purchases<br>
+                            <p class="tab"></p>
+                            <b>DMV Records</b><br>
+                            
+                            <input type="checkbox" id="prsRace" checked>Race<br>
+                            <input type="checkbox" id="prsGender" checked >Gender<br>
+                            <input type="checkbox" id="prsSexuality" >Sexuality<br>
+                            <input type="checkbox" id="prsCrimes" checked>Criminal Record<br><p></p>
+                            
+                            <b>Financial Data</b><br>
+                            
+                            <input type="checkbox" id="prsSalary">Current Salary<br>
+                            
+                        </div>
+                        
+                    
+                </div>
+            </td>
+            
+        </tr>
+
+        <% if current_user %>
+        <% @history = Useraction.where('user_id = ?', current_user.first_name).order('id DESC').limit(2) %>
+        <% @history.each_with_index do |history_record, i| %>
+            <tr>
+                <td>
+                <span>History of Results <%= i %> </span> 
+                <% history_array = history_record.action_details.split('-', -1) %>
+                </td>
+                <td>
+                    <div  class="level3">
+                        <div class="lvl3Results">
+                        <h2>Results:</h2>
+                        <p>Extreme Poverty:</p>
+                        <p>White: <span><%= history_array[18] %></span>%<br/>Color: <span><%= history_array[19] %></span>%</p>
+                        <p>Male: <span><%= history_array[20] %></span>%<br/>Female: <span><%= history_array[21] %></span>%</p>
+                    
+                        </div>
+
+                    </div>
+                
+                </td>
+
+                <td class="level3">
+                    <div class="level3">
+                            <div class="lvl3CompanySelectors">
+                                <u><b>Data for Job Application</b></u><br>
+                                <p class="tab"></p>
+                                <b>Web History</b><br>
+                                <input type="checkbox" <%= history_array[0] %> >Amazon Purchases<br>
+                                <p class="tab"></p>
+                                <b>DMV Records</b><br>
+                                
+                                <input type="checkbox"  <%= history_array[1] %> >Race<br>
+                                <input type="checkbox"  <%= history_array[2] %> >Gender<br>
+                                <input type="checkbox"  <%= history_array[3] %> >Sexuality<br>
+                                <input type="checkbox"  <%= history_array[4] %> >Criminal Record<br><p></p>
+                                
+                                <b>Financial Data</b><br>
+                            
+                                <input type="checkbox"  <%= history_array[5] %> >Current Salary<br>
+                                
+                            </div>
+                    </div>
+                </td>
+                <td class="level3">
+                    <div class="level3">
+                        
+                        
+                            
+                        <div class="lvl3BankSelectors">
+                            <u><b>Data for Bank Loan</b></u><br>
+                            <p class="tab"></p>
+                            <b>Web History</b><br>
+                            <input type="checkbox"  <%= history_array[6] %> >Amazon Purchases<br>
+                            <p class="tab"></p>
+                            <b>DMV Records</b><br>
+                            
+                            <input type="checkbox"  <%= history_array[7] %> >Race<br>
+                            <input type="checkbox"  <%= history_array[8] %> >Gender<br>
+                            <input type="checkbox"  <%= history_array[9] %> >Sexuality<br>
+                            <input type="checkbox"  <%= history_array[10] %> >Criminal Record<br><p></p>
+                            
+                            <b>Financial Data</b><br>
+                            
+                            <input type="checkbox"  <%= history_array[11] %> >Current Salary<br>
+                            
+                        </div>
+                    </div>
+                </td>
+                <td class="level3">
+                    <div class="level3">            
+                            <div class="lvl3PrisonSelectors">
+                                <u><b>Data for Prison Sentence</b></u><br>
+                                <p class="tab"></p>
+                                <b>Web History</b><br>
+                                <input type="checkbox"  <%= history_array[12] %> >Amazon Purchases<br>
+                                <p class="tab"></p>
+                                <b>DMV Records</b><br>
+                                
+                                <input type="checkbox"  <%= history_array[13] %> >Race<br>
+                                <input type="checkbox"  <%= history_array[14] %> >Gender<br>
+                                <input type="checkbox"  <%= history_array[15] %> >Sexuality<br>
+                                <input type="checkbox"  <%= history_array[16] %> >Criminal Record<br><p></p>
+                                
+                                <b>Financial Data</b><br>
+                                
+                                <input type="checkbox"  <%= history_array[17] %> >Current Salary<br>
+                                
+                            </div>
+                            
+                        
+                    </div>
+                </td>
+            </tr>
+            <% end %>
+        <% end %>
+    </table>
+    <script>init();</script>

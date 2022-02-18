@@ -1,0 +1,2 @@
+class Useraction < ApplicationRecord
+end
