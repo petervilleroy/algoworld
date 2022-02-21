@@ -815,8 +815,26 @@ function inQuadrantFour(c, wc) {
     }
 }
 function updateHistory() {
-    userActionHistory = $.ajax("/history", {type: "GET", async: false, data:""})
-    console.log("PATH: Collected history from the server: " + userActionHistory.responseText);
+    userActionHistory = $.getJSON("/history", function( data ) {
+        console.log("PATH: Collected user history from the server: " + data.length + " history objects.");
+        var useractionhistoryJSON = [];
+        useractionhistoryJSON.push("<table class='results_history'>")
+        /*$.each( data, function(i, ua) {
+            useractionhistoryJSON.push( "<tr><td>History Record "+i+"</td><td>"+this.action_details+"</td></tr>");
+        });*/
+        data.forEach((ua, i) => {
+            console.log ("PATH: Inserting historical record " + i +"...");
+            useractionhistoryJSON.push( "<tr><td>History Record "+i+"</td><td>"+ua.action_details+"</td></tr>");
+        });
+        useractionhistoryJSON.push("</table>")
+        $(".results_history").html(useractionhistoryJSON.join( ""));
+    });
+    //{type: "GET", dataType: "json", async: false, data:""})
+    
+  
+    //useractionhistoryJSON.push(userActionHistory.responseText);
+    //console.log("PATH: most recent userAction: "+ useractionhistoryJSON[0]);
+    //$(".results_history").innerHTML
 }
 function log2dblvl3(cat, det) {
     $.ajax("/useractions", {type: "POST", async: true, data: {level: "level3", category: cat, details: det}})
