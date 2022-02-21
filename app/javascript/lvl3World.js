@@ -670,11 +670,12 @@ function tweenComplete() {
         
     }
     else if(TOTALWORLDCYCLES == 0 && finishedTweens <= 1){
-        //update history HTML
-        updateHistory();
+       
         //record results of a full run to the database
         log2dblvl3("solution", Cap+"-"+Cr+"-"+Cg+"-"+Cs+"-"+Ccr+"-"+Ccs+"-"+Bap+"-"+Br+"-"+Bg+"-"+Bs+"-"+Bcr+"-"+Bcs+"-"+Pap+"-"+Pr+"-"+Pg+"-"+
                 Ps+"-"+Pcr+"-"+Pcs+"-"+Rw+"-"+Rc+"-"+Rm+"-"+Rf+"-"+tweenSpeed)
+        //update history HTML
+        updateHistory();
     }
 }
 function tick(tickEvent) {
@@ -823,8 +824,52 @@ function updateHistory() {
             useractionhistoryJSON.push( "<tr><td>History Record "+i+"</td><td>"+this.action_details+"</td></tr>");
         });*/
         data.forEach((ua, i) => {
+            history_array = ua.action_details.split("-");
             console.log ("PATH: Inserting historical record " + i +"...");
-            useractionhistoryJSON.push( "<tr><td>History Record "+i+"</td><td>"+ua.action_details+"</td></tr>");
+            useractionhistoryJSON.push( "<tr> <td><span>History of Results "+i+"</span></td>");
+            useractionhistoryJSON.push(" <td> <div  class='level3'> <div class='lvl3Results'>" +
+                "<h2>Results:</h2> <p>Extreme Poverty:</p>" +
+                "<p>White: <span>" + history_array[18] +"</span>%<br/>Color: <span>"+ history_array[19] +"</span>%</p>" +
+                "<p>Male: <span>" + history_array[20] +"</span>%<br/>Female: <span>" + history_array[21] +"</span>%</p>" +
+                "</div> </div> </td>");
+            useractionhistoryJSON.push(" <td class='level3'> <div class='level3'> <div class='lvl3CompanySelectors'> " +
+                        "<u><b>Data for Job Application</b></u><br><p class='tab'></p>" +
+                        " <b>Web History</b><br> <input type='checkbox' "+ history_array[0]+" >Amazon Purchases<br> " +
+                        " <p class='tab'></p> <b>DMV Records</b><br> " +
+                        
+                        "<input type='checkbox' "+ history_array[1] +" >Race<br>"+
+                        "<input type='checkbox' "+ history_array[2] +" >Gender<br>"+
+                        "<input type='checkbox' "+ history_array[3] +" >Sexuality<br>"+
+                        "<input type='checkbox' "+ history_array[4] +" >Criminal Record<br><p></p>"+
+                        
+                        "<b>Financial Data</b><br><input type='checkbox' "+ history_array[5] +">Current Salary<br>" +
+                        "</div></div></td>");
+            useractionhistoryJSON.push(" <td class='level3'> <div class='level3'> <div class='lvl3BankSelectors'> " +
+                        "<u><b>Data for Bank Loan</b></u><br><p class='tab'></p>" +
+                        " <b>Web History</b><br> <input type='checkbox' "+ history_array[6]+" >Amazon Purchases<br> " +
+                        " <p class='tab'></p> <b>DMV Records</b><br> " +
+                        
+                        "<input type='checkbox' "+ history_array[7] +" >Race<br>"+
+                        "<input type='checkbox' "+ history_array[8] +" >Gender<br>"+
+                        "<input type='checkbox' "+ history_array[9] +" >Sexuality<br>"+
+                        "<input type='checkbox' "+ history_array[10] +" >Criminal Record<br><p></p>"+
+                        
+                        "<b>Financial Data</b><br><input type='checkbox' "+ history_array[11] +">Current Salary<br>" +
+                        "</div></div></td>");
+            useractionhistoryJSON.push(" <td class='level3'> <div class='level3'> <div class='lvl3PrisonSelectors'> " +
+                        "<u><b>Data for Prison Sentence</b></u><br><p class='tab'></p>" +
+                        " <b>Web History</b><br> <input type='checkbox' "+ history_array[12]+" >Amazon Purchases<br> " +
+                        " <p class='tab'></p> <b>DMV Records</b><br> " +
+                        
+                        "<input type='checkbox' "+ history_array[13] +" >Race<br>"+
+                        "<input type='checkbox' "+ history_array[14] +" >Gender<br>"+
+                        "<input type='checkbox' "+ history_array[15] +" >Sexuality<br>"+
+                        "<input type='checkbox' "+ history_array[16] +" >Criminal Record<br><p></p>"+
+                        
+                        "<b>Financial Data</b><br><input type='checkbox' "+ history_array[17] +">Current Salary<br>" +
+                        "</div></div></td>");
+
+            useractionhistoryJSON.push( "</tr>");
         });
         useractionhistoryJSON.push("</table>")
         $(".results_history").html(useractionhistoryJSON.join( ""));
