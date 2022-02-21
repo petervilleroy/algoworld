@@ -1,9 +1,11 @@
-<%= javascript_include_tag "lvl2World"  %>
+<% content_for :head do %>
+    <%= javascript_include_tag "lvl2World"  %>
+<% end %>
 <table>
         <tr>
             <td>
                 Levels:
-            
+               
                 <a href="lvl1"><button id="lvl1Button" > _1_ </button></a>
                 <button id="lvl2Button" > _2_ </button>
                 <a href="lvl3"><button id="lvl3Button" > _3_ </button></a>
@@ -97,4 +99,3 @@
             </td>
         </tr>
     </table>
-    <script>init();</script>

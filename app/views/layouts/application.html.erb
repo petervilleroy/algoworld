@@ -12,9 +12,10 @@
     <%= javascript_include_tag "createjs.min" %>
     <%= javascript_include_tag "tweenjs.min" %>
     <%= javascript_include_tag "cek3iwo" %>
+    <%= yield(:head) %>
   </head>
 
-  <body>
+  <body onload="init();">
   
 <div id="user_header">
   <% if current_user %>

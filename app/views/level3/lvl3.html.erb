@@ -1,4 +1,6 @@
-<%= javascript_include_tag "lvl3World"  %>
+<% content_for :head do %>
+    <%= javascript_include_tag "lvl3World"  %>
+<% end %>
 <table>
         <tr>
             <td>
@@ -229,4 +231,3 @@
             </table>
         <% end %>
    
-    <script>init();</script>

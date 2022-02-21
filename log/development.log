@@ -12939,3 +12939,908 @@ Processing by Level1Controller#lvl1 as */*
 Completed 200 OK in 38ms (Views: 37.2ms | ActiveRecord: 0.6ms | Allocations: 11672)
 
 
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 03:44:53 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (4.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (1.0ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:134:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 151.5ms | Allocations: 3951)
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 332.5ms | Allocations: 13479)
+Completed 200 OK in 340ms (Views: 331.0ms | ActiveRecord: 5.2ms | Allocations: 13827)
+
+
+Started GET "/lvl2" for 127.0.0.1 at 2022-02-21 03:44:55 -0800
+Processing by Level2Controller#lvl2 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level2/lvl2.html.erb within layouts/application
+  Rendered level2/lvl2.html.erb within layouts/application (Duration: 5.7ms | Allocations: 2056)
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 54.2ms | Allocations: 12165)
+Completed 200 OK in 60ms (Views: 57.8ms | ActiveRecord: 1.2ms | Allocations: 13206)
+
+
+Started GET "/lvl2" for 127.0.0.1 at 2022-02-21 03:44:57 -0800
+Processing by Level2Controller#lvl2 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level2/lvl2.html.erb within layouts/application
+  Rendered level2/lvl2.html.erb within layouts/application (Duration: 4.7ms | Allocations: 1531)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 58.0ms | Allocations: 11252)
+Completed 200 OK in 66ms (Views: 64.6ms | ActiveRecord: 0.6ms | Allocations: 11614)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:45:13 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 12.3ms | Allocations: 1922)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 84.5ms | Allocations: 11807)
+Completed 200 OK in 95ms (Views: 92.1ms | ActiveRecord: 1.0ms | Allocations: 12980)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:45:13 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 4.3ms | Allocations: 1533)
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 42.2ms | Allocations: 10586)
+Completed 200 OK in 44ms (Views: 41.6ms | ActiveRecord: 1.8ms | Allocations: 10950)
+
+
+Started GET "/lvl2" for 127.0.0.1 at 2022-02-21 03:45:18 -0800
+Processing by Level2Controller#lvl2 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level2/lvl2.html.erb within layouts/application
+  Rendered level2/lvl2.html.erb within layouts/application (Duration: 9.1ms | Allocations: 2028)
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 44.2ms | Allocations: 11378)
+Completed 200 OK in 50ms (Views: 42.2ms | ActiveRecord: 6.2ms | Allocations: 12332)
+
+
+Started GET "/lvl2" for 127.0.0.1 at 2022-02-21 03:45:22 -0800
+Processing by Level2Controller#lvl2 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level2/lvl2.html.erb within layouts/application
+  Rendered level2/lvl2.html.erb within layouts/application (Duration: 10.5ms | Allocations: 1531)
+  [1m[36mUser Load (3.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 59.4ms | Allocations: 10568)
+Completed 200 OK in 62ms (Views: 57.5ms | ActiveRecord: 3.6ms | Allocations: 10932)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:45:26 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 5.5ms | Allocations: 1533)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 61.5ms | Allocations: 10636)
+Completed 200 OK in 67ms (Views: 62.9ms | ActiveRecord: 0.8ms | Allocations: 10986)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:45:28 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 9.7ms | Allocations: 1533)
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 76.9ms | Allocations: 10616)
+Completed 200 OK in 80ms (Views: 75.6ms | ActiveRecord: 2.7ms | Allocations: 10963)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 03:45:32 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (3.4ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:134:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 43.1ms | Allocations: 5389)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 81.4ms | Allocations: 14337)
+Completed 200 OK in 87ms (Views: 82.3ms | ActiveRecord: 4.3ms | Allocations: 15308)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 03:45:34 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (1.3ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:134:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 37.1ms | Allocations: 3963)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 64.2ms | Allocations: 12760)
+Completed 200 OK in 65ms (Views: 62.5ms | ActiveRecord: 2.4ms | Allocations: 13123)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 03:45:44 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (1.2ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:134:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 39.0ms | Allocations: 3966)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 77.5ms | Allocations: 12766)
+Completed 200 OK in 79ms (Views: 76.0ms | ActiveRecord: 2.3ms | Allocations: 13112)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 03:45:49 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (1.8ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:134:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 20.4ms | Allocations: 3975)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 66.9ms | Allocations: 12775)
+Completed 200 OK in 70ms (Views: 65.6ms | ActiveRecord: 3.3ms | Allocations: 13122)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 03:46:03 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (0.8ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:134:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 19.9ms | Allocations: 5357)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 57.2ms | Allocations: 15467)
+Completed 200 OK in 64ms (Views: 59.5ms | ActiveRecord: 1.5ms | Allocations: 16638)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:46:06 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 8.3ms | Allocations: 1921)
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 74.4ms | Allocations: 12004)
+Completed 200 OK in 82ms (Views: 76.3ms | ActiveRecord: 2.0ms | Allocations: 12974)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:46:07 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 5.3ms | Allocations: 1556)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 36.6ms | Allocations: 11350)
+Completed 200 OK in 40ms (Views: 38.8ms | ActiveRecord: 0.5ms | Allocations: 11715)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:49:56 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 4.5ms | Allocations: 1977)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 73.2ms | Allocations: 12626)
+Completed 200 OK in 80ms (Views: 77.3ms | ActiveRecord: 0.5ms | Allocations: 13798)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:50:08 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 5.8ms | Allocations: 1540)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 30.6ms | Allocations: 11267)
+Completed 200 OK in 34ms (Views: 31.5ms | ActiveRecord: 0.4ms | Allocations: 11630)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:52:35 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 7.4ms | Allocations: 1562)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 63.7ms | Allocations: 11284)
+Completed 200 OK in 71ms (Views: 66.9ms | ActiveRecord: 1.0ms | Allocations: 11630)
+
+
+Started GET "/lvl2" for 127.0.0.1 at 2022-02-21 03:52:38 -0800
+Processing by Level2Controller#lvl2 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level2/lvl2.html.erb within layouts/application
+  Rendered level2/lvl2.html.erb within layouts/application (Duration: 12.3ms | Allocations: 2093)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 43.1ms | Allocations: 12132)
+Completed 200 OK in 47ms (Views: 45.7ms | ActiveRecord: 0.5ms | Allocations: 13088)
+
+
+Started GET "/lvl2" for 127.0.0.1 at 2022-02-21 03:52:39 -0800
+Processing by Level2Controller#lvl2 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level2/lvl2.html.erb within layouts/application
+  Rendered level2/lvl2.html.erb within layouts/application (Duration: 6.9ms | Allocations: 1538)
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 40.5ms | Allocations: 11264)
+Completed 200 OK in 46ms (Views: 43.3ms | ActiveRecord: 1.4ms | Allocations: 11628)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 03:52:41 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (0.9ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:136:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 25.8ms | Allocations: 5427)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 54.8ms | Allocations: 15060)
+Completed 200 OK in 68ms (Views: 63.3ms | ActiveRecord: 3.0ms | Allocations: 16032)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:52:47 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 5.9ms | Allocations: 1563)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 45.1ms | Allocations: 11336)
+Completed 200 OK in 49ms (Views: 47.2ms | ActiveRecord: 0.5ms | Allocations: 11704)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:54:03 -0800
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 262.0ms | Allocations: 37392)
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 371.0ms | Allocations: 68447)
+Completed 200 OK in 399ms (Views: 380.4ms | ActiveRecord: 6.9ms | Allocations: 74315)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:57:08 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 9.3ms | Allocations: 1994)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 96.4ms | Allocations: 12607)
+Completed 200 OK in 116ms (Views: 113.3ms | ActiveRecord: 0.8ms | Allocations: 13821)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 03:57:14 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (3.3ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:136:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 70.3ms | Allocations: 10091)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 126.7ms | Allocations: 19826)
+Completed 200 OK in 134ms (Views: 122.9ms | ActiveRecord: 10.0ms | Allocations: 20879)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 03:57:19 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (1.7ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:136:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 25.5ms | Allocations: 4043)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 84.5ms | Allocations: 13518)
+Completed 200 OK in 90ms (Views: 82.1ms | ActiveRecord: 4.7ms | Allocations: 13906)
+
+
+Started POST "/useractions" for 127.0.0.1 at 2022-02-21 03:57:53 -0800
+Started GET "/history" for 127.0.0.1 at 2022-02-21 03:57:53 -0800
+Processing by UseractionsController#create as */*
+Processing by UseractionsController#history as JSON
+  Parameters: {"level"=>"level3", "category"=>"solution", "details"=>"-checked---checked--checked-------checked-checked--checked--27.3-66.7-45.5-44.4-50"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (4.0ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter' AND level = 'level3') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/controllers/useractions_controller.rb:24:in `block (2 levels) in history'
+Completed 200 OK in 18ms (Views: 7.7ms | ActiveRecord: 4.4ms | Allocations: 4906)
+
+
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/useractions_controller.rb:11:in `block in create'
+  [1m[36mUseraction Create (2.9ms)[0m  [1m[32mINSERT INTO "useractions" ("user_id", "level", "action_category", "action_details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", "Peter"], ["level", "level3"], ["action_category", "solution"], ["action_details", "-checked---checked--checked-------checked-checked--checked--27.3-66.7-45.5-44.4-50"], ["created_at", "2022-02-21 11:57:53.117197"], ["updated_at", "2022-02-21 11:57:53.117197"]]
+  ↳ app/controllers/useractions_controller.rb:11:in `block in create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/useractions_controller.rb:11:in `block in create'
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 50ms (ActiveRecord: 17.7ms | Allocations: 9798)
+
+
+Started GET "/" for 127.0.0.1 at 2022-02-21 03:57:53 -0800
+Processing by Level1Controller#lvl1 as */*
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 3.0ms | Allocations: 1665)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 74.8ms | Allocations: 11446)
+Completed 200 OK in 85ms (Views: 83.3ms | ActiveRecord: 0.4ms | Allocations: 11911)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 03:59:24 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (21.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (11.1ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:136:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 99.4ms | Allocations: 5448)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 142.4ms | Allocations: 15578)
+Completed 200 OK in 167ms (Views: 131.0ms | ActiveRecord: 32.9ms | Allocations: 16761)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 03:59:31 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 17.3ms | Allocations: 1960)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 78.6ms | Allocations: 12047)
+Completed 200 OK in 89ms (Views: 86.9ms | ActiveRecord: 0.9ms | Allocations: 13017)
+
+
+Started GET "/lvl2" for 127.0.0.1 at 2022-02-21 03:59:47 -0800
+Processing by Level2Controller#lvl2 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level2/lvl2.html.erb within layouts/application
+  Rendered level2/lvl2.html.erb within layouts/application (Duration: 4.5ms | Allocations: 2092)
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 30.5ms | Allocations: 12132)
+Completed 200 OK in 34ms (Views: 31.0ms | ActiveRecord: 2.0ms | Allocations: 13172)
+
+
+Started GET "/lvl2" for 127.0.0.1 at 2022-02-21 03:59:50 -0800
+Processing by Level2Controller#lvl2 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level2/lvl2.html.erb within layouts/application
+  Rendered level2/lvl2.html.erb within layouts/application (Duration: 9.4ms | Allocations: 1538)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 80.1ms | Allocations: 11309)
+Completed 200 OK in 84ms (Views: 82.7ms | ActiveRecord: 0.7ms | Allocations: 11672)
+
+
+Started GET "/lvl2" for 127.0.0.1 at 2022-02-21 04:05:20 -0800
+Processing by Level2Controller#lvl2 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level2/lvl2.html.erb within layouts/application
+  Rendered level2/lvl2.html.erb within layouts/application (Duration: 27.8ms | Allocations: 2171)
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 160.3ms | Allocations: 15175)
+Completed 200 OK in 169ms (Views: 167.6ms | ActiveRecord: 25.6ms | Allocations: 16344)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 04:05:23 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (2.4ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:136:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 46.5ms | Allocations: 5423)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 102.5ms | Allocations: 14998)
+Completed 200 OK in 113ms (Views: 107.2ms | ActiveRecord: 4.2ms | Allocations: 15970)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 04:05:29 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (0.6ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:136:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 12.8ms | Allocations: 3976)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 37.5ms | Allocations: 13458)
+Completed 200 OK in 43ms (Views: 41.2ms | ActiveRecord: 1.2ms | Allocations: 13821)
+
+
+Started GET "/lvl2" for 127.0.0.1 at 2022-02-21 04:05:31 -0800
+Processing by Level2Controller#lvl2 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level2/lvl2.html.erb within layouts/application
+  Rendered level2/lvl2.html.erb within layouts/application (Duration: 9.3ms | Allocations: 1556)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 43.7ms | Allocations: 11278)
+Completed 200 OK in 46ms (Views: 44.6ms | ActiveRecord: 0.5ms | Allocations: 11629)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 04:05:35 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 12.2ms | Allocations: 1973)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 61.3ms | Allocations: 12012)
+Completed 200 OK in 77ms (Views: 72.3ms | ActiveRecord: 0.7ms | Allocations: 12987)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 04:05:37 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 2.2ms | Allocations: 1540)
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 70.1ms | Allocations: 11291)
+Completed 200 OK in 73ms (Views: 70.0ms | ActiveRecord: 2.0ms | Allocations: 11654)
+
+
+Started GET "/lvl1" for 127.0.0.1 at 2022-02-21 04:17:27 -0800
+  [1m[36mActiveRecord::SchemaMigration Pluck (3.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 1220.0ms | Allocations: 100202)
+Importmap skipped missing path: turbo.min.js
+Importmap skipped missing path: turbo.min.js
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 1359.5ms | Allocations: 127725)
+Completed 200 OK in 1380ms (Views: 1357.4ms | ActiveRecord: 7.6ms | Allocations: 133562)
+
+
+Started GET "/lvl2" for 127.0.0.1 at 2022-02-21 04:17:31 -0800
+Processing by Level2Controller#lvl2 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level2/lvl2.html.erb within layouts/application
+  Rendered level2/lvl2.html.erb within layouts/application (Duration: 5.0ms | Allocations: 2078)
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 28.8ms | Allocations: 9881)
+Completed 200 OK in 33ms (Views: 31.2ms | ActiveRecord: 0.9ms | Allocations: 10912)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 04:17:34 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 12.5ms | Allocations: 3754)
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 38.3ms | Allocations: 11113)
+Completed 200 OK in 41ms (Views: 39.8ms | ActiveRecord: 0.6ms | Allocations: 12142)
+
+
+Started GET "/history" for 127.0.0.1 at 2022-02-21 04:18:08 -0800
+Started POST "/useractions" for 127.0.0.1 at 2022-02-21 04:18:08 -0800
+Processing by UseractionsController#create as */*
+  Parameters: {"level"=>"level3", "category"=>"solution", "details"=>"-checked---checked--checked-------checked-checked--checked--10.0-80.0-50.0-42.9-50"}
+Processing by UseractionsController#history as JSON
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 2.4ms | Allocations: 5068)
+
+
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 500 Internal Server Error in 39ms (ActiveRecord: 7.5ms | Allocations: 6941)
+
+
+  
+NoMethodError (undefined method `first_name' for nil:NilClass):
+  
+app/controllers/useractions_controller.rb:9:in `create'
+  
+NoMethodError (undefined method `first_name' for nil:NilClass):
+  
+app/controllers/useractions_controller.rb:21:in `history'
+Started GET "/login" for 127.0.0.1 at 2022-02-21 04:18:36 -0800
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.5ms | Allocations: 924)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 21.8ms | Allocations: 9425)
+Completed 200 OK in 27ms (Views: 25.2ms | ActiveRecord: 0.5ms | Allocations: 10681)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2022-02-21 04:18:38 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "email"=>"peter@peter.com", "password"=>"[FILTERED]", "commit"=>"Log In"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "peter@peter.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:6:in `create'
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 398ms (ActiveRecord: 0.8ms | Allocations: 6855)
+
+
+Started GET "/" for 127.0.0.1 at 2022-02-21 04:18:38 -0800
+Processing by Level1Controller#lvl1 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 4.2ms | Allocations: 1888)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 29.6ms | Allocations: 11634)
+Completed 200 OK in 33ms (Views: 31.4ms | ActiveRecord: 0.5ms | Allocations: 12613)
+
+
+Started GET "/lvl3" for 127.0.0.1 at 2022-02-21 04:18:40 -0800
+Processing by Level3Controller#lvl3 as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering level3/lvl3.html.erb within layouts/application
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (1.3ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/views/level3/lvl3.html.erb:136:in `each_with_index'
+  Rendered level3/lvl3.html.erb within layouts/application (Duration: 70.2ms | Allocations: 9475)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 109.8ms | Allocations: 18682)
+Completed 200 OK in 114ms (Views: 104.1ms | ActiveRecord: 9.0ms | Allocations: 19661)
+
+
+Started POST "/useractions" for 127.0.0.1 at 2022-02-21 04:18:49 -0800
+Processing by UseractionsController#create as */*
+  Parameters: {"level"=>"level3", "category"=>"solution", "details"=>"-checked---checked--checked-------checked-checked--checked--40.0-40.0-33.3-50.0-97"}
+Started GET "/history" for 127.0.0.1 at 2022-02-21 04:18:49 -0800
+Processing by UseractionsController#history as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mUseraction Load (7.3ms)[0m  [1m[34mSELECT "useractions".* FROM "useractions" WHERE (user_id = 'Peter' AND level = 'level3') ORDER BY id DESC LIMIT $1[0m  [["LIMIT", 5]]
+  ↳ app/controllers/useractions_controller.rb:24:in `block (2 levels) in history'
+Completed 200 OK in 41ms (Views: 22.4ms | ActiveRecord: 8.2ms | Allocations: 4658)
+
+
+  [1m[36mTRANSACTION (29.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/useractions_controller.rb:11:in `block in create'
+  [1m[36mUseraction Create (3.6ms)[0m  [1m[32mINSERT INTO "useractions" ("user_id", "level", "action_category", "action_details", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", "Peter"], ["level", "level3"], ["action_category", "solution"], ["action_details", "-checked---checked--checked-------checked-checked--checked--40.0-40.0-33.3-50.0-97"], ["created_at", "2022-02-21 12:18:49.778050"], ["updated_at", "2022-02-21 12:18:49.778050"]]
+  ↳ app/controllers/useractions_controller.rb:11:in `block in create'
+  [1m[36mTRANSACTION (3.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/useractions_controller.rb:11:in `block in create'
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 69ms (ActiveRecord: 39.2ms | Allocations: 7612)
+
+
+Started GET "/" for 127.0.0.1 at 2022-02-21 04:18:49 -0800
+Processing by Level1Controller#lvl1 as */*
+  Rendering layout layouts/application.html.erb
+  Rendering level1/lvl1.html.erb within layouts/application
+  Rendered level1/lvl1.html.erb within layouts/application (Duration: 4.8ms | Allocations: 1479)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 42.3ms | Allocations: 10895)
+Completed 200 OK in 45ms (Views: 43.2ms | ActiveRecord: 0.6ms | Allocations: 11328)
+
+
