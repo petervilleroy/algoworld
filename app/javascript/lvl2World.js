@@ -400,6 +400,7 @@ function tick(tickEvent) {
 function getDetailString() {
     return ""+degreeP+"-"+attendanceP+"";
 }
+//TODO: log for each BIO VIEW!!!
 function log2dblvl2(cat, det) {
     $.ajax("/useractions", {type: "POST", async: true, data: {level: "level2", category: cat, details: det}})
 }

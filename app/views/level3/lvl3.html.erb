@@ -129,7 +129,7 @@
         </tr>
 
         <% if current_user %>
-        <% @history = Useraction.where('user_id = ?', current_user.first_name).order('id DESC').limit(2) %>
+        <% @history = Useraction.where('user_id = ?', current_user.first_name).order('id DESC').limit(5) %>
         <% @history.each_with_index do |history_record, i| %>
             <tr>
                 <td>

@@ -10959,3 +10959,15 @@ Processing by UsersController#new as HTML
 Completed 200 OK in 42ms (Views: 39.1ms | ActiveRecord: 0.7ms | Allocations: 9917)
 
 
+Started POST "/useractions" for 127.0.0.1 at 2022-02-18 04:31:22 -0800
+Processing by UseractionsController#create as */*
+  Parameters: {"level"=>"level3", "category"=>"solution", "details"=>"------------------7.7-0.0-14.3-0.0-50"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 8.6ms | Allocations: 4025)
+
+
+  
+NoMethodError (undefined method `first_name' for nil:NilClass):
+  
+app/controllers/useractions_controller.rb:9:in `create'
