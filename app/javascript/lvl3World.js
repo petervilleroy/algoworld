@@ -670,6 +670,8 @@ function tweenComplete() {
         
     }
     else if(TOTALWORLDCYCLES == 0 && finishedTweens <= 1){
+        //update history HTML
+        updateHistory();
         //record results of a full run to the database
         log2dblvl3("solution", Cap+"-"+Cr+"-"+Cg+"-"+Cs+"-"+Ccr+"-"+Ccs+"-"+Bap+"-"+Br+"-"+Bg+"-"+Bs+"-"+Bcr+"-"+Bcs+"-"+Pap+"-"+Pr+"-"+Pg+"-"+
                 Ps+"-"+Pcr+"-"+Pcs+"-"+Rw+"-"+Rc+"-"+Rm+"-"+Rf+"-"+tweenSpeed)
@@ -811,6 +813,10 @@ function inQuadrantFour(c, wc) {
     else {
         return false;
     }
+}
+function updateHistory() {
+    userActionHistory = $.ajax("/history", {type: "GET", async: false, data:""})
+    console.log("PATH: Collected history from the server: " + userActionHistory.responseText);
 }
 function log2dblvl3(cat, det) {
     $.ajax("/useractions", {type: "POST", async: true, data: {level: "level3", category: cat, details: det}})
