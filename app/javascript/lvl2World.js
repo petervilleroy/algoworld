@@ -314,7 +314,7 @@ function populateLevel_2() {
 
     crownShape = new Crown(1);
     crownShape.render();
-    crownShape.x = 250;
+    crownShape.x = 100;
     crownShape.y = 100;
     worldStage.addChild(crownShape);
     worldStage.addChild(tooltip);
