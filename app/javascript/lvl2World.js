@@ -46,8 +46,6 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.darkOutline = "#6F4F1D";
     this.darkHead = "#876127";
     this.bodyColor = 'orange';
-    this.selected = false;
-    this.selectShape = new createjs.Shape();
 
     this.degree=0;
     this.attendance=0;
@@ -55,6 +53,13 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.coolfactor=0;
     this.testscores=0;
     this.teacherBio="";
+    this.barcharttext = "Degree\nAttendance\nKindness\nCoolness\nTestScores\n";
+    this.bartip = null;
+    this.barchartShape1 = new createjs.Shape();
+    this.barchartShape2 = new createjs.Shape();
+    this.barchartShape3 = new createjs.Shape();
+    this.barchartShape4 = new createjs.Shape();
+    this.barchartShape5 = new createjs.Shape();
 
 }
 Citizen.prototype = Object.create(createjs.Container.prototype);
@@ -106,33 +111,35 @@ Citizen.prototype.render = function() {
         this.genderShape.y = this.shapey;
         this.addChild(this.genderShape);
     }
-    /*this.selectShape = new createjs.Shape();
-    this.selectShape.graphics.moveTo(-1.5*this.shaper,0);
-    this.selectShape.graphics.beginStroke('orange').lineTo(-1.5*this.shaper,1.5*this.shaper).lineTo(1.5*this.shaper, 1.5*this.shaper)
-            .lineTo(1.5*this.shaper,-1.5*this.shaper).lineTo(-1.5*this.shaper,-1.5*this.shaper).lineTo(-1.5*this.shaper,1.5*this.shaper);
-    this.addChild(this.selectShape);
-    */
     
-};
-Citizen.prototype.reRender = function() {
+    // Render 5 Bar Charts
+    this.bartip = new createjs.Text(this.barcharttext, "10px Arial");
     
-    this.removeChild(this.bodyShape);
-    this.bodyShape = new createjs.Shape();
-    this.bodyShape.graphics.beginFill(this.bodyColor).arc(0, 0, this.shaper*2, 
-        (Math.PI/2)-(Math.PI*this.wealth/100), (Math.PI/2)+(Math.PI*this.wealth/100), true);
-    this.bodyShape.x = this.shapex;
-    this.bodyShape.y = this.shapey+(this.shaper*2.5);
-    this.addChildAt(this.bodyShape, 0);
-    if(this.selected){
-        this.selectShape = new createjs.Shape();
-        this.selectShape.graphics.moveTo(-1.5*this.shaper,0);
-        this.selectShape.graphics.beginStroke('orange').lineTo(-1.5*this.shaper,1.5*this.shaper).lineTo(1.5*this.shaper, 1.5*this.shaper)
-                .lineTo(1.5*this.shaper,-1.5*this.shaper).lineTo(-1.5*this.shaper,-1.5*this.shaper).lineTo(-1.5*this.shaper,1.5*this.shaper);
-        this.addChild(this.selectShape);
-    }
-    else {
-        this.removeChild(this.selectShape);
-    }
+    this.bartip.x = this.shapex - 2.5*this.shaper;
+    this.bartip.y = this.bodyShape.y + 2*this.shaper;
+    this.bartip.lineWidth = this.shaper;
+    this.addChild(this.bartip);
+
+    this.barchartShape1.graphics.beginStroke('black').drawRect(this.shapex+.5*shaper, this.bartip.y, 2*this.shaper, 9);
+    this.barchartShape1.graphics.beginFill('red').drawRect(this.shapex+.5*shaper,this.bartip.y, 2*this.shaper*(this.degree/100),9);
+    this.addChild(this.barchartShape1);
+
+    this.barchartShape2.graphics.beginStroke('black').drawRect(this.shapex+.5*shaper, this.bartip.y+10, 2*this.shaper, 9);
+    this.barchartShape2.graphics.beginFill('red').drawRect(this.shapex+.5*shaper,this.bartip.y+10, 2*this.shaper*(this.attendance/100),9);
+    this.addChild(this.barchartShape2);
+    
+    this.barchartShape3.graphics.beginStroke('black').drawRect(this.shapex+.5*shaper, this.bartip.y+20, 2*this.shaper, 9);
+    this.barchartShape3.graphics.beginFill('red').drawRect(this.shapex+.5*shaper,this.bartip.y+20, 2*this.shaper*(this.kindness/100),9);
+    this.addChild(this.barchartShape3);
+    
+    this.barchartShape4.graphics.beginStroke('black').drawRect(this.shapex+.5*shaper, this.bartip.y+30, 2*this.shaper, 9);
+    this.barchartShape4.graphics.beginFill('red').drawRect(this.shapex+.5*shaper,this.bartip.y+30, 2*this.shaper*(this.coolfactor/100),9);
+    this.addChild(this.barchartShape4);
+    
+    this.barchartShape5.graphics.beginStroke('black').drawRect(this.shapex+.5*shaper, this.bartip.y+40, 2*this.shaper, 9);
+    this.barchartShape5.graphics.beginFill('red').drawRect(this.shapex+.5*shaper,this.bartip.y+40, 2*this.shaper*(this.testscores/100),9);
+    this.addChild(this.barchartShape5);
+    
 };
 
 function Crown(scale) {
@@ -211,12 +218,13 @@ function populateLevel_2() {
     tooltip.x = 15;
     tooltip.y = 130;
     tooltip.lineWidth = worldCanvas.width - 30;
+
     var degreeP, attendanceP, kindnessP, coolfactorP, testscoresP, raceP, genderP;
     degreeP = attendanceP = kindnessP = coolfactorP = testscoresP = raceP = genderP = 50;
 
     // Draw Ms. Adams
     shapex = worldCanvas.width * .1; 
-    shapey = worldCanvas.height *.8; 
+    shapey = worldCanvas.height *.7; 
     shaper = 20;
     shapeRace = 0;
     shapeGender = 1;
@@ -234,7 +242,7 @@ function populateLevel_2() {
     
     // Draw Mr. Baker
     shapex = worldCanvas.width * .3; 
-    shapey = worldCanvas.height *.8; 
+    shapey = worldCanvas.height *.7; 
     shaper = 20;
     shapeRace = 0;
     shapeGender = 0;
@@ -252,7 +260,7 @@ function populateLevel_2() {
 
     // Draw Mr. Cohen
     shapex = worldCanvas.width * .5;  
-    shapey = worldCanvas.height *.8; 
+    shapey = worldCanvas.height *.7; 
     shaper = 20;
     shapeRace = 0;
     shapeGender = 0;
@@ -270,7 +278,7 @@ function populateLevel_2() {
 
     // Draw Mr. Darden
     shapex = worldCanvas.width * .7; 
-    shapey = worldCanvas.height *.8; 
+    shapey = worldCanvas.height *.7; 
     shaper = 20;
     shapeRace = 1;
     shapeGender = 0;
@@ -288,7 +296,7 @@ function populateLevel_2() {
 
     // Draw Ms. Edwards
     shapex = worldCanvas.width * .9; 
-    shapey = worldCanvas.height *.8; 
+    shapey = worldCanvas.height *.7; 
     shaper = 20;
     shapeRace = 1;
     shapeGender = 1;

@@ -20,32 +20,36 @@
         <tr>
             <td>
                 <p>Instructions:</p>
-                <span class="level2">Click on each teacher to learn about them. Use the sliders on the right to decide which attributes are most important, and click go to see who wins Teacher of the Year</span>
+                <span class="level2"><ul><li>Click on each teacher to learn about them. </li><li>Use the sliders on the right to decide which attributes are most important</li><li> Click go to see who wins Teacher of the Year</li></ul></span>
                 <br/>
-                <canvas id="myWorldCanvas" width="500" height="450"></canvas>
+                <canvas id="myWorldCanvas" width="700" height="550"></canvas>
             </td>
             <td>
                 
             </td>
-            <td>
-               
-            </td>
+          
             
             <td class="level2">
                 <table class="sliderTable">
                     <tr>
                         <td>
+                            <p>Choose how important each of these traits should be in granting the Teacher of the Year award.</p> <br>
+                            <b><-- Less Important ____________ More Important --> </b> <br>
                             <span class="sliderBox" id="degreeSliderBox">Degree<br/>
                                 <input type="range" min="1" max="100" value="50" class="slider" id="degreeSlider">
                             </span>
                             
                         </td>
+                    </tr>
+                    <tr>
                         <td>
-                            <span class="sliderBox" id="coolfactorSliderBox">Cool Factor<br/>
-                                <input type="range" min="1" max="100" value="50" class="slider" id="coolfactorSlider">
+                            <span class="sliderBox" id="attendanceSliderBox">Attendance<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="attendanceSlider">
                             </span>
                             
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             <span class="sliderBox" id="kindnessSliderBox">Kindness<br/>
                                 <input type="range" min="1" max="100" value="50" class="slider" id="kindnessSlider">
@@ -54,23 +58,9 @@
                         </td>
                     </tr>
                     <tr>
-                        
                         <td>
-                            <span class="sliderBox" id="genderSliderBox">Gender<br/>
-                                <input type="range" min="1" max="100" value="50" class="slider" id="genderSlider">
-                            </span>
-                            
-                        </td>
-                        <td>
-                            <span class="sliderBox" id="raceSliderBox">Race<br/>
-                                <input type="range" min="1" max="100" value="50" class="slider" id="raceSlider">
-                            </span>
-                            
-                        </td>
-                   
-                        <td>
-                            <span class="sliderBox" id="attendanceSliderBox">Attendance<br/>
-                                <input type="range" min="1" max="100" value="50" class="slider" id="attendanceSlider">
+                            <span class="sliderBox" id="coolfactorSliderBox">Cool Factor<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="coolfactorSlider">
                             </span>
                             
                         </td>
@@ -85,6 +75,25 @@
                         
                     </tr>
                     <tr>
+                        
+                        <td>
+                            <span class="sliderBox" id="genderSliderBox">Gender<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="genderSlider">
+                            </span>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="sliderBox" id="raceSliderBox">Race<br/>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="raceSlider">
+                            </span>
+                            
+                        </td>
+                    </tr>
+                   
+                
+                    <tr>
                         <td>
                             <button id="eventButton" >GO!</button>
                         </td>
@@ -95,7 +104,7 @@
         </tr>
         <tr>
             <td>
-                
+            
             </td>
         </tr>
     </table>

@@ -47,3 +47,9 @@
   border: 5px solid green;
   border-radius: 7px;
 }
+.slider {
+  width: 300px;
+}
+#speedSlider {
+  width: 150px;
+}
