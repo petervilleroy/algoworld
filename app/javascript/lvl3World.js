@@ -744,7 +744,7 @@ function calculateSentence(c, r, m) {
         return true;
     }
     var randomSentence = Math.random(); //(Math.random()*2)-1 + prisonProb; // a number between -1+PP and 1+PP.
-    var score = r*c.race + randomSentence// + m*c.gender;
+    var score = r*c.race + randomSentence - m*c.gender;
     console.log("---DEBUG: "+c.name+" imprisonment score: "+score);
     if(score > prisonProb) {
         return true;
