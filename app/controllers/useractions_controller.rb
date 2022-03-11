@@ -18,7 +18,7 @@ class UseractionsController < ApplicationController
   end
 
   def history #todo: stipulate only lvl3 logs should be returned.
-    @history = Useraction.where('user_id = ? AND level = ?', current_user.first_name, 'level3').order('id DESC').limit(5)
+    @history = Useraction.where('user_id = ? AND level = ? AND category = ?', current_user.first_name, 'level3', 'solution').order('id DESC').limit(5)
     respond_to do |format|
       #format.html { redirect_to root_url }
       format.json {render json: @history, status: :ok }
