@@ -158,6 +158,7 @@ function init() {
     $("#pauseButton").click(function() {
         if(PAUSE) {
             console.log("--- DEBUG: Unpausing...");
+            log2dblvl3("attempt", "Un-PAUSE-"+tweenSpeed)
             $("#pauseButton").text("PAUSE");
             PAUSE = false;
             finishedTweens = 0;
@@ -166,6 +167,7 @@ function init() {
         }
         else {
             console.log("--- DEBUG: Pausing...");
+            log2dblvl3("attempt", "PAUSE-"+tweenSpeed)
             $("#pauseButton").text("UN-PAUSE");
             PAUSE = true;
         }
@@ -187,6 +189,8 @@ function init() {
     $("#speedSlider").mouseup(function() {
         tweenSpeed = this.value;
         $("#currentSpeedLabel").text(this.value);
+        log2dblvl3("attempt", Cap+"-"+Cr+"-"+Cg+"-"+Cs+"-"+Ccr+"-"+Ccs+"-"+Bap+"-"+Br+"-"+Bg+"-"+Bs+"-"+Bcr+"-"+Bcs+"-"+Pap+"-"+Pr+"-"+Pg+"-"+
+                Ps+"-"+Pcr+"-"+Pcs+"-"+Rw+"-"+Rc+"-"+Rm+"-"+Rf+"-"+tweenSpeed)
     })
     
 	switch(currentLevel) {
@@ -330,6 +334,11 @@ function populateLevel_3() {
             ", "+(evt.target.parent.employed == false ? "Unemployed" : "Employed") +
             ", Wealth: "+(100-evt.target.parent.wealth).toFixed(0) +
             ", "+ (evt.target.parent.imprisoned == true? "Imprisoned" : "");
+            log2dblvl3("attempt", "TipClick -"+(evt.target.parent.gender == 0 ? "Male" : "Female") +"-"+
+                    (evt.target.parent.race == 0 ? "White" : "Color")+"-"+
+                    (evt.target.parent.employed == false ? "Unemployed" : "Employed")+"-Wealth "+
+                    (100-evt.target.parent.wealth).toFixed(0) +"-"+
+                    (evt.target.parent.imprisoned == true? "Imprisoned" : "")+"-");
 
             // If the click was on one of the world entities, update the checkbox area to reflect that entity
         //}
