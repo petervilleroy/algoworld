@@ -132,7 +132,7 @@
         </table>
         <% if current_user %>
         <table class="results_history">
-        <% @history = Useraction.where(category: 'solution', 'user_id = ?', current_user.first_name).order('id DESC').limit(5) %>
+        <% @history = Useraction.where('category = ? AND user_id = ?', 'solution', current_user.first_name).order('id DESC').limit(5) %>
         <% @history.each_with_index do |history_record, i| %>
             
             <tr>
