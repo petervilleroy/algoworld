@@ -146,7 +146,7 @@ Citizen.prototype.reRender = function() {
         this.addChild(this.happinessShape);
     }
     else {
-        this.removeChild(this.happinessShape);
+        if(this.happinessShape) {this.removeChild(this.happinessShape);}
     }
 };
 
