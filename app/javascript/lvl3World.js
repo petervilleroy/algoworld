@@ -49,7 +49,7 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.bodyColor = 'orange';
     this.selected = false;
     this.selectShape = new createjs.Shape();
-    this.happinessShape = null;
+    this.happinessShape = new createjs.Shape();
 
     this.degree=0;
     this.attendance=0;
@@ -126,7 +126,7 @@ Citizen.prototype.reRender = function() {
     this.bodyShape.y = this.shapey+(this.shaper*2.5);
     this.addChildAt(this.bodyShape, 0);
     if(this.selected){
-        this.selectShape = new createjs.Shape();
+        //this.selectShape = new createjs.Shape();
         this.selectShape.graphics.moveTo(-1.5*this.shaper,0);
         this.selectShape.graphics.beginStroke('orange').lineTo(-1.5*this.shaper,1.5*this.shaper).lineTo(1.5*this.shaper, 1.5*this.shaper)
                 .lineTo(1.5*this.shaper,-1.5*this.shaper).lineTo(-1.5*this.shaper,-1.5*this.shaper).lineTo(-1.5*this.shaper,1.5*this.shaper);
@@ -136,7 +136,7 @@ Citizen.prototype.reRender = function() {
         this.removeChild(this.selectShape);
     }
     if(this.employed) {
-        this.happinessShape = new createjs.Shape();
+        //this.happinessShape = new createjs.Shape();
         this.happinessShape.graphics.beginStroke('red').arc(0,0,this.shaper*.7,(Math.PI/2),0);
         this.addChild(this.happinessShape);
     }
