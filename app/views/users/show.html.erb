@@ -10,7 +10,7 @@
 
 <div>
 Full user history:
- <% @fullhistory = Useraction.where('user_id = ?', current_user.first_name).order('id DESC') %>
+ <% @fullhistory = Useraction.where('user_id = ?', current_user.first_name).order('id ASC') %>
  <% @fullhistory.each_with_index do |history_record, i| %>
     <span> <%= history_record.id %>, <%= history_record.user_id %>, <%= history_record.level %>, <%= history_record.action_category %>, <%= history_record.action_details %>, <%= history_record.created_at %>
     <br />
