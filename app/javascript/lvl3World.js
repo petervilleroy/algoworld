@@ -480,6 +480,7 @@ function handleGo() { //This function is the main animation loop. It is re-execu
                     console.log("DEBUG: "+citizen.name + " has been released from prison!");
                     citizen.imprisoned = false;
                     citizen.prisonTimer = 7;
+                    citizen.removeChild(citizen.happinessShape);
                     // move citizen to random non-prison spot
                     citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
                     citizeny = ((worldCanvas.height-prison.height) * Math.random() | 0)
