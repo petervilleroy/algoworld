@@ -526,7 +526,7 @@ function handleGo() { //This function is the main animation loop. It is re-execu
                     citizen.employed = false;
                     citizen.reRender();
                     citizen.jobHistory = true;
-                    citizen.jobTimer =10; // greater than the init value, because repeat jobs last longer
+                    citizen.jobTimer =11; // greater than the init value, because repeat jobs last longer
                     // Move citizen to a non-prison spot (don't go from job to jail 8-P )
                     citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
                     citizeny = ((worldCanvas.height-prison.height) * Math.random() | 0)
@@ -560,7 +560,10 @@ function handleGo() { //This function is the main animation loop. It is re-execu
         // If not imprisoned, not employed, and not dead, perform Random Move
         else {
             if(citizen.imprisoned == false && citizen.employed == false) {
-                if(inQuadrantOne(citizen, worldCanvas)) {
+                if(citizen.jobTimer == 11) { //handling a hidden flag for 'just left the job'
+                    citizen.jobTimer = 10;
+                }
+                else if(inQuadrantOne(citizen, worldCanvas)) {
                     citizenx = 15 + ((worldCanvas.width/2)*Math.random() | 0);
                     citizeny = worldCanvas.height/2 + (((worldCanvas.height-50)/2)*Math.random() | 0);
                 }
