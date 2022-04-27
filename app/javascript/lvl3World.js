@@ -310,25 +310,7 @@ function populateLevel_3() {
     worldStage.update();
     
     worldStage.on("click", function(evt) {
-        /*if(evt.target == companyShape) {
-            $(".lvl3BankSelectors").hide();
-            $(".lvl3PrisonSelectors").hide();
-            $(".lvl3CompanySelectors").show();
-            $("#myBoxCanvas").css("border", "8px solid blue");
-        }
-        else if(evt.target == bankShape) {
-            $(".lvl3CompanySelectors").hide();
-            $(".lvl3PrisonSelectors").hide();
-            $(".lvl3BankSelectors").show();
-            $("#myBoxCanvas").css("border", "8px solid green");
-        }
-        else if(evt.target == prisonShape) {
-            $(".lvl3CompanySelectors").hide();
-            $(".lvl3BankSelectors").hide();
-            $(".lvl3PrisonSelectors").show();
-            $("#myBoxCanvas").css("border", "8px solid red");
-        }
-        else {*/
+       
             tooltip_target = evt.target.parent;
             //remove selected shape for every sprite.
             spriteArray.forEach(function(sprite, i) {
@@ -349,8 +331,7 @@ function populateLevel_3() {
                     (100-evt.target.parent.wealth).toFixed(0) +"-"+
                     (evt.target.parent.imprisoned == true? "Imprisoned" : "")+"-");
 
-            // If the click was on one of the world entities, update the checkbox area to reflect that entity
-        //}
+         
 
         worldStage.update();
     });
@@ -536,6 +517,7 @@ function handleGo() { //This function is the main animation loop. It is re-execu
                 if(citizen.jobTimer <= 0) {
                     console.log("DEBUG: "+citizen.name + " has retired from a job.");
                     citizen.employed = false;
+                    citizen.reRender();
                     citizen.jobHistory = true;
                     citizen.jobTimer =10; // greater than the init value, because repeat jobs last longer
                     // Move citizen to a non-prison spot (don't go from job to jail 8-P )
