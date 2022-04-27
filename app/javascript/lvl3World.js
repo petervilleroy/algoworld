@@ -529,9 +529,9 @@ function handleGo() { //This function is the main animation loop. It is re-execu
                     citizen.employed = false;
                     citizen.jobHistory = true;
                     citizen.jobTimer =10; // greater than the init value, because repeat jobs last longer
-                    // Move citizen to a non-company spot
-                    citizenx = company.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
-                    citizeny = company.height + ((worldCanvas.height - prison.height) * Math.random() | 0)
+                    // Move citizen to a non-prison spot (don't go from job to jail 8-P )
+                    citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
+                    citizeny = ((worldCanvas.height-prison.height) * Math.random() | 0)
                 }
                 else {
                     console.log("DEBUG: "+citizen.name + " is still employed at Company. Timer: "+citizen.jobTimer);
