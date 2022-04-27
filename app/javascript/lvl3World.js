@@ -140,12 +140,13 @@ Citizen.prototype.reRender = function() {
         this.happinessShape.graphics.beginStroke('red').arc(0,-1,this.shaper*.7,(Math.PI*.2),(Math.PI*.8));
         this.addChild(this.happinessShape);
     }
+    else if(this.imprisoned) {
+        this.happinessShape = new createjs.Shape();
+        this.happinessShape.graphics.beginStroke('red').arc(0,11,this.shaper*.7,(Math.PI*1.8),(Math.PI*1.2),true);
+        this.addChild(this.happinessShape);
+    }
     else {
         this.removeChild(this.happinessShape);
-    }
-    if(this.imprisoned) {
-        this.happinessShape.graphics.beginStroke('red').arc(0,-3,this.shaper*.7,(Math.PI*.2),(Math.PI*.8),false);
-        this.addChild(this.happinessShape);
     }
 };
 
@@ -481,6 +482,7 @@ function handleGo() { //This function is the main animation loop. It is re-execu
                     citizen.imprisoned = false;
                     citizen.prisonTimer = 7;
                     citizen.removeChild(citizen.happinessShape);
+                    citizen.reRender();
                     // move citizen to random non-prison spot
                     citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
                     citizeny = ((worldCanvas.height-prison.height) * Math.random() | 0)
