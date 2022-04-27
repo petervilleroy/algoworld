@@ -508,35 +508,43 @@ function handleGo() { //This function is the main animation loop. It is re-execu
                     console.log("DEBUG: "+citizen.name + " received a job!");
                     citizen.employed = true;
                     citizen.jobHistory = true;
+                    // jobTimer is either init 5, or it's been set to 10 if this is the second job.
                 }
                 else {
                     console.log("DEBUG: "+citizen.name + " didn't get the job.");
                 }
-                
             }
+                // Pay Salary to employed Citizens
+            if(citizen.employed) {
+                if(citizen.wealth > 15) {
+                    citizen.wealth -= 15;
+                }
+                else {
+                    citizen.wealth = 5;
+                }
+                console.log("DEBUG: "+citizen.name + " earned a salary!");
+                citizen.jobTimer -= 1;
+                if(citizen.jobTimer <= 0) {
+                    console.log("DEBUG: "+citizen.name + " has retired from a job.");
+                    citizen.employed = false;
+                    citizen.jobHistory = true;
+                    citizen.jobTimer =10; // greater than the init value, because repeat jobs last longer
+                    // Move citizen to a non-company spot
+                    citizenx = company.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
+                    citizeny = company.height + ((worldCanvas.height - prison.height) * Math.random() | 0)
+                }
+                else {
+                    console.log("DEBUG: "+citizen.name + " is still employed at Company. Timer: "+citizen.jobTimer);
+                    citizenx = citizen.x;
+                    citizeny = citizen.y;
+                }
+            }
+                
+            
             
         }
         
-        // Pay Salary to employed Citizens
-        if(citizen.employed) {
-            if(citizen.wealth > 15) {
-                citizen.wealth -= 15;
-            }
-            else {
-                citizen.wealth = 5;
-            }
-            console.log("DEBUG: "+citizen.name + " earned a salary!");
-            citizen.jobTimer -= 1;
-            if(citizen.jobTimer <= 0) {
-                console.log("DEBUG: "+citizen.name + " has retired from a job.");
-                citizen.employed = false;
-                citizen.jobHistory = true;
-                citizen.jobTimer =10; // greater than the init value, because repeat jobs last longer
-                // Move citizen to a non-company spot
-                citizenx = company.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
-                citizeny = company.height + ((worldCanvas.height - prison.height) * Math.random() | 0)
-            }
-        }
+        
 
         // Decrement Wealth
         citizen.wealth += 5;
@@ -551,9 +559,9 @@ function handleGo() { //This function is the main animation loop. It is re-execu
             deadArray.push(spriteArray.splice(i,1));
             console.log("DEBUG: "+citizen.name + " has died.");
         }
-        // If not imprisoned and not dead, perform Random Move
+        // If not imprisoned, not employed, and not dead, perform Random Move
         else {
-            if(citizen.imprisoned == false) {
+            if(citizen.imprisoned == false && citizen.employed == false) {
                 if(inQuadrantOne(citizen, worldCanvas)) {
                     citizenx = 15 + ((worldCanvas.width/2)*Math.random() | 0);
                     citizeny = worldCanvas.height/2 + (((worldCanvas.height-50)/2)*Math.random() | 0);

@@ -358,7 +358,7 @@ function populateLevel_2() {
     worldStage.on("click", function(evt) {
         tooltip_target = evt.target.parent;
         tooltip.text = " " + evt.target.parent.teacherBio;
-        log2dblvl2("attempt", ""+degreeP+"-"+attendanceP+"-"+kindnessP+"-"+coolfactorP+"-"+testscoresP+"-"+genderP+"-"+raceP+"-BIO"+evt.target.parent.teacherBio);
+        log2dblvl2("attempt", ""+degreeP+"-"+attendanceP+"-"+kindnessP+"-"+coolfactorP+"-"+testscoresP+"-"+genderP+"-"+raceP+"-BIO"+evt.target.parent.teacherBio.slice(0,8));
         worldStage.update();
     });
 
