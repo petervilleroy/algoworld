@@ -136,7 +136,7 @@ Citizen.prototype.reRender = function() {
         this.removeChild(this.selectShape);
     }
     if(this.employed) {
-        //this.happinessShape = new createjs.Shape();
+        this.happinessShape = new createjs.Shape();
         this.happinessShape.graphics.beginStroke('red').arc(0,-1,this.shaper*.7,(Math.PI*.2),(Math.PI*.8));
         this.addChild(this.happinessShape);
     }
@@ -481,7 +481,6 @@ function handleGo() { //This function is the main animation loop. It is re-execu
                     console.log("DEBUG: "+citizen.name + " has been released from prison!");
                     citizen.imprisoned = false;
                     citizen.prisonTimer = 7;
-                    citizen.removeChild(citizen.happinessShape);
                     citizen.reRender();
                     // move citizen to random non-prison spot
                     citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
