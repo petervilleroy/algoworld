@@ -136,13 +136,8 @@ Citizen.prototype.reRender = function() {
         this.removeChild(this.selectShape);
     }
     if(this.employed) {
-<<<<<<< HEAD
-        this.happinessShape = new createjs.Shape();
-        this.happinessShape.graphics.beginStroke('red').arc(0,0,this.shaper*.7,(Math.PI/2),0);
-=======
-        this.happinessShape = new createjs.Shape();
-        this.happinessShape.graphics.beginStroke('red').arc(0,0,this.shaper*.7,0,(Math.PI));
->>>>>>> e46841c107c4eba474f9c3c03b1fe885c83d39e3
+        //this.happinessShape = new createjs.Shape();
+        this.happinessShape.graphics.beginStroke('red').arc(0,0,this.shaper*.7,0,(Math.PI/2));
         this.addChild(this.happinessShape);
     }
     else {
