@@ -137,7 +137,7 @@ Citizen.prototype.reRender = function() {
     }
     if(this.employed) {
         this.happinessShape = new createjs.Shape();
-        this.happinessShape.graphics.beginStroke('red').arc(0,0,this.shaper*.7,(Math.PI/2),(Math.PI));
+        this.happinessShape.graphics.beginStroke('red').arc(0,0,this.shaper*.7,(Math.PI/2),0);
         this.addChild(this.happinessShape);
     }
     else {
