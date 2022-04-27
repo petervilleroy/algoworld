@@ -49,6 +49,7 @@ function Citizen(name, race, gender, wealth, shapex, shapey, shaper) {
     this.bodyColor = 'orange';
     this.selected = false;
     this.selectShape = new createjs.Shape();
+    this.happinessShape = null;
 
     this.degree=0;
     this.attendance=0;
@@ -133,6 +134,14 @@ Citizen.prototype.reRender = function() {
     }
     else {
         this.removeChild(this.selectShape);
+    }
+    if(this.employed) {
+        this.happinessShape = new createjs.Shape();
+        this.happinessShape.graphics.beginStroke('red').arc(0,0,this.shaper*.7,(Math.PI/2),(Math.PI));
+        this.addChild(this.happinessShape);
+    }
+    else {
+        this.removeChild(this.happinessShape);
     }
 };
 
