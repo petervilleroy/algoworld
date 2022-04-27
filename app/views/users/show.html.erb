@@ -1,9 +1,18 @@
 <%= render @user %>
-<%= render @useraction.full_user_history %> 
+
 
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>
 
   <%= button_to "Destroy this user", @user, method: :delete %>
+</div>
+
+<div>
+Full user history:
+ <% @fullhistory = Useraction.where('user_id = ?', current_user.first_name).order('id DESC') %>
+ <% @fullhistory.each_with_index do |history_record, i| %>
+    <span> <%= history_record.id %>, <%= history_record.user_id %>, <%= history_record.level %>, <%= history_record.action_category %>, <%= history_record.action_details %>, <%= history_record.created_at %>
+    <br />
+ <% end %>
 </div>

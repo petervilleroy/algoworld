@@ -24,12 +24,5 @@ class UseractionsController < ApplicationController
       format.json {render json: @history, status: :ok }
     end
   end
-
-  def full_user_history
-    @fullhistory = Useraction.select('user_id': current_user.first_name).order('id DESC')
-    respond_to do |format|
-      format.json {render json: @fullhistory, status: :ok }
-    end
-  end
   
 end
