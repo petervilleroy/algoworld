@@ -143,6 +143,10 @@ Citizen.prototype.reRender = function() {
     else {
         this.removeChild(this.happinessShape);
     }
+    if(this.imprisoned) {
+        this.happinessShape.graphics.beginStroke('red').arc(0,-3,this.shaper*.7,(Math.PI*.2),(Math.PI*.8),false);
+        this.addChild(this.happinessShape);
+    }
 };
 
 
