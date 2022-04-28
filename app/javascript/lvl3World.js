@@ -87,6 +87,7 @@ Citizen.prototype.render = function() {
 
     this.headShape.x = this.shapex;
     this.headShape.y = this.shapey;
+    this.headShape.name = this.name+"_headShape";
     this.addChild(this.headShape);
     
 
@@ -106,6 +107,7 @@ Citizen.prototype.render = function() {
         //citizen.gender = 1;
         this.genderShape.x = this.shapex;
         this.genderShape.y = this.shapey;
+        this.genderShape.name = this.name+"_genderShape"
         this.addChild(this.genderShape);
     }
     /*this.selectShape = new createjs.Shape();
@@ -124,30 +126,44 @@ Citizen.prototype.reRender = function() {
         (Math.PI/2)-(Math.PI*this.wealth/100), (Math.PI/2)+(Math.PI*this.wealth/100), true);
     this.bodyShape.x = this.shapex;
     this.bodyShape.y = this.shapey+(this.shaper*2.5);
+    this.bodyShape.name = this.name+"_bodyShape";
     this.addChildAt(this.bodyShape, 0);
     if(this.selected){
         //this.selectShape = new createjs.Shape();
         this.selectShape.graphics.moveTo(-1.5*this.shaper,0);
         this.selectShape.graphics.beginStroke('orange').lineTo(-1.5*this.shaper,1.5*this.shaper).lineTo(1.5*this.shaper, 1.5*this.shaper)
                 .lineTo(1.5*this.shaper,-1.5*this.shaper).lineTo(-1.5*this.shaper,-1.5*this.shaper).lineTo(-1.5*this.shaper,1.5*this.shaper);
+        this.selectShape.name = this.name+"_selectShape";
         this.addChild(this.selectShape);
     }
     else {
         this.removeChild(this.selectShape);
     }
-    if(this.employed) {
-        this.happinessShape = new createjs.Shape();
-        this.happinessShape.graphics.beginStroke('red').arc(0,-1,this.shaper*.7,(Math.PI*.2),(Math.PI*.8));
-        this.addChild(this.happinessShape);
+    if(this.jobHistory || this.prisonHistory) {
+        if(this.employed) {
+            //doesn't work: if(this.happinessShape) {this.removeChild(this.happinessShape);}
+            this.happinessShape = new createjs.Shape();
+            this.happinessShape.graphics.beginStroke('red').arc(0,-1,this.shaper*.7,(Math.PI*.2),(Math.PI*.8));
+            this.happinessShape.name = this.name + "_happinessShape_job";
+            this.addChild(this.happinessShape);
+        }
+        else if(this.imprisoned) {
+            this.happinessShape = new createjs.Shape();
+            this.happinessShape.graphics.beginStroke('red').arc(0,11,this.shaper*.7,(Math.PI*1.8),(Math.PI*1.2),true);
+            this.happinessShape.name = this.name + "_happinessShape_prison";
+            this.addChild(this.happinessShape);
+        }
+        else {
+            this.children.forEach(function(child, i) {
+                if(child.name.indexOf('happinessShape') > 0) {
+                    child.parent.removeChild(child);
+                }
+                
+            });
+            
+        }
     }
-    else if(this.imprisoned) {
-        this.happinessShape = new createjs.Shape();
-        this.happinessShape.graphics.beginStroke('red').arc(0,11,this.shaper*.7,(Math.PI*1.8),(Math.PI*1.2),true);
-        this.addChild(this.happinessShape);
-    }
-    else {
-        if(this.happinessShape) {this.removeChild(this.happinessShape);}
-    }
+  
 };
 
 
@@ -480,8 +496,9 @@ function handleGo() { //This function is the main animation loop. It is re-execu
                 if(citizen.prisonTimer <= 0) {
                     console.log("DEBUG: "+citizen.name + " has been released from prison!");
                     citizen.imprisoned = false;
+                    //citizen.reRender();
                     citizen.prisonTimer = 7;
-                    citizen.reRender();
+                   
                     // move citizen to random non-prison spot
                     citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
                     citizeny = ((worldCanvas.height-prison.height) * Math.random() | 0)
@@ -523,8 +540,9 @@ function handleGo() { //This function is the main animation loop. It is re-execu
                 if(citizen.jobTimer <= 0) {
                     console.log("DEBUG: "+citizen.name + " has retired from a job.");
                     citizen.employed = false;
-                    citizen.reRender();
                     citizen.jobHistory = true;
+                    //citizen.reRender();
+                    
                     citizen.jobTimer =11; // greater than the init value, because repeat jobs last longer
                     // Move citizen to a non-prison spot (don't go from job to jail 8-P )
                     citizenx = prison.width + ((worldCanvas.width-prison.width) * Math.random() | 0)
