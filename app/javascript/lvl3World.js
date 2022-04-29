@@ -329,6 +329,24 @@ function populateLevel_3() {
     worldStage.addChild(graveyardText);
     worldStage.addChild(tooltip);
     worldStage.update();
+
+    $( ".awDialog" ).dialog({
+        autoOpen: true,
+        show: {
+          effect: "blind",
+          duration: 1000
+        },
+        hide: {
+          effect: "explode",
+          duration: 1000
+        },
+        buttons: [ {
+          text: "Okay",
+          click: function() { $(this).dialog("close");}
+         }
+        ],
+        width: 500,
+      });
     
     worldStage.on("click", function(evt) {
        
