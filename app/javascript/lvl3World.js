@@ -342,7 +342,38 @@ function populateLevel_3() {
         },
         buttons: [ {
           text: "Okay",
-          click: function() { $(this).dialog("close");}
+          click: function() { 
+              $(this).dialog("close");
+                // begin the level animation
+                for (var i = 0; i < worldPopulation; i++) {
+                    // Create and attach Body
+                    shapex = 0; 
+                    shapey = 0; 
+                    shaper = 10;
+                    shapeRace = 100*Math.random() | 0;
+                    shapeGender = 100*Math.random() | 0;
+                    shapeInitWealth = Math.random();
+                    shapeInitWealth = Math.round(shapeInitWealth*40)+5; // a number 5-45
+                    console.log("DEBUG: shapeInitWealth is "+shapeInitWealth);
+                    lightProportion = 65;
+                    maleProportion = 55;
+                    
+                    if(shapeRace < lightProportion) {shapeRace = 0} else { shapeRace = 1}
+                    if(shapeGender < maleProportion) {shapeGender = 0} else {shapeGender = 1}
+
+                    citizen = new Citizen("citizen_"+i, shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
+                    citizen.render();
+                    
+                    // Add the new Citizen to the population
+                            
+                    spriteArray.push(citizen);
+                    worldStage.addChild(citizen);
+                    
+                }
+                spriteArray.forEach(function(citizen, i){createjs.Tween.get(citizen).to({x: movex, y: movey}, 1500, createjs.Ease.quadInOut)
+                .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");}).call(tweenComplete)});
+                
+        }
          }
         ],
         width: 500,
@@ -375,34 +406,6 @@ function populateLevel_3() {
         worldStage.update();
     });
 
-    for (var i = 0; i < worldPopulation; i++) {
-        // Create and attach Body
-        shapex = 0; 
-        shapey = 0; 
-        shaper = 10;
-        shapeRace = 100*Math.random() | 0;
-        shapeGender = 100*Math.random() | 0;
-        shapeInitWealth = Math.random();
-        shapeInitWealth = Math.round(shapeInitWealth*40)+5; // a number 5-45
-        console.log("DEBUG: shapeInitWealth is "+shapeInitWealth);
-        lightProportion = 65;
-        maleProportion = 55;
-        
-        if(shapeRace < lightProportion) {shapeRace = 0} else { shapeRace = 1}
-        if(shapeGender < maleProportion) {shapeGender = 0} else {shapeGender = 1}
-
-        citizen = new Citizen("citizen_"+i, shapeRace, shapeGender, shapeInitWealth, shapex, shapey, shaper);
-        citizen.render();
-        
-        // Add the new Citizen to the population
-                
-        spriteArray.push(citizen);
-        worldStage.addChild(citizen);
-        
-    }
-    spriteArray.forEach(function(citizen, i){createjs.Tween.get(citizen).to({x: movex, y: movey}, 1500, createjs.Ease.quadInOut)
-    .call(function(citizen){console.log("DEBUG: citizen is now at ("+this.x+","+this.y+")");}).call(tweenComplete)});
-    
     createjs.Ticker.addEventListener("tick", tick);
     
  
